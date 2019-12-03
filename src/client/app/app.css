@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+}
+
+
+.Content {
+    margin: 0 auto;
+    max-width: 1440px;
+    min-width: 240px;
+}
+
+.Content_green {
+    background: #33473C;
+}
+
+.Title {
+    font-size: 4em;
+    letter-spacing: 3px;
+    font-weight: 600;
+    border-bottom: 1.3px solid black;
+    word-spacing: 5px;
+}
+
+
+.Title_normal {
+    font-size: 3em;
+    font-weight:600;
+    word-spacing: 5px;
+}
+
+.Text {
+    font-size: 3em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}
+
+.Text_normal {
+    font-size: 3em;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}

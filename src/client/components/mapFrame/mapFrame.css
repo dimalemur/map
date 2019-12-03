@@ -1,0 +1,20 @@
+.MapFrame {
+    overflow: hidden;
+
+}
+
+.MapFrame-Frame {
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+    top: -93px;
+    transform: scaleX(1.4) scaleY(1.4);
+}
+
+@media (max-width: 1440px) {
+    .MapFrame-Frame {
+        transform: scaleX(1) scaleY(1);
+    }
+
+}

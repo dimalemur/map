@@ -1,0 +1,38 @@
+{
+  "name": "maps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "watch": "webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-router": "latest",
+    "react-router-dom": "^5.1.2",
+    "react-select": "^3.0.8",
+    "redux": "^4.0.4",
+    "regenerator-runtime": "latest"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
+    "babel": "5.x",
+    "babel-loader": "5.*",
+    "cors": "^2.8.5",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "json-loader": "^0.5.7",
+    "react-hot-loader": "^1.3.1",
+    "style-loader": "^1.0.0",
+    "url-loader": "^2.2.0",
+    "webpack": "^1.15.0",
+    "webpack-dev-server": "^1.4.1",
+    "babel-plugin-syntax-async-functions": "^6.1.4",
+    "babel-plugin-transform-regenerator": "^6.1.4",
+    "babel-polyfill": "^6.1.4",
+    "babel-preset-es2015": "^6.1.4"
+  }
+}

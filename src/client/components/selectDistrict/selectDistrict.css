@@ -1,0 +1,13 @@
+.SelectDistrict-Select {
+    display: block;
+    width: 100%;
+    height: 73px;
+    outline: none;
+    font-size: 2em;
+}
+
+.Select-Item {
+    display: grid;
+    height: 50px;
+    background: transparent;
+}
