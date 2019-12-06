@@ -1,4 +1,6 @@
-a{
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap&subset=cyrillic,cyrillic-ext');
+
+a {
     text-decoration: none;
     color: inherit;
 }
@@ -8,10 +10,6 @@ a{
     box-sizing: border-box;
 }
 
-.OptionSelection-Title {
-    font-size: 3em;
-}
-
 .NavBar {
     margin: 0;
     padding: 0;
@@ -19,31 +17,49 @@ a{
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.NavBar-Item{
+.NavBar-Item {
     list-style-type: none;
     display: grid;
     justify-content: center;
     align-items: center;
+
     height: 66px;
-    font-size: 2.5em;
+    font-size: 2em;
     max-width: 382px;
-    border: 2px solid #33473C;
     color: #33473C;
-    background:#EAE9E5;
+    border: 2px solid #000000;
+    background: #EAE9E5;
+
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: normal;
 
 }
 
 .NavBar-Item_active {
 
-    background: #33473C;
-    color: #EAE9E5;
+    background: #FC9801;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
 
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 480px) {
+    .NavBar-Item {
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .OptionSelection {
+        padding: 30px 0 0;
+    }
+}
+
+@media (max-width: 1080px) {
     .NavBar {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: auto;
     }
 
     .NavBar-Item {

@@ -1,0 +1,51 @@
+.InfoForDistrict-Place {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+}
+.InfoForDistrict-Title{
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: 3px;
+}
+
+.InfoForDistrict-Title span {
+    font-size: 3em;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+.Place-PlaceNum {
+    font-size: 4em;
+    font-weight: bold;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.PlaceNum-Circle {
+    height: 100px;
+    width: 100px;
+    background: rgba(128, 128, 128, 0.29);
+    position: relative;
+    top: 80px;
+    left: 15px;
+    border-radius: 100px;
+}
+.Place-Text {
+    font-size: 2em;
+}
+
+.IfoForDistrict-Text {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 0 3em 0 3em;
+    box-sizing: border-box;
+    font-size: 3em;
+}
+
+.IfoForDistrict-AdditionalText {
+    font-size: 3em;
+    text-decoration: underline;
+}

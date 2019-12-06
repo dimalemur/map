@@ -10,27 +10,22 @@ body {
 }
 
 .Content_green {
-    background: #33473C;
+    background: url("https://s3-alpha-sig.figma.com/img/4d56/6940/f9bb29279b3b4dc5901ae3268f56a98a?Expires=1576454400&Signature=AXIpRo1l3UGJ~nLziBP2qMWd1QOtt~KOGqo7FXKzodGEb9Gfauc~dQ8A~Ge1dKUkYZAwEfSVMMNTdLyU1HLC8mzDYjcLLukwYj~DElGPUT2FuV4LcjPbEZEO0ij~84tQ2z~Ml9DMSoCXvRFwcQmFPPXlMSaqMrcKvIT6uaPQKsqaw2AZSHVUVdXhIwnPRIfviX2kNrwaNhvAEiX1J5tg0a-LW00OymOhvDPRrpTTa5yzQMcSKRpYdQLURmokeGGTEewnpvmHK-~7t9R9h4xHyP9YBI0zk31V79kxk213N8SwgjOUdfGXwahoNSJ~51QWcx6GLvS2dEKK3JJ1XgjIvw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA") no-repeat;
+    background-size: 100%;
+    background-position: center;
 }
 
-.Title {
-    font-size: 4em;
-    letter-spacing: 3px;
-    font-weight: 600;
-    border-bottom: 1.3px solid black;
-    word-spacing: 5px;
-}
 
 
 .Title_normal {
     font-size: 3em;
-    font-weight:600;
+    font-weight: 600;
     word-spacing: 5px;
 }
 
 .Text {
     font-size: 3em;
-    font-weight: 900;
+    font-weight: 500;
     letter-spacing: 2px;
     word-spacing: 5px;
 }
@@ -39,4 +34,24 @@ body {
     font-size: 3em;
     letter-spacing: 2px;
     word-spacing: 5px;
+}
+
+@media (max-width: 480px) {
+    .Text {
+        font-size: 1em;
+    }
+
+}
+
+@media (min-width: 480px) and (max-width: 840px) {
+    .Text {
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 840px) and (max-width: 1080px) {
+    .Text {
+        font-size: 2em;
+    }
+
 }

@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates:300&display=swap&subset=cyrillic,cyrillic-ext');
+
+.Tags {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+}
+
 .Item {
+    font-family: 'Montserrat Alternates', sans-serif;
     display: flex;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    align-items: center;
+    padding: 28px 0 28px 28px;
 }
 
 .Item-Lst {
@@ -12,5 +19,41 @@
 
 .Item-Text {
     font-size: 2em;
-    margin-left: 20px;
+    margin-left: 30px;
 }
+
+
+@media (max-width: 480px) {
+    .Item {
+        padding: 28px 0 28px 0;
+    }
+    .Item-Text {
+        font-size: 1em;
+    }
+
+    .Item-Lst {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+@media (min-width: 480px) and (max-width: 840px) {
+    .Item-Text {
+        font-size: 1.5em;
+    }
+    .Item-Lst {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+@media (max-width: 1080px) {
+    .Tags {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+}
+

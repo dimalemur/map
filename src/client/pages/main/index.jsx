@@ -1,19 +1,32 @@
 import React from 'react';
 import {Header} from "../../components/header";
-import {TextContent} from "../../components/textContent";
-import {OptionSelection} from "../../components/optionSelection";
+import TextContent from "../../components/textContent";
+import OptionSelection from "../../components/optionSelection";
 import {AsideWhiteBlock} from "../../components/asideWhiteBlock";
-import {SelectDistrict} from "../../components/selectDistrict";
+import SelectDistrict from "../../components/selectDistrict";
+import {connect} from "react-redux";
 
-export const Main = (props) => {
+
+const Main = (props) => {
     return (
         <div className="Main">
-            <Header store={props.store}/>
-            <AsideWhiteBlock title={props.store.getState().MainPage.title[0]} text = {props.store.getState().MainPage.text[0]}/>
-            <TextContent store={props.store}/>
-            <OptionSelection store = {props.store} />
-            <AsideWhiteBlock title = {props.store.getState().MainPage.title[3]} text = {props.store.getState().MainPage.text[3]}/>
-            <SelectDistrict districts = {props.store.getState().MainPage.districts} />
+            <Header/>
+            <AsideWhiteBlock text = {props.state.MainPage.text[0]} />
+            <AsideWhiteBlock text = {props.state.MainPage.text[1]}/>
+            {/*<TextContent/>*/}
+            <OptionSelection />
+            {/*<AsideWhiteBlock/>*/}
+            {/*<SelectDistrict />*/}
         </div>
     )
 };
+
+
+export default connect(
+    state =>({
+        state:state
+    }),
+    dispatch => ({
+
+    })
+)(Main);

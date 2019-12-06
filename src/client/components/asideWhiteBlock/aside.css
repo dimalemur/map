@@ -1,8 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates:200,200i,500&display=swap&subset=cyrillic,cyrillic-ext');
+
 .AsideWhiteBlock {
-    padding: 6em 3em 6em 3em;
+    padding: 5em 3em 0 3em;
     box-sizing: border-box;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 500;
 }
 
-.AsideWhiteBlock-Text {
-    margin-top: 5em;
+
+@media (max-width: 480px) {
+    .AsideWhiteBlock {
+        padding: 2em 3em 0 3em;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 840px) {
+    .AsideWhiteBlock {
+        padding: 3em 3em 0 3em;
+    }
 }
