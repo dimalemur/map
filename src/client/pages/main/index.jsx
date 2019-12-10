@@ -1,10 +1,9 @@
 import React from 'react';
 import {Header} from "../../components/header";
-import TextContent from "../../components/textContent";
 import OptionSelection from "../../components/optionSelection";
 import {AsideWhiteBlock} from "../../components/asideWhiteBlock";
-import SelectDistrict from "../../components/selectDistrict";
 import {connect} from "react-redux";
+import Places from "../../components/places";
 
 
 const Main = (props) => {
@@ -13,10 +12,8 @@ const Main = (props) => {
             <Header/>
             <AsideWhiteBlock text = {props.state.MainPage.text[0]} />
             <AsideWhiteBlock text = {props.state.MainPage.text[1]}/>
-            {/*<TextContent/>*/}
             <OptionSelection />
-            {/*<AsideWhiteBlock/>*/}
-            {/*<SelectDistrict />*/}
+            <Places/>
         </div>
     )
 };

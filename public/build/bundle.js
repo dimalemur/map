@@ -58,14 +58,16 @@
 	
 	var _app = __webpack_require__(17);
 	
-	var _storeStore = __webpack_require__(98);
+	var _app2 = _interopRequireDefault(_app);
+	
+	var _storeStore = __webpack_require__(91);
 	
 	var _reactRedux = __webpack_require__(30);
 	
 	_reactDom2['default'].render(_react2['default'].createElement(
 	    _reactRedux.Provider,
 	    { store: _storeStore.store },
-	    _react2['default'].createElement(_app.App, { store: _storeStore.store })
+	    _react2['default'].createElement(_app2['default'], { store: _storeStore.store })
 	), document.getElementById('Page'));
 
 /***/ }),
@@ -32419,7 +32421,15 @@
 	    value: true
 	});
 	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(1);
 	
@@ -32429,16 +32439,55 @@
 	
 	var _pagesMain2 = _interopRequireDefault(_pagesMain);
 	
-	__webpack_require__(96);
+	__webpack_require__(88);
 	
-	var App = function App(props) {
-	    return _react2["default"].createElement(
-	        "div",
-	        { className: "App" },
-	        _react2["default"].createElement(_pagesMain2["default"], { store: props.store })
-	    );
-	};
-	exports.App = App;
+	var _reactRedux = __webpack_require__(30);
+	
+	var _storeReducersSetInitState = __webpack_require__(90);
+	
+	var _storeReducersMainPageReducer = __webpack_require__(80);
+	
+	var App = (function (_React$Component) {
+	    _inherits(App, _React$Component);
+	
+	    function App() {
+	        _classCallCheck(this, App);
+	
+	        _get(Object.getPrototypeOf(App.prototype), "constructor", this).apply(this, arguments);
+	    }
+	
+	    _createClass(App, [{
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            this.props.setInitState();
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return _react2["default"].createElement(
+	                "div",
+	                { className: "App" },
+	                _react2["default"].createElement(_pagesMain2["default"], { store: this.props.store })
+	            );
+	        }
+	    }]);
+	
+	    return App;
+	})(_react2["default"].Component);
+	
+	exports["default"] = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        state: state
+	    };
+	}, function (dispatch) {
+	    return {
+	        setInitState: function setInitState() {
+	            dispatch((0, _storeReducersSetInitState.setInitOptions)());
+	            dispatch((0, _storeReducersSetInitState.setInitPlaces)());
+	        }
+	    };
+	})(App);
+	module.exports = exports["default"];
 
 /***/ }),
 /* 18 */
@@ -32458,21 +32507,17 @@
 	
 	var _componentsHeader = __webpack_require__(19);
 	
-	var _componentsTextContent = __webpack_require__(24);
-	
-	var _componentsTextContent2 = _interopRequireDefault(_componentsTextContent);
-	
-	var _componentsOptionSelection = __webpack_require__(70);
+	var _componentsOptionSelection = __webpack_require__(24);
 	
 	var _componentsOptionSelection2 = _interopRequireDefault(_componentsOptionSelection);
 	
-	var _componentsAsideWhiteBlock = __webpack_require__(87);
-	
-	var _componentsSelectDistrict = __webpack_require__(90);
-	
-	var _componentsSelectDistrict2 = _interopRequireDefault(_componentsSelectDistrict);
+	var _componentsAsideWhiteBlock = __webpack_require__(82);
 	
 	var _reactRedux = __webpack_require__(30);
+	
+	var _componentsPlaces = __webpack_require__(85);
+	
+	var _componentsPlaces2 = _interopRequireDefault(_componentsPlaces);
 	
 	var Main = function Main(props) {
 	    return _react2["default"].createElement(
@@ -32481,7 +32526,8 @@
 	        _react2["default"].createElement(_componentsHeader.Header, null),
 	        _react2["default"].createElement(_componentsAsideWhiteBlock.AsideWhiteBlock, { text: props.state.MainPage.text[0] }),
 	        _react2["default"].createElement(_componentsAsideWhiteBlock.AsideWhiteBlock, { text: props.state.MainPage.text[1] }),
-	        _react2["default"].createElement(_componentsOptionSelection2["default"], null)
+	        _react2["default"].createElement(_componentsOptionSelection2["default"], null),
+	        _react2["default"].createElement(_componentsPlaces2["default"], null)
 	    );
 	};
 	
@@ -32493,7 +32539,6 @@
 	    return {};
 	})(Main);
 	module.exports = exports["default"];
-	/*<TextContent/>*/ /*<AsideWhiteBlock/>*/ /*<SelectDistrict />*/
 
 /***/ }),
 /* 19 */
@@ -32533,7 +32578,7 @@
 	                    { className: "Nav-Map Map" },
 	                    _react2["default"].createElement(
 	                        "a",
-	                        { href: "#", className: "Map-Link" },
+	                        { href: "#maps", className: "Map-Link" },
 	                        "Карты"
 	                    )
 	                ),
@@ -32542,8 +32587,8 @@
 	                    { className: "Nav-Rating" },
 	                    _react2["default"].createElement(
 	                        "a",
-	                        { href: "#", className: "Nav-Link" },
-	                        "Отзывы"
+	                        { href: "#Events", className: "Nav-Link" },
+	                        "Места"
 	                    )
 	                )
 	            )
@@ -32986,16 +33031,40 @@
 	
 	__webpack_require__(25);
 	
-	var _AsideGrayBlock = __webpack_require__(27);
+	var _mapFrame = __webpack_require__(27);
+	
+	var _mapFrame2 = _interopRequireDefault(_mapFrame);
+	
+	var _tags = __webpack_require__(73);
 	
 	var _reactRedux = __webpack_require__(30);
 	
-	var TextContent = function TextContent(props) {
+	var _button = __webpack_require__(76);
+	
+	var _button2 = _interopRequireDefault(_button);
+	
+	var OptionSelection = function OptionSelection(props) {
+	
 	    return _react2["default"].createElement(
 	        "div",
-	        { className: "Content TextContent" },
-	        _react2["default"].createElement(_AsideGrayBlock.AsideGrayBlock, { title: props.state.MainPage.title[1], text: props.state.MainPage.text[1] }),
-	        _react2["default"].createElement(_AsideGrayBlock.AsideGrayBlock, { title: props.state.MainPage.title[2], text: props.state.MainPage.text[2] })
+	        { className: "OptionSelection Content" },
+	        _react2["default"].createElement(
+	            "ul",
+	            { className: "OptionSelection-NavBar NavBar" },
+	            props.state.MainPage.options.map(function (btn, index) {
+	                return _react2["default"].createElement(_button2["default"], {
+	                    key: index,
+	                    index: index,
+	                    btn: btn.buttonName
+	                });
+	            })
+	        ),
+	        _react2["default"].createElement(_tags.Tags, { tags: props.state.MainPage.options[props.state.MainPage.active].tags }),
+	        _react2["default"].createElement(
+	            "div",
+	            { className: "OptionSelection-Map" },
+	            _react2["default"].createElement(_mapFrame2["default"], { active: props.state.MainPage.active })
+	        )
 	    );
 	};
 	
@@ -33005,7 +33074,7 @@
 	    };
 	}, function (dispatch) {
 	    return {};
-	})(TextContent);
+	})(OptionSelection);
 	module.exports = exports["default"];
 
 /***/ }),
@@ -33035,8 +33104,10 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(22)(false);
+	// Imports
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap&subset=cyrillic,cyrillic-ext);", ""]);
 	// Module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, "a {\n    text-decoration: none;\n    color: inherit;\n}\n\n.OptionSelection {\n    padding: 4em 3em 4em 3em;\n    box-sizing: border-box;\n}\n\n.NavBar {\n    margin: 0;\n    padding: 0;\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-columns: 1fr 1fr 1fr;\n        grid-template-columns: 1fr 1fr 1fr;\n}\n\n.NavBar-Item {\n    list-style-type: none;\n    display: -ms-grid;\n    display: grid;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-align: center;\n        align-items: center;\n\n    height: 66px;\n    font-size: 2em;\n    max-width: 382px;\n    color: #33473C;\n    border: 2px solid #000000;\n    background: #EAE9E5;\n\n    font-family: 'Montserrat Alternates', sans-serif;\n    font-style: normal;\n    font-weight: normal;\n\n}\n\n.NavBar-Item_active {\n\n    background: #FC9801;\n    border: 2px solid #000000;\n    box-sizing: border-box;\n    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);\n\n}\n\n@media (max-width: 480px) {\n    .NavBar-Item {\n        font-size: 1.5em;\n        text-align: center;\n    }\n\n    .OptionSelection {\n        padding: 30px 0 0;\n    }\n}\n\n@media (max-width: 1080px) {\n    .NavBar {\n        -ms-grid-columns: 1fr;\n            grid-template-columns: 1fr;\n        -ms-grid-rows: auto;\n            grid-template-rows: auto;\n    }\n\n    .NavBar-Item {\n        max-width: 100%;\n    }\n\n}", ""]);
 
 
 /***/ }),
@@ -33057,31 +33128,45 @@
 	
 	__webpack_require__(28);
 	
-	var AsideGrayBlock = function AsideGrayBlock(props) {
+	var _reactRedux = __webpack_require__(30);
+	
+	var _reactYandexMaps = __webpack_require__(70);
+	
+	var MapFrame = function MapFrame(props) {
 	    return _react2["default"].createElement(
 	        "div",
-	        { className: "AsideGrayBlock" },
+	        { className: "MapFrame Content", id: "maps" },
 	        _react2["default"].createElement(
-	            "div",
-	            { className: "AsideGrayBlock-Title" },
+	            _reactYandexMaps.YMaps,
+	            null,
 	            _react2["default"].createElement(
-	                "span",
-	                { className: "Title_normal" },
-	                props.title
-	            )
-	        ),
-	        _react2["default"].createElement(
-	            "div",
-	            { className: "AsideGrayBlock-Text" },
-	            _react2["default"].createElement(
-	                "span",
-	                { className: "Text_normal" },
-	                props.text
+	                _reactYandexMaps.Map,
+	                { state: { center: [55.76, 37.64], zoom: 12, showMap: false }, width: "100%", height: "100%" },
+	                props.options[props.active].points.map(function (point, i) {
+	                    return _react2["default"].createElement(_reactYandexMaps.Placemark, {
+	                        key: i,
+	                        geometry: [point.latitude, point.longitude],
+	                        options: {
+	                            preset: "islands#circleDotIcon",
+	                            iconColor: point.color
+	                        },
+	                        modules: ['geoObject.addon.balloon']
+	                    });
+	                })
 	            )
 	        )
 	    );
 	};
-	exports.AsideGrayBlock = AsideGrayBlock;
+	
+	exports["default"] = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        options: state.MainPage.options,
+	        active: state.MainPage.active
+	    };
+	}, function (dispatch) {
+	    return {};
+	})(MapFrame);
+	module.exports = exports["default"];
 
 /***/ }),
 /* 28 */
@@ -33111,7 +33196,7 @@
 
 	exports = module.exports = __webpack_require__(22)(false);
 	// Module
-	exports.push([module.id, ".AsideGrayBlock {\n    background: #EAE9E5;\n    padding: 4em 3em 6em 3em;\n}\n\n.AsideGrayBlock-Text {\n    margin-top: 3em;\n}\n\n", ""]);
+	exports.push([module.id, ".MapFrame {\n    height: 700px;\n}\n\n.MapFrame-Frame {\n}\n\n@media (max-width: 840px) {\n    .MapFrame {\n        height: 500px;\n    }\n}", ""]);
 
 
 /***/ }),
@@ -36707,108 +36792,37 @@
 /* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	/* WEBPACK VAR INJECTION */(function(process) {// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// !!! WARNING: ONLY CHANGE THIS FILE IF OUTPUT FOLDER CHANGES !!!
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
+	// This determines which build to use based on the `NODE_ENV` of your end user.
+	if (process.env.NODE_ENV === 'production') {
+	  module.exports = __webpack_require__(71);
+	} else {
+	  module.exports = __webpack_require__(72);
+	}
 	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	__webpack_require__(71);
-	
-	var _mapFrame = __webpack_require__(73);
-	
-	var _mapFrame2 = _interopRequireDefault(_mapFrame);
-	
-	var _tags = __webpack_require__(79);
-	
-	var _reactRedux = __webpack_require__(30);
-	
-	var _button = __webpack_require__(82);
-	
-	var _button2 = _interopRequireDefault(_button);
-	
-	var OptionSelection = function OptionSelection(props) {
-	    var _useState = (0, _react.useState)(0);
-	
-	    var _useState2 = _slicedToArray(_useState, 2);
-	
-	    var active = _useState2[0];
-	    var setActive = _useState2[1];
-	
-	    return _react2["default"].createElement(
-	        "div",
-	        { className: "OptionSelection Content" },
-	        _react2["default"].createElement(
-	            "ul",
-	            { className: "OptionSelection-NavBar NavBar" },
-	            props.state.MainPage.options.map(function (btn, index) {
-	                return _react2["default"].createElement(_button2["default"], {
-	                    key: index,
-	                    index: index,
-	                    btn: btn.buttonName,
-	                    setActive: setActive,
-	                    active: active
-	                });
-	            })
-	        ),
-	        _react2["default"].createElement(_tags.Tags, { tags: props.state.MainPage.options[active].tags }),
-	        _react2["default"].createElement(
-	            "div",
-	            { className: "OptionSelection-Map" },
-	            _react2["default"].createElement(_mapFrame2["default"], { active: active })
-	        )
-	    );
-	};
-	
-	exports["default"] = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        state: state
-	    };
-	}, function (dispatch) {
-	    return {};
-	})(OptionSelection);
-	module.exports = exports["default"];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var content = __webpack_require__(72);
+	/* WEBPACK VAR INJECTION */(function(global) {var t,e=(t=__webpack_require__(1))&&"object"==typeof t&&"default"in t?t.default:t,n="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};function o(t){return t&&t.__esModule&&Object.prototype.hasOwnProperty.call(t,"default")?t.default:t}function r(t,e){return t(e={exports:{}},e.exports),e.exports}var s=r(function(t,e){Object.defineProperty(e,"__esModule",{value:!0});var n="function"==typeof Symbol&&Symbol.for,o=n?Symbol.for("react.element"):60103,r=n?Symbol.for("react.portal"):60106,s=n?Symbol.for("react.fragment"):60107,i=n?Symbol.for("react.strict_mode"):60108,a=n?Symbol.for("react.profiler"):60114,c=n?Symbol.for("react.provider"):60109,u=n?Symbol.for("react.context"):60110,p=n?Symbol.for("react.async_mode"):60111,f=n?Symbol.for("react.concurrent_mode"):60111,l=n?Symbol.for("react.forward_ref"):60112,d=n?Symbol.for("react.suspense"):60113,m=n?Symbol.for("react.memo"):60115,h=n?Symbol.for("react.lazy"):60116;function y(t){if("object"==typeof t&&null!==t){var e=t.$$typeof;switch(e){case o:switch(t=t.type){case p:case f:case s:case a:case i:case d:return t;default:switch(t=t&&t.$$typeof){case u:case l:case c:return t;default:return e}}case h:case m:case r:return e}}}function v(t){return y(t)===f}e.typeOf=y,e.AsyncMode=p,e.ConcurrentMode=f,e.ContextConsumer=u,e.ContextProvider=c,e.Element=o,e.ForwardRef=l,e.Fragment=s,e.Lazy=h,e.Memo=m,e.Portal=r,e.Profiler=a,e.StrictMode=i,e.Suspense=d,e.isValidElementType=function(t){return"string"==typeof t||"function"==typeof t||t===s||t===f||t===a||t===i||t===d||"object"==typeof t&&null!==t&&(t.$$typeof===h||t.$$typeof===m||t.$$typeof===c||t.$$typeof===u||t.$$typeof===l)},e.isAsyncMode=function(t){return v(t)||y(t)===p},e.isConcurrentMode=v,e.isContextConsumer=function(t){return y(t)===u},e.isContextProvider=function(t){return y(t)===c},e.isElement=function(t){return"object"==typeof t&&null!==t&&t.$$typeof===o},e.isForwardRef=function(t){return y(t)===l},e.isFragment=function(t){return y(t)===s},e.isLazy=function(t){return y(t)===h},e.isMemo=function(t){return y(t)===m},e.isPortal=function(t){return y(t)===r},e.isProfiler=function(t){return y(t)===a},e.isStrictMode=function(t){return y(t)===i},e.isSuspense=function(t){return y(t)===d}});o(s),o(r(function(t,e){})),r(function(t){t.exports=s}),Object,Object,Object,function(){try{if(!Object.assign)return!1;var t=new String("abc");if(t[5]="de","5"===Object.getOwnPropertyNames(t)[0])return!1;for(var e={},n=0;n<10;n++)e["_"+String.fromCharCode(n)]=n;if("0123456789"!==Object.getOwnPropertyNames(e).map(function(t){return e[t]}).join(""))return!1;var o={};return"abcdefghijklmnopqrst".split("").forEach(function(t){o[t]=t}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},o)).join("")}catch(t){return!1}}()&&Object;var i="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";function a(){}function c(){}Function.call.bind(Object.prototype.hasOwnProperty),c.resetWarningCache=a;var u=r(function(t){t.exports=function(){function t(t,e,n,o,r,s){if(s!==i){var a=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw a.name="Invariant Violation",a}}function e(){return t}t.isRequired=t;var n={array:t,bool:t,func:t,number:t,object:t,string:t,symbol:t,any:t,arrayOf:e,element:t,elementType:t,instanceOf:e,node:t,objectOf:e,oneOf:e,oneOfType:e,shape:e,exact:e,checkPropTypes:c,resetWarningCache:a};return n.PropTypes=n,n}()}),p=o(r(function(t,e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(t){return t.displayName||t.name||("string"==typeof t&&t.length>0?t:"Unknown")}})),f=function(t,e){var n={};for(var o in t)-1===e.indexOf(o)&&(n[o]=t[o]);return n},l="__global_unique_id__",d=function(){return n[l]=(n[l]||0)+1};function m(t){return function(){return t}}var h=function(){};h.thatReturns=m,h.thatReturnsFalse=m(!1),h.thatReturnsTrue=m(!0),h.thatReturnsNull=m(null),h.thatReturnsThis=function(){return this},h.thatReturnsArgument=function(t){return t};var y=h,v=r(function(t,n){n.__esModule=!0;var o=s(u),r=s(d);function s(t){return t&&t.__esModule?t:{default:t}}function i(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function a(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e}function c(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}s(y),n.default=function(t,n){var s,u,p="__create-react-context-"+(0,r.default)()+"__",f=function(t){function e(){var n,o,r,s;i(this,e);for(var c=arguments.length,u=Array(c),p=0;p<c;p++)u[p]=arguments[p];return n=o=a(this,t.call.apply(t,[this].concat(u))),o.emitter=(r=o.props.value,s=[],{on:function(t){s.push(t)},off:function(t){s=s.filter(function(e){return e!==t})},get:function(){return r},set:function(t,e){r=t,s.forEach(function(t){return t(r,e)})}}),a(o,n)}return c(e,t),e.prototype.getChildContext=function(){var t;return(t={})[p]=this.emitter,t},e.prototype.componentWillReceiveProps=function(t){if(this.props.value!==t.value){var e=this.props.value,o=t.value,r=void 0;((s=e)===(i=o)?0!==s||1/s==1/i:s!=s&&i!=i)?r=0:(r="function"==typeof n?n(e,o):1073741823,0!=(r|=0)&&this.emitter.set(t.value,r))}var s,i},e.prototype.render=function(){return this.props.children},e}(e.Component);f.childContextTypes=((s={})[p]=o.default.object.isRequired,s);var l=function(e){function n(){var t,o;i(this,n);for(var r=arguments.length,s=Array(r),c=0;c<r;c++)s[c]=arguments[c];return t=o=a(this,e.call.apply(e,[this].concat(s))),o.state={value:o.getValue()},o.onUpdate=function(t,e){0!=((0|o.observedBits)&e)&&o.setState({value:o.getValue()})},a(o,t)}return c(n,e),n.prototype.componentWillReceiveProps=function(t){var e=t.observedBits;this.observedBits=null==e?1073741823:e},n.prototype.componentDidMount=function(){this.context[p]&&this.context[p].on(this.onUpdate);var t=this.props.observedBits;this.observedBits=null==t?1073741823:t},n.prototype.componentWillUnmount=function(){this.context[p]&&this.context[p].off(this.onUpdate)},n.prototype.getValue=function(){return this.context[p]?this.context[p].get():t},n.prototype.render=function(){return(t=this.props.children,Array.isArray(t)?t[0]:t)(this.state.value);var t},n}(e.Component);return l.contextTypes=((u={})[p]=o.default.object,u),{Provider:f,Consumer:l}},t.exports=n.default});o(v);var b=o(r(function(t,n){n.__esModule=!0;var o=s(e),r=s(v);function s(t){return t&&t.__esModule?t:{default:t}}n.default=o.default.createContext||r.default,t.exports=n.default})),j=b(null),O=function(t){var n=p(t);return function(o){return e.createElement(j.Consumer,null,function(r){if(null===r)throw new Error("Couldn't find Yandex.Maps API in the context. Make sure that <"+n+" /> is inside <YMaps /> provider");return e.createElement(t,Object.assign({},{ymaps:r},o))})}},_=b(null),g=function(t){return function(n){return e.createElement(_.Consumer,null,function(o){return e.createElement(t,Object.assign({},{parent:o},n))})}};function E(t,n,o){void 0===n&&(n=!1),void 0===o&&(o=[]);var r=function(r){function s(){r.call(this),this.state={loading:!0},this._isMounted=!1}return r&&(s.__proto__=r),(s.prototype=Object.create(r&&r.prototype)).constructor=s,s.prototype.componentDidMount=function(){var t=this;this._isMounted=!0,this.props.ymaps.load().then(function(e){return Promise.all(o.concat(t.props.modules).map(e.loadModule)).then(function(){!0===t._isMounted&&t.setState({loading:!1},function(){t.props.onLoad(e)})})}).catch(function(e){!0===t._isMounted&&t.props.onError(e)})},s.prototype.componentWillUnmount=function(){this._isMounted=!1},s.prototype.render=function(){var o=this.props.ymaps,r=!1===n||!1===this.state.loading,s=f(this.props,["onLoad","onError","modules","ymaps"]);return r&&e.createElement(t,Object.assign({},{ymaps:o.getApi()},s))},s}(e.Component);return r.defaultProps={onLoad:Function.prototype,onError:Function.prototype,modules:[]},O(r)}var C={lang:"ru_RU",load:"",ns:"",mode:"release"},w={},R=function(t){var e=Date.now().toString(32);this.options=t,this.namespace=t.query.ns||C.ns,this.onload="__yandex-maps-api-onload__$$"+e,this.onerror="__yandex-maps-api-onerror__$$"+e};R.prototype.getApi=function(){return"undefined"!=typeof window&&this.namespace?window[this.namespace]:this.api},R.prototype.setApi=function(t){return this.api=t},R.prototype.getPromise=function(){return this.namespace?w[this.namespace]:this.promise},R.prototype.setPromise=function(t){return this.namespace?w[this.namespace]=this.promise=t:this.promise=t},R.prototype.load=function(){var t=this;if(this.getApi())return Promise.resolve(this.setApi(this.getApi()));if(this.getPromise())return this.setPromise(this.getPromise());var e=Object.assign({onload:this.onload,onerror:this.onerror},C,this.options.query),n=Object.keys(e).map(function(t){return t+"="+e[t]}).join("&"),o=["https://"+(this.options.enterprise?"enterprise.":"")+"api-maps.yandex.ru",this.options.version,"?"+n].join("/"),r=new Promise(function(e,n){window[t.onload]=function(n){delete window[t.onload],n.loadModule=t.loadModule.bind(t),n.ready(function(){return e(t.setApi(n))})},window[t.onerror]=function(e){delete window[t.onerror],n(e)},t.fetchScript(o).catch(window[t.onerror])});return this.setPromise(r)},R.prototype.fetchScript=function(t){var e=this;return new Promise(function(n,o){e.script=document.createElement("script"),e.script.type="text/javascript",e.script.onload=n,e.script.onerror=o,e.script.src=t,e.script.async="async",document.head.appendChild(e.script)})},R.prototype.loadModule=function(t){var e=this;return new Promise(function(n,o){e.getApi().modules.require(t,function(o){!function(t,e,n,o){void 0===o&&(o=!1),e="string"==typeof e?e.split("."):e.slice();for(var r,s=t;e.length>1;)s[r=e.shift()]||(s[r]={}),s=s[r];s[e[0]]=!0===o&&s[e[0]]||n}(e.api,t,o,!0),n(o)},o,e.getApi())})},R._name="__react-yandex-maps__";var x=function(t){function n(e){t.call(this,e),this.ymaps=new R(e)}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){!0===this.props.preload&&this.ymaps.load()},n.prototype.render=function(){return e.createElement(j.Provider,{value:this.ymaps},this.props.children)},n}(e.Component);x.defaultProps={version:"2.1",enterprise:!1,query:{lang:"ru_RU",load:"",ns:""},preload:!1};var P=/^on(?=[A-Z])/;function M(t){return Object.keys(t).reduce(function(e,n){if(P.test(n)){var o=n.replace(P,"").toLowerCase();e._events[o]=t[n]}else e[n]=t[n];return e},{_events:{}})}function S(t,e,n){"function"==typeof n&&t.events.add(e,n)}function T(t,e,n){"function"==typeof n&&t.events.remove(e,n)}function k(t,e,n){Object.keys(Object.assign({},e,n)).forEach(function(o){e[o]!==n[o]&&(T(t,o,e[o]),S(t,o,n[o]))})}var A=function(t){return"default"+t.charAt(0).toUpperCase()+t.slice(1)};function U(t,e){return void 0!==t[e]||void 0===t[A(e)]}function $(t,e,n){return(U(t,e)?t[e]:t[A(e)])||n}function B(t,e,n){void 0===n&&(n=null),t&&t!==e&&(t.hasOwnProperty("current")?t.current=null:"function"==typeof t&&t(null)),e&&(e.hasOwnProperty("current")?e.current=n:"function"==typeof e&&e(n))}function D(t){var e=t.width,n=t.height,o=t.style,r=t.className;return void 0!==o||void 0!==r?Object.assign({},o&&{style:o},r&&{className:r}):{style:{width:e,height:n}}}var L=function(t){function n(){var e=this;t.call(this),this.state={instance:null},this._parentElement=null,this._getRef=function(t){e._parentElement=t}}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){var t=n.mountObject(this._parentElement,this.props.ymaps.Map,this.props);this.setState({instance:t})},n.prototype.componentDidUpdate=function(t){null!==this.state.instance&&n.updateObject(this.state.instance,t,this.props)},n.prototype.componentWillUnmount=function(){n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){var t=D(this.props),n=M(this.props),o=f(n,["_events","state","defaultState","options","defaultOptions","instanceRef","ymaps","children","width","height","style","className"]);return e.createElement(_.Provider,{value:this.state.instance},e.createElement("div",Object.assign({},{ref:this._getRef},t,o),this.props.children))},n.mountObject=function(t,e,n){var o=M(n),r=o.instanceRef,s=o._events,i=new e(t,$(n,"state"),$(n,"options"));return Object.keys(s).forEach(function(t){return S(i,t,s[t])}),B(null,r,i),i},n.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"state")){var u=$(e,"state",{}),p=$(n,"state",{});u.type!==p.type&&t.setType(p.type),u.behaviors!==p.behaviors&&(u.behaviors&&t.behaviors.disable(u.behaviors),p.behaviors&&t.behaviors.enable(p.behaviors)),u.zoom!==p.zoom&&t.setZoom(p.zoom),u.center!==p.center&&t.setCenter(p.center),p.bounds&&u.bounds!==p.bounds&&t.setBounds(p.bounds)}if(U(n,"options")){var f=$(e,"options"),l=$(n,"options",{});f!==l&&t.options.set(l)}$(e,"width")===$(n,"width")&&$(e,"height")===$(n,"height")||t.container.fitToViewport(),k(t,a,r),B(c,s,t)},n.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n._events;null!==t&&(Object.keys(r).forEach(function(e){return T(t,e,r[e])}),t.destroy(),B(o))},n}(e.Component);L.defaultProps={width:320,height:240};var F=E(L,!0,["Map"]),W=function(t){function n(){var e=this;t.call(this),this.state={instance:null},this._parentElement=null,this._getRef=function(t){e._parentElement=t}}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){var t=this;this._mounted=!0,this.props.ymaps.panorama.isSupported()&&n.mountObject(this._parentElement,this.props.ymaps.panorama,this.props).then(function(e){return t._mounted&&t.setState({instance:e})})},n.prototype.componentDidUpdate=function(t){null!==this.state.instance&&n.updateObject(this.state.instance,t,this.props)},n.prototype.componentWillUnmount=function(){this._mounted=!1,n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){var t=D(this.props);return e.createElement("div",Object.assign({},{ref:this._getRef},t))},n.mountObject=function(t,e,n){var o=M(n),r=o.instanceRef,s=o._events,i=$(n,"point"),a=$(n,"locateOptions"),c=$(n,"options");return new Promise(function(n,o){e.locate(i,a).done(function(o){if(o.length>0){var i=new e.Player(t,o[0],c);B(null,r,i),Object.keys(s).forEach(function(t){return S(i,t,s[t])}),n(i)}},o)})},n.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"options")){var u=$(e,"options"),p=$(n,"options");u!==p&&t.options.set(p)}if(U(n,"point")){var f=$(n,"point"),l=$(e,"point"),d=$(n,"locateOptions");f!==l&&t.moveTo(f,d)}k(t,a,r),B(c,s,t)},n.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n._events;null!==t&&(Object.keys(r).forEach(function(e){return T(t,e,r[e])}),B(o))},n}(e.Component);W.defaultProps={width:320,height:240};var N=E(W,!0,["panorama.isSupported","panorama.locate","panorama.createPlayer","panorama.Player"]),q=function(t){function n(){t.call(this),this.state={instance:null}}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){var t=n.mountControl(this.props.ymaps.control[this.props.name],this.props);this.setState({instance:t})},n.prototype.componentDidUpdate=function(t){null!==this.state.instance&&n.updateControl(this.state.instance,t,this.props)},n.prototype.componentWillUnmount=function(){n.unmountControl(this.state.instance,this.props)},n.prototype.render=function(){return e.createElement(_.Provider,{value:this.state.instance},this.props.children)},n.mountControl=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n.lazy,i=n._events,a=new t({data:$(e,"data"),options:$(e,"options"),state:$(e,"state"),mapTypes:$(e,"mapTypes"),lazy:s});if(Object.keys(i).forEach(function(t){return S(a,t,i[t])}),r&&r.controls&&"function"==typeof r.controls.add)r.controls.add(a);else{if(!r||!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount "+e.name);r.add(a)}return B(null,o,a),a},n.updateControl=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"options")){var u=$(e,"options"),p=$(n,"options");u!==p&&t.options.set(p)}if(U(n,"data")){var f=$(e,"data"),l=$(n,"data");f!==l&&t.data.set(l)}if(U(n,"state")){var d=$(e,"state"),m=$(n,"state");d!==m&&t.state.set(m)}if(U(n,"mapTypes")){var h=$(e,"mapTypes"),y=$(n,"mapTypes");h!==y&&(t.removeAllMapTypes(),y.forEach(function(e){return t.addMapType(e)}))}k(t,a,r),B(c,s,t)},n.unmountControl=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events;null!==t&&(Object.keys(s).forEach(function(e){return T(t,e,s[e])}),r.controls&&"function"==typeof r.controls.remove?r.controls.remove(t):r.remove&&"function"==typeof r.remove&&r.remove(t),B(o))},n}(e.Component),z=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"Button"}))},!0,["control.Button"])),I=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"FullscreenControl"}))},!0,["control.FullscreenControl"])),Z=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"GeolocationControl"}))},!0,["control.GeolocationControl"])),G=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"ListBox"}))},!0,["control.ListBox"])),V=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"ListBoxItem"}))},!0,["control.ListBoxItem"])),Y=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"RouteButton"}))},!0,["control.RouteButton"])),H=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"RouteEditor"}))},!0,["control.RouteEditor"])),J=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"RoutePanel"}))},!0,["control.RoutePanel"])),K=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"RulerControl"}))},!0,["control.RulerControl"])),Q=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"SearchControl"}))},!0,["control.SearchControl"])),X=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"TrafficControl"}))},!0,["control.TrafficControl"])),tt=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"TypeSelector"}))},!0,["control.TypeSelector"])),et=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"ZoomControl"}))},!0,["control.ZoomControl"])),nt=g(E(function(t){function n(){t.call(this),this.state={instance:null}}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){var t=n.mountObject(this.props.ymaps.Clusterer,this.props);this.setState({instance:t})},n.prototype.componentDidUpdate=function(t){null!==this.state.instance&&n.updateObject(this.state.instance,t,this.props)},n.prototype.componentWillUnmount=function(){n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){return e.createElement(_.Provider,{value:this.state.instance},this.props.children)},n.mountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events,i=new t($(e,"options"));if(Object.keys(s).forEach(function(t){return S(i,t,s[t])}),r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(i);else{if(!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount Clusterer");r.add(i)}return B(null,o,i),i},n.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"options")){var u=$(e,"options"),p=$(n,"options");u!==p&&t.options.set(p)}k(t,a,r),B(c,s,t)},n.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events;null!==t&&(Object.keys(s).forEach(function(e){return T(t,e,s[e])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(t):r.remove&&"function"==typeof r.remove&&r.remove(t),B(o))},n}(e.Component),!0,["Clusterer"])),ot=g(E(function(t){function e(){t.call(this),this.state={instance:null}}return t&&(e.__proto__=t),(e.prototype=Object.create(t&&t.prototype)).constructor=e,e.prototype.componentDidMount=function(){var t=e.mountObject(this.props.ymaps.ObjectManager,this.props);this.setState({instance:t})},e.prototype.componentDidUpdate=function(t){null!==this.state.instance&&e.updateObject(this.state.instance,t,this.props)},e.prototype.componentWillUnmount=function(){e.unmountObject(this.state.instance,this.props)},e.prototype.render=function(){return null},e.mountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events,i=$(e,"options"),a=$(e,"features"),c=$(e,"filter"),u=$(e,"objects"),p=$(e,"clusters"),f=new t(i);if(f.add(a||[]),f.setFilter(c),f.objects.options.set(u),f.clusters.options.set(p),Object.keys(s).forEach(function(t){return S(f,t,s[t])}),r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(f);else{if(!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount ObjectManager");r.add(f)}return B(null,o,f),f},e.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"options")){var u=$(e,"options"),p=$(n,"options");u!==p&&t.options.set(p)}if(U(n,"objects")){var f=$(e,"objects"),l=$(n,"objects");f!==l&&t.objects.options.set(l)}if(U(n,"clusters")){var d=$(e,"clusters"),m=$(n,"clusters");d!==m&&t.clusters.options.set(m)}if(U(n,"filter")){var h=$(e,"filter"),y=$(n,"filter");h!==y&&t.options.set(y)}if(U(n,"features")){var v=$(e,"features"),b=$(n,"features");v!==b&&(t.remove(v),t.add(b))}k(t,a,r),B(c,s,t)},e.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events;null!==t&&(Object.keys(s).forEach(function(e){return T(t,e,s[e])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(t):r.remove&&"function"==typeof r.remove&&r.remove(t),B(o))},e}(e.Component),!0,["ObjectManager"])),rt=function(t){function e(){t.call(this),this.state={instance:null}}return t&&(e.__proto__=t),(e.prototype=Object.create(t&&t.prototype)).constructor=e,e.prototype.componentDidMount=function(){var t=this.props,n=t.name,o=t.ymaps,r=t.dangerZone,s=e.mountObject(r&&"function"==typeof r.modifyConstructor?r.modifyConstructor(o[n]):o[n],this.props);this.setState({instance:s})},e.prototype.componentDidUpdate=function(t){null!==this.state.instance&&e.updateObject(this.state.instance,t,this.props)},e.prototype.componentWillUnmount=function(){e.unmountObject(this.state.instance,this.props)},e.prototype.render=function(){return null},e.mountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events,i=new t($(e,"geometry"),$(e,"properties"),$(e,"options"));if(Object.keys(s).forEach(function(t){return S(i,t,s[t])}),r&&r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(i);else{if(!r||!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount "+e.name);r.add(i)}return B(null,o,i),i},e.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"geometry")){var u=$(e,"geometry",{}),p=$(n,"geometry",{});Array.isArray(p)&&p!==u?Array.isArray(p[0])&&"number"==typeof p[1]?(t.geometry.setCoordinates(p[0]),t.geometry.setRadius(p[1])):t.geometry.setCoordinates(p):"object"==typeof p&&(p.coordinates!==u.coordinates&&t.geometry.setCoordinates(p.coordinates),p.radius!==u.radius&&t.geometry.setRadius(p.radius))}if(U(n,"properties")){var f=$(e,"properties"),l=$(n,"properties");f!==l&&t.properties.set(l)}if(U(n,"options")){var d=$(e,"options"),m=$(n,"options");d!==m&&t.options.set(m)}k(t,a,r),B(c,s,t)},e.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events;null!==t&&(Object.keys(s).forEach(function(e){return T(t,e,s[e])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(t):r.remove&&"function"==typeof r.remove&&r.remove(t),B(o))},e}(e.Component),st={modifyConstructor:function(t){function e(e,n,o){t.call(this,{geometry:e,properties:n},o)}return e.prototype=t.prototype,e}},it=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"GeoObject",dangerZone:st}))},!0,["GeoObject"])),at=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Circle"}))},!0,["Circle"])),ct=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Placemark"}))},!0,["Placemark"])),ut=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Polygon"}))},!0,["Polygon"])),pt=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Polyline"}))},!0,["Polyline"])),ft=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Rectangle"}))},!0,["Rectangle"]));exports.withYMaps=E,exports.YMaps=x,exports.Map=F,exports.Panorama=N,exports.Button=z,exports.FullscreenControl=I,exports.GeolocationControl=Z,exports.ListBox=G,exports.ListBoxItem=V,exports.RouteButton=Y,exports.RouteEditor=H,exports.RoutePanel=J,exports.RulerControl=K,exports.SearchControl=Q,exports.TrafficControl=X,exports.TypeSelector=tt,exports.ZoomControl=et,exports.Clusterer=nt,exports.ObjectManager=ot,exports.GeoObject=it,exports.Circle=at,exports.Placemark=ct,exports.Polygon=ut,exports.Polyline=pt,exports.Rectangle=ft;
+	//# sourceMappingURL=react-yandex-maps.js.map
 	
-	if (typeof content === 'string') {
-	  content = [[module.id, content, '']];
-	}
-	
-	var options = {}
-	
-	options.insert = "head";
-	options.singleton = false;
-	
-	var update = __webpack_require__(23)(content, options);
-	
-	if (content.locals) {
-	  module.exports = content.locals;
-	}
-
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
 /* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(22)(false);
-	// Imports
-	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap&subset=cyrillic,cyrillic-ext);", ""]);
-	// Module
-	exports.push([module.id, "a {\n    text-decoration: none;\n    color: inherit;\n}\n\n.OptionSelection {\n    padding: 4em 3em 4em 3em;\n    box-sizing: border-box;\n}\n\n.NavBar {\n    margin: 0;\n    padding: 0;\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-columns: 1fr 1fr 1fr;\n        grid-template-columns: 1fr 1fr 1fr;\n}\n\n.NavBar-Item {\n    list-style-type: none;\n    display: -ms-grid;\n    display: grid;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-align: center;\n        align-items: center;\n\n    height: 66px;\n    font-size: 2em;\n    max-width: 382px;\n    color: #33473C;\n    border: 2px solid #000000;\n    background: #EAE9E5;\n\n    font-family: 'Montserrat Alternates', sans-serif;\n    font-style: normal;\n    font-weight: normal;\n\n}\n\n.NavBar-Item_active {\n\n    background: #FC9801;\n    border: 2px solid #000000;\n    box-sizing: border-box;\n    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);\n\n}\n\n@media (max-width: 480px) {\n    .NavBar-Item {\n        font-size: 1.5em;\n        text-align: center;\n    }\n\n    .OptionSelection {\n        padding: 30px 0 0;\n    }\n}\n\n@media (max-width: 1080px) {\n    .NavBar {\n        -ms-grid-columns: 1fr;\n            grid-template-columns: 1fr;\n        -ms-grid-rows: auto;\n            grid-template-rows: auto;\n    }\n\n    .NavBar-Item {\n        max-width: 100%;\n    }\n\n}", ""]);
-
+	/* WEBPACK VAR INJECTION */(function(global) {var e,t=(e=__webpack_require__(1))&&"object"==typeof e&&"default"in e?e.default:e,n="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};function o(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}function r(e,t){return e(t={exports:{}},t.exports),t.exports}o(r(function(e,t){Object.defineProperty(t,"__esModule",{value:!0});var n="function"==typeof Symbol&&Symbol.for,o=n?Symbol.for("react.element"):60103,r=n?Symbol.for("react.portal"):60106,a=n?Symbol.for("react.fragment"):60107,s=n?Symbol.for("react.strict_mode"):60108,i=n?Symbol.for("react.profiler"):60114,p=n?Symbol.for("react.provider"):60109,u=n?Symbol.for("react.context"):60110,c=n?Symbol.for("react.async_mode"):60111,f=n?Symbol.for("react.concurrent_mode"):60111,l=n?Symbol.for("react.forward_ref"):60112,d=n?Symbol.for("react.suspense"):60113,y=n?Symbol.for("react.memo"):60115,h=n?Symbol.for("react.lazy"):60116;function m(e){if("object"==typeof e&&null!==e){var t=e.$$typeof;switch(t){case o:switch(e=e.type){case c:case f:case a:case i:case s:case d:return e;default:switch(e=e&&e.$$typeof){case u:case l:case p:return e;default:return t}}case h:case y:case r:return t}}}function v(e){return m(e)===f}t.typeOf=m,t.AsyncMode=c,t.ConcurrentMode=f,t.ContextConsumer=u,t.ContextProvider=p,t.Element=o,t.ForwardRef=l,t.Fragment=a,t.Lazy=h,t.Memo=y,t.Portal=r,t.Profiler=i,t.StrictMode=s,t.Suspense=d,t.isValidElementType=function(e){return"string"==typeof e||"function"==typeof e||e===a||e===f||e===i||e===s||e===d||"object"==typeof e&&null!==e&&(e.$$typeof===h||e.$$typeof===y||e.$$typeof===p||e.$$typeof===u||e.$$typeof===l)},t.isAsyncMode=function(e){return v(e)||m(e)===c},t.isConcurrentMode=v,t.isContextConsumer=function(e){return m(e)===u},t.isContextProvider=function(e){return m(e)===p},t.isElement=function(e){return"object"==typeof e&&null!==e&&e.$$typeof===o},t.isForwardRef=function(e){return m(e)===l},t.isFragment=function(e){return m(e)===a},t.isLazy=function(e){return m(e)===h},t.isMemo=function(e){return m(e)===y},t.isPortal=function(e){return m(e)===r},t.isProfiler=function(e){return m(e)===i},t.isStrictMode=function(e){return m(e)===s},t.isSuspense=function(e){return m(e)===d}}));var a=r(function(e,t){!function(){Object.defineProperty(t,"__esModule",{value:!0});var e="function"==typeof Symbol&&Symbol.for,n=e?Symbol.for("react.element"):60103,o=e?Symbol.for("react.portal"):60106,r=e?Symbol.for("react.fragment"):60107,a=e?Symbol.for("react.strict_mode"):60108,s=e?Symbol.for("react.profiler"):60114,i=e?Symbol.for("react.provider"):60109,p=e?Symbol.for("react.context"):60110,u=e?Symbol.for("react.async_mode"):60111,c=e?Symbol.for("react.concurrent_mode"):60111,f=e?Symbol.for("react.forward_ref"):60112,l=e?Symbol.for("react.suspense"):60113,d=e?Symbol.for("react.memo"):60115,y=e?Symbol.for("react.lazy"):60116;function h(e){if("object"==typeof e&&null!==e){var t=e.$$typeof;switch(t){case n:var h=e.type;switch(h){case u:case c:case r:case s:case a:case l:return h;default:var m=h&&h.$$typeof;switch(m){case p:case f:case i:return m;default:return t}}case y:case d:case o:return t}}}var m=u,v=c,b=p,O=i,g=n,j=f,_=r,w=y,x=d,E=o,R=s,C=a,S=l,P=!1;function T(e){return h(e)===c}t.typeOf=h,t.AsyncMode=m,t.ConcurrentMode=v,t.ContextConsumer=b,t.ContextProvider=O,t.Element=g,t.ForwardRef=j,t.Fragment=_,t.Lazy=w,t.Memo=x,t.Portal=E,t.Profiler=R,t.StrictMode=C,t.Suspense=S,t.isValidElementType=function(e){return"string"==typeof e||"function"==typeof e||e===r||e===c||e===s||e===a||e===l||"object"==typeof e&&null!==e&&(e.$$typeof===y||e.$$typeof===d||e.$$typeof===i||e.$$typeof===p||e.$$typeof===f)},t.isAsyncMode=function(e){return P||(P=!0,function(e,t){if(void 0===t)throw new Error("`lowPriorityWarning(condition, format, ...args)` requires a warning message argument");if(!e){for(var n=arguments.length,o=Array(n>2?n-2:0),r=2;r<n;r++)o[r-2]=arguments[r];(function(e){for(var t=arguments.length,n=Array(t>1?t-1:0),o=1;o<t;o++)n[o-1]=arguments[o];var r=0,a="Warning: "+e.replace(/%s/g,function(){return n[r++]});"undefined"!=typeof console&&console.warn(a);try{throw new Error(a)}catch(e){}}).apply(void 0,[t].concat(o))}}(!1,"The ReactIs.isAsyncMode() alias has been deprecated, and will be removed in React 17+. Update your code to use ReactIs.isConcurrentMode() instead. It has the exact same API.")),T(e)||h(e)===u},t.isConcurrentMode=T,t.isContextConsumer=function(e){return h(e)===p},t.isContextProvider=function(e){return h(e)===i},t.isElement=function(e){return"object"==typeof e&&null!==e&&e.$$typeof===n},t.isForwardRef=function(e){return h(e)===f},t.isFragment=function(e){return h(e)===r},t.isLazy=function(e){return h(e)===y},t.isMemo=function(e){return h(e)===d},t.isPortal=function(e){return h(e)===o},t.isProfiler=function(e){return h(e)===s},t.isStrictMode=function(e){return h(e)===a},t.isSuspense=function(e){return h(e)===l}}()});o(a);var s=r(function(e){e.exports=a}),i=Object.getOwnPropertySymbols,p=Object.prototype.hasOwnProperty,u=Object.prototype.propertyIsEnumerable,c=function(){try{if(!Object.assign)return!1;var e=new String("abc");if(e[5]="de","5"===Object.getOwnPropertyNames(e)[0])return!1;for(var t={},n=0;n<10;n++)t["_"+String.fromCharCode(n)]=n;if("0123456789"!==Object.getOwnPropertyNames(t).map(function(e){return t[e]}).join(""))return!1;var o={};return"abcdefghijklmnopqrst".split("").forEach(function(e){o[e]=e}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},o)).join("")}catch(e){return!1}}()?Object.assign:function(e,t){for(var n,o,r=function(e){if(null==e)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(e)}(e),a=1;a<arguments.length;a++){for(var s in n=Object(arguments[a]))p.call(n,s)&&(r[s]=n[s]);if(i){o=i(n);for(var c=0;c<o.length;c++)u.call(n,o[c])&&(r[o[c]]=n[o[c]])}}return r},f="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED",l=function(){},d=f,y={},h=Function.call.bind(Object.prototype.hasOwnProperty);function m(e,t,n,o,r){for(var a in e)if(h(e,a)){var s;try{if("function"!=typeof e[a]){var i=Error((o||"React class")+": "+n+" type `"+a+"` is invalid; it must be a function, usually from the `prop-types` package, but received `"+typeof e[a]+"`.");throw i.name="Invariant Violation",i}s=e[a](t,a,o,n,null,d)}catch(e){s=e}if(!s||s instanceof Error||l((o||"React class")+": type specification of "+n+" `"+a+"` is invalid; the type checker function must return `null` or an `Error` but returned a "+typeof s+". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument)."),s instanceof Error&&!(s.message in y)){y[s.message]=!0;var p=r?r():"";l("Failed "+n+" type: "+s.message+(null!=p?p:""))}}}l=function(e){var t="Warning: "+e;"undefined"!=typeof console&&console.error(t);try{throw new Error(t)}catch(e){}},m.resetWarningCache=function(){y={}};var v=m,b=Function.call.bind(Object.prototype.hasOwnProperty),O=function(){};function g(){return null}O=function(e){var t="Warning: "+e;"undefined"!=typeof console&&console.error(t);try{throw new Error(t)}catch(e){}};var j=r(function(e){e.exports=function(e,t){var n="function"==typeof Symbol&&Symbol.iterator,o="@@iterator",r="<<anonymous>>",a={array:u("array"),bool:u("boolean"),func:u("function"),number:u("number"),object:u("object"),string:u("string"),symbol:u("symbol"),any:p(g),arrayOf:function(e){return p(function(t,n,o,r,a){if("function"!=typeof e)return new i("Property `"+a+"` of component `"+o+"` has invalid PropType notation inside arrayOf.");var s=t[n];if(!Array.isArray(s))return new i("Invalid "+r+" `"+a+"` of type `"+d(s)+"` supplied to `"+o+"`, expected an array.");for(var p=0;p<s.length;p++){var u=e(s,p,o,r,a+"["+p+"]",f);if(u instanceof Error)return u}return null})},element:p(function(t,n,o,r,a){var s=t[n];return e(s)?null:new i("Invalid "+r+" `"+a+"` of type `"+d(s)+"` supplied to `"+o+"`, expected a single ReactElement.")}),elementType:p(function(e,t,n,o,r){var a=e[t];return s.isValidElementType(a)?null:new i("Invalid "+o+" `"+r+"` of type `"+d(a)+"` supplied to `"+n+"`, expected a single ReactElement type.")}),instanceOf:function(e){return p(function(t,n,o,a,s){var p;return t[n]instanceof e?null:new i("Invalid "+a+" `"+s+"` of type `"+((p=t[n]).constructor&&p.constructor.name?p.constructor.name:r)+"` supplied to `"+o+"`, expected instance of `"+(e.name||r)+"`.")})},node:p(function(e,t,n,o,r){return l(e[t])?null:new i("Invalid "+o+" `"+r+"` supplied to `"+n+"`, expected a ReactNode.")}),objectOf:function(e){return p(function(t,n,o,r,a){if("function"!=typeof e)return new i("Property `"+a+"` of component `"+o+"` has invalid PropType notation inside objectOf.");var s=t[n],p=d(s);if("object"!==p)return new i("Invalid "+r+" `"+a+"` of type `"+p+"` supplied to `"+o+"`, expected an object.");for(var u in s)if(b(s,u)){var c=e(s,u,o,r,a+"."+u,f);if(c instanceof Error)return c}return null})},oneOf:function(e){return Array.isArray(e)?p(function(t,n,o,r,a){for(var s=t[n],p=0;p<e.length;p++)if((u=s)===(c=e[p])?0!==u||1/u==1/c:u!=u&&c!=c)return null;var u,c,f=JSON.stringify(e,function(e,t){return"symbol"===y(t)?String(t):t});return new i("Invalid "+r+" `"+a+"` of value `"+String(s)+"` supplied to `"+o+"`, expected one of "+f+".")}):(O(arguments.length>1?"Invalid arguments supplied to oneOf, expected an array, got "+arguments.length+" arguments. A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).":"Invalid argument supplied to oneOf, expected an array."),g)},oneOfType:function(e){if(!Array.isArray(e))return O("Invalid argument supplied to oneOfType, expected an instance of array."),g;for(var t=0;t<e.length;t++){var n=e[t];if("function"!=typeof n)return O("Invalid argument supplied to oneOfType. Expected an array of check functions, but received "+h(n)+" at index "+t+"."),g}return p(function(t,n,o,r,a){for(var s=0;s<e.length;s++)if(null==(0,e[s])(t,n,o,r,a,f))return null;return new i("Invalid "+r+" `"+a+"` supplied to `"+o+"`.")})},shape:function(e){return p(function(t,n,o,r,a){var s=t[n],p=d(s);if("object"!==p)return new i("Invalid "+r+" `"+a+"` of type `"+p+"` supplied to `"+o+"`, expected `object`.");for(var u in e){var c=e[u];if(c){var l=c(s,u,o,r,a+"."+u,f);if(l)return l}}return null})},exact:function(e){return p(function(t,n,o,r,a){var s=t[n],p=d(s);if("object"!==p)return new i("Invalid "+r+" `"+a+"` of type `"+p+"` supplied to `"+o+"`, expected `object`.");var u=c({},t[n],e);for(var l in u){var y=e[l];if(!y)return new i("Invalid "+r+" `"+a+"` key `"+l+"` supplied to `"+o+"`.\nBad object: "+JSON.stringify(t[n],null,"  ")+"\nValid keys: "+JSON.stringify(Object.keys(e),null,"  "));var h=y(s,l,o,r,a+"."+l,f);if(h)return h}return null})}};function i(e){this.message=e,this.stack=""}function p(e){var n={},o=0;function a(a,s,p,u,c,l,d){if(u=u||r,l=l||p,d!==f){if(t){var y=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types");throw y.name="Invariant Violation",y}if("undefined"!=typeof console){var h=u+":"+p;!n[h]&&o<3&&(O("You are manually calling a React.PropTypes validation function for the `"+l+"` prop on `"+u+"`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details."),n[h]=!0,o++)}}return null==s[p]?a?new i(null===s[p]?"The "+c+" `"+l+"` is marked as required in `"+u+"`, but its value is `null`.":"The "+c+" `"+l+"` is marked as required in `"+u+"`, but its value is `undefined`."):null:e(s,p,u,c,l)}var s=a.bind(null,!1);return s.isRequired=a.bind(null,!0),s}function u(e){return p(function(t,n,o,r,a,s){var p=t[n];return d(p)!==e?new i("Invalid "+r+" `"+a+"` of type `"+y(p)+"` supplied to `"+o+"`, expected `"+e+"`."):null})}function l(t){switch(typeof t){case"number":case"string":case"undefined":return!0;case"boolean":return!t;case"object":if(Array.isArray(t))return t.every(l);if(null===t||e(t))return!0;var r=function(e){var r=t&&(n&&t[n]||t[o]);if("function"==typeof r)return r}();if(!r)return!1;var a,s=r.call(t);if(r!==t.entries){for(;!(a=s.next()).done;)if(!l(a.value))return!1}else for(;!(a=s.next()).done;){var i=a.value;if(i&&!l(i[1]))return!1}return!0;default:return!1}}function d(e){var t=typeof e;return Array.isArray(e)?"array":e instanceof RegExp?"object":function(e,t){return"symbol"===e||!!t&&("Symbol"===t["@@toStringTag"]||"function"==typeof Symbol&&t instanceof Symbol)}(t,e)?"symbol":t}function y(e){if(null==e)return""+e;var t=d(e);if("object"===t){if(e instanceof Date)return"date";if(e instanceof RegExp)return"regexp"}return t}function h(e){var t=y(e);switch(t){case"array":case"object":return"an "+t;case"boolean":case"date":case"regexp":return"a "+t;default:return t}}return i.prototype=Error.prototype,a.checkPropTypes=v,a.resetWarningCache=v.resetWarningCache,a.PropTypes=a,a}(s.isElement,!0)}),_=o(r(function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e){return e.displayName||e.name||("string"==typeof e&&e.length>0?e:"Unknown")}})),w=function(e,t){var n={};for(var o in e)-1===t.indexOf(o)&&(n[o]=e[o]);return n},x="__global_unique_id__",E=function(){return n[x]=(n[x]||0)+1};function R(e){return function(){return e}}var C=function(){};C.thatReturns=R,C.thatReturnsFalse=R(!1),C.thatReturnsTrue=R(!0),C.thatReturnsNull=R(null),C.thatReturnsThis=function(){return this},C.thatReturnsArgument=function(e){return e};var S=function(e,t){if(void 0===t)throw new Error("`warning(condition, format, ...args)` requires a warning message argument");if(0!==t.indexOf("Failed Composite propType: ")&&!e){for(var n=arguments.length,o=Array(n>2?n-2:0),r=2;r<n;r++)o[r-2]=arguments[r];(function(e){for(var t=arguments.length,n=Array(t>1?t-1:0),o=1;o<t;o++)n[o-1]=arguments[o];var r=0,a="Warning: "+e.replace(/%s/g,function(){return n[r++]});"undefined"!=typeof console&&console.error(a);try{throw new Error(a)}catch(e){}}).apply(void 0,[t].concat(o))}},P=r(function(e,n){n.__esModule=!0;var o=s(j),r=s(E),a=s(S);function s(e){return e&&e.__esModule?e:{default:e}}function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function p(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function u(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}n.default=function(e,n){var s,c,f="__create-react-context-"+(0,r.default)()+"__",l=function(e){function t(){var n,o,r,a;i(this,t);for(var s=arguments.length,u=Array(s),c=0;c<s;c++)u[c]=arguments[c];return n=o=p(this,e.call.apply(e,[this].concat(u))),o.emitter=(r=o.props.value,a=[],{on:function(e){a.push(e)},off:function(e){a=a.filter(function(t){return t!==e})},get:function(){return r},set:function(e,t){r=e,a.forEach(function(e){return e(r,t)})}}),p(o,n)}return u(t,e),t.prototype.getChildContext=function(){var e;return(e={})[f]=this.emitter,e},t.prototype.componentWillReceiveProps=function(e){if(this.props.value!==e.value){var t=this.props.value,o=e.value,r=void 0;((s=t)===(i=o)?0!==s||1/s==1/i:s!=s&&i!=i)?r=0:(r="function"==typeof n?n(t,o):1073741823,(0,a.default)((1073741823&r)===r,"calculateChangedBits: Expected the return value to be a 31-bit integer. Instead received: %s",r),0!=(r|=0)&&this.emitter.set(e.value,r))}var s,i},t.prototype.render=function(){return this.props.children},t}(t.Component);l.childContextTypes=((s={})[f]=o.default.object.isRequired,s);var d=function(t){function n(){var e,o;i(this,n);for(var r=arguments.length,a=Array(r),s=0;s<r;s++)a[s]=arguments[s];return e=o=p(this,t.call.apply(t,[this].concat(a))),o.state={value:o.getValue()},o.onUpdate=function(e,t){0!=((0|o.observedBits)&t)&&o.setState({value:o.getValue()})},p(o,e)}return u(n,t),n.prototype.componentWillReceiveProps=function(e){var t=e.observedBits;this.observedBits=null==t?1073741823:t},n.prototype.componentDidMount=function(){this.context[f]&&this.context[f].on(this.onUpdate);var e=this.props.observedBits;this.observedBits=null==e?1073741823:e},n.prototype.componentWillUnmount=function(){this.context[f]&&this.context[f].off(this.onUpdate)},n.prototype.getValue=function(){return this.context[f]?this.context[f].get():e},n.prototype.render=function(){return(e=this.props.children,Array.isArray(e)?e[0]:e)(this.state.value);var e},n}(t.Component);return d.contextTypes=((c={})[f]=o.default.object,c),{Provider:l,Consumer:d}},e.exports=n.default});o(P);var T=o(r(function(e,n){n.__esModule=!0;var o=a(t),r=a(P);function a(e){return e&&e.__esModule?e:{default:e}}n.default=o.default.createContext||r.default,e.exports=n.default})),M=T(null),A=function(e){var n=_(e),o=function(o){return t.createElement(M.Consumer,null,function(r){if(null===r)throw new Error("Couldn't find Yandex.Maps API in the context. Make sure that <"+n+" /> is inside <YMaps /> provider");return t.createElement(e,Object.assign({},{ymaps:r},o))})};return o.displayName="withYMapsContext("+n+")",o},k=T(null),$=function(e){var n=function(n){return t.createElement(k.Consumer,null,function(o){return t.createElement(e,Object.assign({},{parent:o},n))})};return n.displayName="withParentContext("+_(e)+")",n};function I(e,n,o){void 0===n&&(n=!1),void 0===o&&(o=[]);var r=function(r){function a(){r.call(this),this.state={loading:!0},this._isMounted=!1}return r&&(a.__proto__=r),(a.prototype=Object.create(r&&r.prototype)).constructor=a,a.prototype.componentDidMount=function(){var e=this;this._isMounted=!0,this.props.ymaps.load().then(function(t){return Promise.all(o.concat(e.props.modules).map(t.loadModule)).then(function(){!0===e._isMounted&&e.setState({loading:!1},function(){e.props.onLoad(t)})})}).catch(function(t){!0===e._isMounted&&e.props.onError(t)})},a.prototype.componentWillUnmount=function(){this._isMounted=!1},a.prototype.render=function(){var o=this.props.ymaps,r=!1===n||!1===this.state.loading,a=w(this.props,["onLoad","onError","modules","ymaps"]);return r&&t.createElement(e,Object.assign({},{ymaps:o.getApi()},a))},a}(t.Component);return r.displayName="withYMaps("+_(e)+")",r.propTypes={onLoad:j.func,onError:j.func,modules:j.arrayOf(j.string),ymaps:j.object},r.defaultProps={onLoad:Function.prototype,onError:Function.prototype,modules:[]},A(r)}var D={lang:"ru_RU",load:"",ns:"",mode:"debug"},U={},q=function(e){var t=Date.now().toString(32);this.options=e,this.namespace=e.query.ns||D.ns,this.onload="__yandex-maps-api-onload__$$"+t,this.onerror="__yandex-maps-api-onerror__$$"+t};q.prototype.getApi=function(){return"undefined"!=typeof window&&this.namespace?window[this.namespace]:this.api},q.prototype.setApi=function(e){return this.api=e},q.prototype.getPromise=function(){return this.namespace?U[this.namespace]:this.promise},q.prototype.setPromise=function(e){return this.namespace?U[this.namespace]=this.promise=e:this.promise=e},q.prototype.load=function(){var e=this;if(this.getApi())return Promise.resolve(this.setApi(this.getApi()));if(this.getPromise())return this.setPromise(this.getPromise());var t=Object.assign({onload:this.onload,onerror:this.onerror},D,this.options.query),n=Object.keys(t).map(function(e){return e+"="+t[e]}).join("&"),o=["https://"+(this.options.enterprise?"enterprise.":"")+"api-maps.yandex.ru",this.options.version,"?"+n].join("/"),r=new Promise(function(t,n){window[e.onload]=function(n){delete window[e.onload],n.loadModule=e.loadModule.bind(e),n.ready(function(){return t(e.setApi(n))})},window[e.onerror]=function(t){delete window[e.onerror],n(t)},e.fetchScript(o).catch(window[e.onerror])});return this.setPromise(r)},q.prototype.fetchScript=function(e){var t=this;return new Promise(function(n,o){t.script=document.createElement("script"),t.script.type="text/javascript",t.script.onload=n,t.script.onerror=o,t.script.src=e,t.script.async="async",document.head.appendChild(t.script)})},q.prototype.loadModule=function(e){var t=this;return new Promise(function(n,o){t.getApi().modules.require(e,function(o){!function(e,t,n,o){void 0===o&&(o=!1),t="string"==typeof t?t.split("."):t.slice();for(var r,a=e;t.length>1;)a[r=t.shift()]||(a[r]={}),a=a[r];a[t[0]]=!0===o&&a[t[0]]||n}(t.api,e,o,!0),n(o)},o,t.getApi())})},q._name="__react-yandex-maps__";var B=function(e){function n(t){e.call(this,t),this.ymaps=new q(t)}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){!0===this.props.preload&&this.ymaps.load()},n.prototype.render=function(){return t.createElement(M.Provider,{value:this.ymaps},this.props.children)},n}(t.Component);B.propTypes={version:j.string.isRequired,enterprise:j.bool,query:j.shape({lang:j.oneOf(["tr_TR","en_US","en_RU","ru_RU","ru_UA","uk_UA"]),apikey:j.string,coordorder:j.oneOf(["latlong","longlat"]),load:j.string,mode:j.oneOf(["release","debug"]),csp:j.bool,ns:j.string}),children:j.node,preload:j.bool},B.defaultProps={version:"2.1",enterprise:!1,query:{lang:"ru_RU",load:"",ns:""},preload:!1};var F=/^on(?=[A-Z])/;function N(e){return Object.keys(e).reduce(function(t,n){if(F.test(n)){var o=n.replace(F,"").toLowerCase();t._events[o]=e[n]}else t[n]=e[n];return t},{_events:{}})}function L(e,t,n){"function"==typeof n&&e.events.add(t,n)}function W(e,t,n){"function"==typeof n&&e.events.remove(t,n)}function z(e,t,n){Object.keys(Object.assign({},t,n)).forEach(function(o){t[o]!==n[o]&&(W(e,o,t[o]),L(e,o,n[o]))})}var G=function(e){return"default"+e.charAt(0).toUpperCase()+e.slice(1)};function V(e,t){return void 0!==e[t]||void 0===e[G(t)]}function Y(e,t,n){return(V(e,t)?e[t]:e[G(t)])||n}function Z(e,t,n){void 0===n&&(n=null),e&&e!==t&&(e.hasOwnProperty("current")?e.current=null:"function"==typeof e&&e(null)),t&&(t.hasOwnProperty("current")?t.current=n:"function"==typeof t&&t(n))}function J(e){var t=e.width,n=e.height,o=e.style,r=e.className;return void 0!==o||void 0!==r?Object.assign({},o&&{style:o},r&&{className:r}):{style:{width:t,height:n}}}var H=function(e){function n(){var t=this;e.call(this),this.state={instance:null},this._parentElement=null,this._getRef=function(e){t._parentElement=e}}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){var e=n.mountObject(this._parentElement,this.props.ymaps.Map,this.props);this.setState({instance:e})},n.prototype.componentDidUpdate=function(e){null!==this.state.instance&&n.updateObject(this.state.instance,e,this.props)},n.prototype.componentWillUnmount=function(){n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){var e=J(this.props),n=N(this.props),o=w(n,["_events","state","defaultState","options","defaultOptions","instanceRef","ymaps","children","width","height","style","className"]);return t.createElement(k.Provider,{value:this.state.instance},t.createElement("div",Object.assign({},{ref:this._getRef},e,o),this.props.children))},n.mountObject=function(e,t,n){var o=N(n),r=o.instanceRef,a=o._events,s=new t(e,Y(n,"state"),Y(n,"options"));return Object.keys(a).forEach(function(e){return L(s,e,a[e])}),Z(null,r,s),s},n.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"state")){var u=Y(t,"state",{}),c=Y(n,"state",{});u.type!==c.type&&e.setType(c.type),u.behaviors!==c.behaviors&&(u.behaviors&&e.behaviors.disable(u.behaviors),c.behaviors&&e.behaviors.enable(c.behaviors)),u.zoom!==c.zoom&&e.setZoom(c.zoom),u.center!==c.center&&e.setCenter(c.center),c.bounds&&u.bounds!==c.bounds&&e.setBounds(c.bounds)}if(V(n,"options")){var f=Y(t,"options"),l=Y(n,"options",{});f!==l&&e.options.set(l)}Y(t,"width")===Y(n,"width")&&Y(t,"height")===Y(n,"height")||e.container.fitToViewport(),z(e,i,r),Z(p,a,e)},n.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n._events;null!==e&&(Object.keys(r).forEach(function(t){return W(e,t,r[t])}),e.destroy(),Z(o))},n}(t.Component),K={bounds:j.arrayOf(j.arrayOf(j.number)),center:j.arrayOf(j.number),controls:j.arrayOf(j.string),behaviors:j.arrayOf(j.string),margin:j.oneOfType([j.arrayOf(j.number),j.arrayOf(j.arrayOf(j.number))]),type:j.oneOf(["yandex#map","yandex#satellite","yandex#hybrid"]),zoom:j.number},Q={};H.propTypes={state:j.shape(K),defaultState:j.shape(K),options:j.shape(Q),defaultOptions:j.shape(Q),instanceRef:j.func,ymaps:j.object,children:j.node,width:j.oneOfType([j.number,j.string]),height:j.oneOfType([j.number,j.string]),style:j.object,className:j.string},H.defaultProps={width:320,height:240};var X=I(H,!0,["Map"]),ee=function(e){function n(){var t=this;e.call(this),this.state={instance:null},this._parentElement=null,this._getRef=function(e){t._parentElement=e}}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){var e=this;this._mounted=!0,this.props.ymaps.panorama.isSupported()&&n.mountObject(this._parentElement,this.props.ymaps.panorama,this.props).then(function(t){return e._mounted&&e.setState({instance:t})})},n.prototype.componentDidUpdate=function(e){null!==this.state.instance&&n.updateObject(this.state.instance,e,this.props)},n.prototype.componentWillUnmount=function(){this._mounted=!1,n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){var e=J(this.props);return t.createElement("div",Object.assign({},{ref:this._getRef},e))},n.mountObject=function(e,t,n){var o=N(n),r=o.instanceRef,a=o._events,s=Y(n,"point"),i=Y(n,"locateOptions"),p=Y(n,"options");return new Promise(function(n,o){t.locate(s,i).done(function(o){if(o.length>0){var s=new t.Player(e,o[0],p);Z(null,r,s),Object.keys(a).forEach(function(e){return L(s,e,a[e])}),n(s)}},o)})},n.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"options")){var u=Y(t,"options"),c=Y(n,"options");u!==c&&e.options.set(c)}if(V(n,"point")){var f=Y(n,"point"),l=Y(t,"point"),d=Y(n,"locateOptions");f!==l&&e.moveTo(f,d)}z(e,i,r),Z(p,a,e)},n.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n._events;null!==e&&(Object.keys(r).forEach(function(t){return W(e,t,r[t])}),Z(o))},n}(t.Component),te={};ee.propTypes={options:j.shape(te),defaultOptions:j.shape(te),point:j.arrayOf(j.number),defaultPoint:j.arrayOf(j.number),locateOptions:j.shape({layer:j.oneOf(["yandex#panorama","yandex#airPanorama"])}),instanceRef:j.func,ymaps:j.object,children:j.node,width:j.oneOfType([j.number,j.string]),height:j.oneOfType([j.number,j.string]),style:j.object,className:j.string},ee.defaultProps={width:320,height:240};var ne=I(ee,!0,["panorama.isSupported","panorama.locate","panorama.createPlayer","panorama.Player"]),oe=function(e){function n(){e.call(this),this.state={instance:null}}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){var e=n.mountControl(this.props.ymaps.control[this.props.name],this.props);this.setState({instance:e})},n.prototype.componentDidUpdate=function(e){null!==this.state.instance&&n.updateControl(this.state.instance,e,this.props)},n.prototype.componentWillUnmount=function(){n.unmountControl(this.state.instance,this.props)},n.prototype.render=function(){return t.createElement(k.Provider,{value:this.state.instance},this.props.children)},n.mountControl=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n.lazy,s=n._events,i=new e({data:Y(t,"data"),options:Y(t,"options"),state:Y(t,"state"),mapTypes:Y(t,"mapTypes"),lazy:a});if(Object.keys(s).forEach(function(e){return L(i,e,s[e])}),r&&r.controls&&"function"==typeof r.controls.add)r.controls.add(i);else{if(!r||!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount "+t.name);r.add(i)}return Z(null,o,i),i},n.updateControl=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"options")){var u=Y(t,"options"),c=Y(n,"options");u!==c&&e.options.set(c)}if(V(n,"data")){var f=Y(t,"data"),l=Y(n,"data");f!==l&&e.data.set(l)}if(V(n,"state")){var d=Y(t,"state"),y=Y(n,"state");d!==y&&e.state.set(y)}if(V(n,"mapTypes")){var h=Y(t,"mapTypes"),m=Y(n,"mapTypes");h!==m&&(e.removeAllMapTypes(),m.forEach(function(t){return e.addMapType(t)}))}z(e,i,r),Z(p,a,e)},n.unmountControl=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events;null!==e&&(Object.keys(a).forEach(function(t){return W(e,t,a[t])}),r.controls&&"function"==typeof r.controls.remove?r.controls.remove(e):r.remove&&"function"==typeof r.remove&&r.remove(e),Z(o))},n}(t.Component);function re(e){return t.createElement(oe,Object.assign({},e,{name:"Button"}))}oe.propTypes={children:j.node,instanceRef:j.func,ymaps:j.object,parent:j.object,name:j.oneOf(["Button","FullscreenControl","GeolocationControl","ListBox","ListBoxItem","RouteButton","RouteEditor","RoutePanel","RulerControl","SearchControl","TrafficControl","TypeSelector","ZoomControl"]).isRequired},re.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var ae=$(I(re,!0,["control.Button"]));function se(e){return t.createElement(oe,Object.assign({},e,{name:"FullscreenControl"}))}se.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var ie=$(I(se,!0,["control.FullscreenControl"]));function pe(e){return t.createElement(oe,Object.assign({},e,{name:"GeolocationControl"}))}pe.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var ue=$(I(pe,!0,["control.GeolocationControl"]));function ce(e){return t.createElement(oe,Object.assign({},e,{name:"ListBox"}))}ce.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var fe=$(I(ce,!0,["control.ListBox"]));function le(e){return t.createElement(oe,Object.assign({},e,{name:"ListBoxItem"}))}le.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var de=$(I(le,!0,["control.ListBoxItem"]));function ye(e){return t.createElement(oe,Object.assign({},e,{name:"RouteButton"}))}ye.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var he=$(I(ye,!0,["control.RouteButton"]));function me(e){return t.createElement(oe,Object.assign({},e,{name:"RouteEditor"}))}me.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var ve=$(I(me,!0,["control.RouteEditor"]));function be(e){return t.createElement(oe,Object.assign({},e,{name:"RoutePanel"}))}be.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var Oe=$(I(be,!0,["control.RoutePanel"]));function ge(e){return t.createElement(oe,Object.assign({},e,{name:"RulerControl"}))}ge.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var je=$(I(ge,!0,["control.RulerControl"]));function _e(e){return t.createElement(oe,Object.assign({},e,{name:"SearchControl"}))}_e.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var we=$(I(_e,!0,["control.SearchControl"]));function xe(e){return t.createElement(oe,Object.assign({},e,{name:"TrafficControl"}))}xe.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var Ee=$(I(xe,!0,["control.TrafficControl"]));function Re(e){return t.createElement(oe,Object.assign({},e,{name:"TypeSelector"}))}Re.propTypes={mapTypes:j.arrayOf(j.oneOf(["yandex#map","yandex#satellite","yandex#hybrid"])),defaultMapTypes:j.arrayOf(j.oneOf(["yandex#map","yandex#satellite","yandex#hybrid"])),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var Ce=$(I(Re,!0,["control.TypeSelector"]));function Se(e){return t.createElement(oe,Object.assign({},e,{name:"ZoomControl"}))}Se.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var Pe=$(I(Se,!0,["control.ZoomControl"])),Te=function(e){function n(){e.call(this),this.state={instance:null}}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){var e=n.mountObject(this.props.ymaps.Clusterer,this.props);this.setState({instance:e})},n.prototype.componentDidUpdate=function(e){null!==this.state.instance&&n.updateObject(this.state.instance,e,this.props)},n.prototype.componentWillUnmount=function(){n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){return t.createElement(k.Provider,{value:this.state.instance},this.props.children)},n.mountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events,s=new e(Y(t,"options"));if(Object.keys(a).forEach(function(e){return L(s,e,a[e])}),r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(s);else{if(!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount Clusterer");r.add(s)}return Z(null,o,s),s},n.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"options")){var u=Y(t,"options"),c=Y(n,"options");u!==c&&e.options.set(c)}z(e,i,r),Z(p,a,e)},n.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events;null!==e&&(Object.keys(a).forEach(function(t){return W(e,t,a[t])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(e):r.remove&&"function"==typeof r.remove&&r.remove(e),Z(o))},n}(t.Component);Te.propTypes={options:j.shape({}),defaultOptions:j.shape({}),instanceRef:j.func,ymaps:j.object,parent:j.object,children:j.node};var Me=$(I(Te,!0,["Clusterer"])),Ae=function(e){function t(){e.call(this),this.state={instance:null}}return e&&(t.__proto__=e),(t.prototype=Object.create(e&&e.prototype)).constructor=t,t.prototype.componentDidMount=function(){var e=t.mountObject(this.props.ymaps.ObjectManager,this.props);this.setState({instance:e})},t.prototype.componentDidUpdate=function(e){null!==this.state.instance&&t.updateObject(this.state.instance,e,this.props)},t.prototype.componentWillUnmount=function(){t.unmountObject(this.state.instance,this.props)},t.prototype.render=function(){return null},t.mountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events,s=Y(t,"options"),i=Y(t,"features"),p=Y(t,"filter"),u=Y(t,"objects"),c=Y(t,"clusters"),f=new e(s);if(f.add(i||[]),f.setFilter(p),f.objects.options.set(u),f.clusters.options.set(c),Object.keys(a).forEach(function(e){return L(f,e,a[e])}),r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(f);else{if(!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount ObjectManager");r.add(f)}return Z(null,o,f),f},t.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"options")){var u=Y(t,"options"),c=Y(n,"options");u!==c&&e.options.set(c)}if(V(n,"objects")){var f=Y(t,"objects"),l=Y(n,"objects");f!==l&&e.objects.options.set(l)}if(V(n,"clusters")){var d=Y(t,"clusters"),y=Y(n,"clusters");d!==y&&e.clusters.options.set(y)}if(V(n,"filter")){var h=Y(t,"filter"),m=Y(n,"filter");h!==m&&e.options.set(m)}if(V(n,"features")){var v=Y(t,"features"),b=Y(n,"features");v!==b&&(e.remove(v),e.add(b))}z(e,i,r),Z(p,a,e)},t.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events;null!==e&&(Object.keys(a).forEach(function(t){return W(e,t,a[t])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(e):r.remove&&"function"==typeof r.remove&&r.remove(e),Z(o))},t}(t.Component),ke=j.shape({id:j.oneOfType([j.number,j.string]).isRequired,type:j.oneOf(["Feature"]).isRequired,geometry:j.object.isRequired,options:j.object,properties:j.object}),$e={type:j.oneOf(["FeatureCollection"]).isRequired};$e.features=j.arrayOf(j.oneOfType([j.shape($e),ke])).isRequired;var Ie=j.shape($e),De=j.oneOfType([j.arrayOf(j.oneOfType([Ie,ke])),Ie]),Ue=j.oneOfType([j.string,j.func]),qe=j.shape({}),Be=j.shape({}),Fe=j.shape({});Ae.propTypes={features:De,defaultFeatures:De,filter:Ue,defaultFilter:Ue,options:qe,defaultOptions:qe,objects:Be,defaultObjects:Be,clusters:Fe,defaultClusters:Fe,instanceRef:j.func,ymaps:j.object,parent:j.object};var Ne=$(I(Ae,!0,["ObjectManager"])),Le=function(e){function t(){e.call(this),this.state={instance:null}}return e&&(t.__proto__=e),(t.prototype=Object.create(e&&e.prototype)).constructor=t,t.prototype.componentDidMount=function(){var e=this.props,n=e.name,o=e.ymaps,r=e.dangerZone,a=t.mountObject(r&&"function"==typeof r.modifyConstructor?r.modifyConstructor(o[n]):o[n],this.props);this.setState({instance:a})},t.prototype.componentDidUpdate=function(e){null!==this.state.instance&&t.updateObject(this.state.instance,e,this.props)},t.prototype.componentWillUnmount=function(){t.unmountObject(this.state.instance,this.props)},t.prototype.render=function(){return null},t.mountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events,s=new e(Y(t,"geometry"),Y(t,"properties"),Y(t,"options"));if(Object.keys(a).forEach(function(e){return L(s,e,a[e])}),r&&r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(s);else{if(!r||!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount "+t.name);r.add(s)}return Z(null,o,s),s},t.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"geometry")){var u=Y(t,"geometry",{}),c=Y(n,"geometry",{});Array.isArray(c)&&c!==u?Array.isArray(c[0])&&"number"==typeof c[1]?(e.geometry.setCoordinates(c[0]),e.geometry.setRadius(c[1])):e.geometry.setCoordinates(c):"object"==typeof c&&(c.coordinates!==u.coordinates&&e.geometry.setCoordinates(c.coordinates),c.radius!==u.radius&&e.geometry.setRadius(c.radius))}if(V(n,"properties")){var f=Y(t,"properties"),l=Y(n,"properties");f!==l&&e.properties.set(l)}if(V(n,"options")){var d=Y(t,"options"),y=Y(n,"options");d!==y&&e.options.set(y)}z(e,i,r),Z(p,a,e)},t.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events;null!==e&&(Object.keys(a).forEach(function(t){return W(e,t,a[t])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(e):r.remove&&"function"==typeof r.remove&&r.remove(e),Z(o))},t}(t.Component);Le.propTypes={instanceRef:j.func,ymaps:j.object,parent:j.object,name:j.oneOf(["GeoObject","Placemark","Polyline","Rectangle","Polygon","Circle"]).isRequired,dangerZone:j.shape({modifyConstructor:j.func})};var We={modifyConstructor:function(e){function t(t,n,o){e.call(this,{geometry:t,properties:n},o)}return t.prototype=e.prototype,t}};function ze(e){return t.createElement(Le,Object.assign({},e,{name:"GeoObject",dangerZone:We}))}var Ge=j.shape({type:j.oneOf(["Point","LineString","Rectangle","Polygon","Circle"]).isRequired,coordinates:j.oneOfType([j.arrayOf(j.number),j.arrayOf(j.arrayOf(j.number)),j.arrayOf(j.arrayOf(j.arrayOf(j.number)))]).isRequired,radius:j.number});ze.propTypes={geometry:Ge,defaultGeometry:Ge,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var Ve=$(I(ze,!0,["GeoObject"]));function Ye(e){return t.createElement(Le,Object.assign({},e,{name:"Circle"}))}var Ze=j.arrayOf(j.oneOfType([j.number,j.arrayOf(j.number)]));Ye.propTypes={geometry:Ze,defaultGeometry:Ze,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var Je=$(I(Ye,!0,["Circle"]));function He(e){return t.createElement(Le,Object.assign({},e,{name:"Placemark"}))}var Ke=j.arrayOf(j.number);He.propTypes={geometry:Ke,defaultGeometry:Ke,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var Qe=$(I(He,!0,["Placemark"]));function Xe(e){return t.createElement(Le,Object.assign({},e,{name:"Polygon"}))}var et=j.arrayOf(j.arrayOf(j.arrayOf(j.number)));Xe.propTypes={geometry:et,defaultGeometry:et,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var tt=$(I(Xe,!0,["Polygon"]));function nt(e){return t.createElement(Le,Object.assign({},e,{name:"Polyline"}))}var ot=j.arrayOf(j.arrayOf(j.number));nt.propTypes={geometry:ot,defaultGeometry:ot,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var rt=$(I(nt,!0,["Polyline"]));function at(e){return t.createElement(Le,Object.assign({},e,{name:"Rectangle"}))}var st=j.arrayOf(j.arrayOf(j.number));at.propTypes={geometry:st,defaultGeometry:st,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var it=$(I(at,!0,["Rectangle"]));exports.withYMaps=I,exports.YMaps=B,exports.Map=X,exports.Panorama=ne,exports.Button=ae,exports.FullscreenControl=ie,exports.GeolocationControl=ue,exports.ListBox=fe,exports.ListBoxItem=de,exports.RouteButton=he,exports.RouteEditor=ve,exports.RoutePanel=Oe,exports.RulerControl=je,exports.SearchControl=we,exports.TrafficControl=Ee,exports.TypeSelector=Ce,exports.ZoomControl=Pe,exports.Clusterer=Me,exports.ObjectManager=Ne,exports.GeoObject=Ve,exports.Circle=Je,exports.Placemark=Qe,exports.Polygon=tt,exports.Polyline=rt,exports.Rectangle=it;
+	//# sourceMappingURL=react-yandex-maps.js.map
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
 /* 73 */
@@ -36828,47 +36842,25 @@
 	
 	__webpack_require__(74);
 	
-	var _reactRedux = __webpack_require__(30);
-	
-	var _reactYandexMaps = __webpack_require__(76);
-	
-	var MapFrame = function MapFrame(props) {
+	var Tags = function Tags(props) {
 	    return _react2["default"].createElement(
 	        "div",
-	        { className: "MapFrame Content" },
-	        _react2["default"].createElement(
-	            _reactYandexMaps.YMaps,
-	            null,
-	            _react2["default"].createElement(
-	                _reactYandexMaps.Map,
-	                { state: { center: [55.76, 37.64], zoom: 10, showMap: false }, width: "100%", height: "100%" },
-	                props.options[props.active].points.map(function (point, i) {
-	                    return _react2["default"].createElement(_reactYandexMaps.Placemark, {
-	                        key: i,
-	                        geometry: [point.latitude, point.longitude],
-	                        properties: {
-	                            balloonContent: point.text
-	                        },
-	                        options: {
-	                            preset: "islands#circleDotIcon",
-	                            iconColor: point.color
-	                        },
-	                        modules: ['geoObject.addon.balloon']
-	                    });
-	                })
-	            )
-	        )
+	        { className: "Tags" },
+	        props.tags.map(function (tag, i) {
+	            return _react2["default"].createElement(
+	                "div",
+	                { className: "Item Tags-Item", key: i },
+	                _react2["default"].createElement("div", { className: "Item-Lst", style: { background: "" + tag.color } }),
+	                _react2["default"].createElement(
+	                    "div",
+	                    { className: "Item-Text" },
+	                    tag.text
+	                )
+	            );
+	        })
 	    );
 	};
-	
-	exports["default"] = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        options: state.MainPage.options
-	    };
-	}, function (dispatch) {
-	    return {};
-	})(MapFrame);
-	module.exports = exports["default"];
+	exports.Tags = Tags;
 
 /***/ }),
 /* 74 */
@@ -36897,48 +36889,14 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(22)(false);
+	// Imports
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates:300&display=swap&subset=cyrillic,cyrillic-ext);", ""]);
 	// Module
-	exports.push([module.id, ".MapFrame {\n    height: 700px;\n}\n\n.MapFrame-Frame {\n}\n\n@media (max-width: 840px) {\n    .MapFrame {\n        height: 500px;\n    }\n}", ""]);
+	exports.push([module.id, ".Tags {\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-columns: 1fr 1fr;\n        grid-template-columns: 1fr 1fr;\n    -ms-grid-rows: auto;\n        grid-template-rows: auto;\n}\n\n.Item {\n    font-family: 'Montserrat Alternates', sans-serif;\n    display: -ms-flexbox;\n    display: flex;\n    padding: 28px 0 28px 28px;\n}\n\n.Item-Lst {\n    width: 50px;\n    height: 50px;\n}\n\n.Item-Text {\n    font-size: 2em;\n    margin-left: 30px;\n}\n\n\n@media (max-width: 480px) {\n    .Item {\n        padding: 28px 0 28px 0;\n    }\n    .Item-Text {\n        font-size: 1em;\n    }\n\n    .Item-Lst {\n        width: 30px;\n        height: 30px;\n    }\n}\n\n\n@media (min-width: 480px) and (max-width: 840px) {\n    .Item-Text {\n        font-size: 1.5em;\n    }\n    .Item-Lst {\n        width: 30px;\n        height: 30px;\n    }\n}\n\n\n@media (max-width: 1080px) {\n    .Tags {\n        display: -ms-grid;\n        display: grid;\n        -ms-grid-columns: 1fr;\n            grid-template-columns: 1fr;\n        -ms-grid-rows: auto;\n            grid-template-rows: auto;\n    }\n}\n\n", ""]);
 
 
 /***/ }),
 /* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// !!! WARNING: ONLY CHANGE THIS FILE IF OUTPUT FOLDER CHANGES !!!
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	'use strict';
-	
-	// This determines which build to use based on the `NODE_ENV` of your end user.
-	if (process.env.NODE_ENV === 'production') {
-	  module.exports = __webpack_require__(77);
-	} else {
-	  module.exports = __webpack_require__(78);
-	}
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {var t,e=(t=__webpack_require__(1))&&"object"==typeof t&&"default"in t?t.default:t,n="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};function o(t){return t&&t.__esModule&&Object.prototype.hasOwnProperty.call(t,"default")?t.default:t}function r(t,e){return t(e={exports:{}},e.exports),e.exports}var s=r(function(t,e){Object.defineProperty(e,"__esModule",{value:!0});var n="function"==typeof Symbol&&Symbol.for,o=n?Symbol.for("react.element"):60103,r=n?Symbol.for("react.portal"):60106,s=n?Symbol.for("react.fragment"):60107,i=n?Symbol.for("react.strict_mode"):60108,a=n?Symbol.for("react.profiler"):60114,c=n?Symbol.for("react.provider"):60109,u=n?Symbol.for("react.context"):60110,p=n?Symbol.for("react.async_mode"):60111,f=n?Symbol.for("react.concurrent_mode"):60111,l=n?Symbol.for("react.forward_ref"):60112,d=n?Symbol.for("react.suspense"):60113,m=n?Symbol.for("react.memo"):60115,h=n?Symbol.for("react.lazy"):60116;function y(t){if("object"==typeof t&&null!==t){var e=t.$$typeof;switch(e){case o:switch(t=t.type){case p:case f:case s:case a:case i:case d:return t;default:switch(t=t&&t.$$typeof){case u:case l:case c:return t;default:return e}}case h:case m:case r:return e}}}function v(t){return y(t)===f}e.typeOf=y,e.AsyncMode=p,e.ConcurrentMode=f,e.ContextConsumer=u,e.ContextProvider=c,e.Element=o,e.ForwardRef=l,e.Fragment=s,e.Lazy=h,e.Memo=m,e.Portal=r,e.Profiler=a,e.StrictMode=i,e.Suspense=d,e.isValidElementType=function(t){return"string"==typeof t||"function"==typeof t||t===s||t===f||t===a||t===i||t===d||"object"==typeof t&&null!==t&&(t.$$typeof===h||t.$$typeof===m||t.$$typeof===c||t.$$typeof===u||t.$$typeof===l)},e.isAsyncMode=function(t){return v(t)||y(t)===p},e.isConcurrentMode=v,e.isContextConsumer=function(t){return y(t)===u},e.isContextProvider=function(t){return y(t)===c},e.isElement=function(t){return"object"==typeof t&&null!==t&&t.$$typeof===o},e.isForwardRef=function(t){return y(t)===l},e.isFragment=function(t){return y(t)===s},e.isLazy=function(t){return y(t)===h},e.isMemo=function(t){return y(t)===m},e.isPortal=function(t){return y(t)===r},e.isProfiler=function(t){return y(t)===a},e.isStrictMode=function(t){return y(t)===i},e.isSuspense=function(t){return y(t)===d}});o(s),o(r(function(t,e){})),r(function(t){t.exports=s}),Object,Object,Object,function(){try{if(!Object.assign)return!1;var t=new String("abc");if(t[5]="de","5"===Object.getOwnPropertyNames(t)[0])return!1;for(var e={},n=0;n<10;n++)e["_"+String.fromCharCode(n)]=n;if("0123456789"!==Object.getOwnPropertyNames(e).map(function(t){return e[t]}).join(""))return!1;var o={};return"abcdefghijklmnopqrst".split("").forEach(function(t){o[t]=t}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},o)).join("")}catch(t){return!1}}()&&Object;var i="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";function a(){}function c(){}Function.call.bind(Object.prototype.hasOwnProperty),c.resetWarningCache=a;var u=r(function(t){t.exports=function(){function t(t,e,n,o,r,s){if(s!==i){var a=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw a.name="Invariant Violation",a}}function e(){return t}t.isRequired=t;var n={array:t,bool:t,func:t,number:t,object:t,string:t,symbol:t,any:t,arrayOf:e,element:t,elementType:t,instanceOf:e,node:t,objectOf:e,oneOf:e,oneOfType:e,shape:e,exact:e,checkPropTypes:c,resetWarningCache:a};return n.PropTypes=n,n}()}),p=o(r(function(t,e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(t){return t.displayName||t.name||("string"==typeof t&&t.length>0?t:"Unknown")}})),f=function(t,e){var n={};for(var o in t)-1===e.indexOf(o)&&(n[o]=t[o]);return n},l="__global_unique_id__",d=function(){return n[l]=(n[l]||0)+1};function m(t){return function(){return t}}var h=function(){};h.thatReturns=m,h.thatReturnsFalse=m(!1),h.thatReturnsTrue=m(!0),h.thatReturnsNull=m(null),h.thatReturnsThis=function(){return this},h.thatReturnsArgument=function(t){return t};var y=h,v=r(function(t,n){n.__esModule=!0;var o=s(u),r=s(d);function s(t){return t&&t.__esModule?t:{default:t}}function i(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function a(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e}function c(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}s(y),n.default=function(t,n){var s,u,p="__create-react-context-"+(0,r.default)()+"__",f=function(t){function e(){var n,o,r,s;i(this,e);for(var c=arguments.length,u=Array(c),p=0;p<c;p++)u[p]=arguments[p];return n=o=a(this,t.call.apply(t,[this].concat(u))),o.emitter=(r=o.props.value,s=[],{on:function(t){s.push(t)},off:function(t){s=s.filter(function(e){return e!==t})},get:function(){return r},set:function(t,e){r=t,s.forEach(function(t){return t(r,e)})}}),a(o,n)}return c(e,t),e.prototype.getChildContext=function(){var t;return(t={})[p]=this.emitter,t},e.prototype.componentWillReceiveProps=function(t){if(this.props.value!==t.value){var e=this.props.value,o=t.value,r=void 0;((s=e)===(i=o)?0!==s||1/s==1/i:s!=s&&i!=i)?r=0:(r="function"==typeof n?n(e,o):1073741823,0!=(r|=0)&&this.emitter.set(t.value,r))}var s,i},e.prototype.render=function(){return this.props.children},e}(e.Component);f.childContextTypes=((s={})[p]=o.default.object.isRequired,s);var l=function(e){function n(){var t,o;i(this,n);for(var r=arguments.length,s=Array(r),c=0;c<r;c++)s[c]=arguments[c];return t=o=a(this,e.call.apply(e,[this].concat(s))),o.state={value:o.getValue()},o.onUpdate=function(t,e){0!=((0|o.observedBits)&e)&&o.setState({value:o.getValue()})},a(o,t)}return c(n,e),n.prototype.componentWillReceiveProps=function(t){var e=t.observedBits;this.observedBits=null==e?1073741823:e},n.prototype.componentDidMount=function(){this.context[p]&&this.context[p].on(this.onUpdate);var t=this.props.observedBits;this.observedBits=null==t?1073741823:t},n.prototype.componentWillUnmount=function(){this.context[p]&&this.context[p].off(this.onUpdate)},n.prototype.getValue=function(){return this.context[p]?this.context[p].get():t},n.prototype.render=function(){return(t=this.props.children,Array.isArray(t)?t[0]:t)(this.state.value);var t},n}(e.Component);return l.contextTypes=((u={})[p]=o.default.object,u),{Provider:f,Consumer:l}},t.exports=n.default});o(v);var b=o(r(function(t,n){n.__esModule=!0;var o=s(e),r=s(v);function s(t){return t&&t.__esModule?t:{default:t}}n.default=o.default.createContext||r.default,t.exports=n.default})),j=b(null),O=function(t){var n=p(t);return function(o){return e.createElement(j.Consumer,null,function(r){if(null===r)throw new Error("Couldn't find Yandex.Maps API in the context. Make sure that <"+n+" /> is inside <YMaps /> provider");return e.createElement(t,Object.assign({},{ymaps:r},o))})}},_=b(null),g=function(t){return function(n){return e.createElement(_.Consumer,null,function(o){return e.createElement(t,Object.assign({},{parent:o},n))})}};function E(t,n,o){void 0===n&&(n=!1),void 0===o&&(o=[]);var r=function(r){function s(){r.call(this),this.state={loading:!0},this._isMounted=!1}return r&&(s.__proto__=r),(s.prototype=Object.create(r&&r.prototype)).constructor=s,s.prototype.componentDidMount=function(){var t=this;this._isMounted=!0,this.props.ymaps.load().then(function(e){return Promise.all(o.concat(t.props.modules).map(e.loadModule)).then(function(){!0===t._isMounted&&t.setState({loading:!1},function(){t.props.onLoad(e)})})}).catch(function(e){!0===t._isMounted&&t.props.onError(e)})},s.prototype.componentWillUnmount=function(){this._isMounted=!1},s.prototype.render=function(){var o=this.props.ymaps,r=!1===n||!1===this.state.loading,s=f(this.props,["onLoad","onError","modules","ymaps"]);return r&&e.createElement(t,Object.assign({},{ymaps:o.getApi()},s))},s}(e.Component);return r.defaultProps={onLoad:Function.prototype,onError:Function.prototype,modules:[]},O(r)}var C={lang:"ru_RU",load:"",ns:"",mode:"release"},w={},R=function(t){var e=Date.now().toString(32);this.options=t,this.namespace=t.query.ns||C.ns,this.onload="__yandex-maps-api-onload__$$"+e,this.onerror="__yandex-maps-api-onerror__$$"+e};R.prototype.getApi=function(){return"undefined"!=typeof window&&this.namespace?window[this.namespace]:this.api},R.prototype.setApi=function(t){return this.api=t},R.prototype.getPromise=function(){return this.namespace?w[this.namespace]:this.promise},R.prototype.setPromise=function(t){return this.namespace?w[this.namespace]=this.promise=t:this.promise=t},R.prototype.load=function(){var t=this;if(this.getApi())return Promise.resolve(this.setApi(this.getApi()));if(this.getPromise())return this.setPromise(this.getPromise());var e=Object.assign({onload:this.onload,onerror:this.onerror},C,this.options.query),n=Object.keys(e).map(function(t){return t+"="+e[t]}).join("&"),o=["https://"+(this.options.enterprise?"enterprise.":"")+"api-maps.yandex.ru",this.options.version,"?"+n].join("/"),r=new Promise(function(e,n){window[t.onload]=function(n){delete window[t.onload],n.loadModule=t.loadModule.bind(t),n.ready(function(){return e(t.setApi(n))})},window[t.onerror]=function(e){delete window[t.onerror],n(e)},t.fetchScript(o).catch(window[t.onerror])});return this.setPromise(r)},R.prototype.fetchScript=function(t){var e=this;return new Promise(function(n,o){e.script=document.createElement("script"),e.script.type="text/javascript",e.script.onload=n,e.script.onerror=o,e.script.src=t,e.script.async="async",document.head.appendChild(e.script)})},R.prototype.loadModule=function(t){var e=this;return new Promise(function(n,o){e.getApi().modules.require(t,function(o){!function(t,e,n,o){void 0===o&&(o=!1),e="string"==typeof e?e.split("."):e.slice();for(var r,s=t;e.length>1;)s[r=e.shift()]||(s[r]={}),s=s[r];s[e[0]]=!0===o&&s[e[0]]||n}(e.api,t,o,!0),n(o)},o,e.getApi())})},R._name="__react-yandex-maps__";var x=function(t){function n(e){t.call(this,e),this.ymaps=new R(e)}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){!0===this.props.preload&&this.ymaps.load()},n.prototype.render=function(){return e.createElement(j.Provider,{value:this.ymaps},this.props.children)},n}(e.Component);x.defaultProps={version:"2.1",enterprise:!1,query:{lang:"ru_RU",load:"",ns:""},preload:!1};var P=/^on(?=[A-Z])/;function M(t){return Object.keys(t).reduce(function(e,n){if(P.test(n)){var o=n.replace(P,"").toLowerCase();e._events[o]=t[n]}else e[n]=t[n];return e},{_events:{}})}function S(t,e,n){"function"==typeof n&&t.events.add(e,n)}function T(t,e,n){"function"==typeof n&&t.events.remove(e,n)}function k(t,e,n){Object.keys(Object.assign({},e,n)).forEach(function(o){e[o]!==n[o]&&(T(t,o,e[o]),S(t,o,n[o]))})}var A=function(t){return"default"+t.charAt(0).toUpperCase()+t.slice(1)};function U(t,e){return void 0!==t[e]||void 0===t[A(e)]}function $(t,e,n){return(U(t,e)?t[e]:t[A(e)])||n}function B(t,e,n){void 0===n&&(n=null),t&&t!==e&&(t.hasOwnProperty("current")?t.current=null:"function"==typeof t&&t(null)),e&&(e.hasOwnProperty("current")?e.current=n:"function"==typeof e&&e(n))}function D(t){var e=t.width,n=t.height,o=t.style,r=t.className;return void 0!==o||void 0!==r?Object.assign({},o&&{style:o},r&&{className:r}):{style:{width:e,height:n}}}var L=function(t){function n(){var e=this;t.call(this),this.state={instance:null},this._parentElement=null,this._getRef=function(t){e._parentElement=t}}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){var t=n.mountObject(this._parentElement,this.props.ymaps.Map,this.props);this.setState({instance:t})},n.prototype.componentDidUpdate=function(t){null!==this.state.instance&&n.updateObject(this.state.instance,t,this.props)},n.prototype.componentWillUnmount=function(){n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){var t=D(this.props),n=M(this.props),o=f(n,["_events","state","defaultState","options","defaultOptions","instanceRef","ymaps","children","width","height","style","className"]);return e.createElement(_.Provider,{value:this.state.instance},e.createElement("div",Object.assign({},{ref:this._getRef},t,o),this.props.children))},n.mountObject=function(t,e,n){var o=M(n),r=o.instanceRef,s=o._events,i=new e(t,$(n,"state"),$(n,"options"));return Object.keys(s).forEach(function(t){return S(i,t,s[t])}),B(null,r,i),i},n.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"state")){var u=$(e,"state",{}),p=$(n,"state",{});u.type!==p.type&&t.setType(p.type),u.behaviors!==p.behaviors&&(u.behaviors&&t.behaviors.disable(u.behaviors),p.behaviors&&t.behaviors.enable(p.behaviors)),u.zoom!==p.zoom&&t.setZoom(p.zoom),u.center!==p.center&&t.setCenter(p.center),p.bounds&&u.bounds!==p.bounds&&t.setBounds(p.bounds)}if(U(n,"options")){var f=$(e,"options"),l=$(n,"options",{});f!==l&&t.options.set(l)}$(e,"width")===$(n,"width")&&$(e,"height")===$(n,"height")||t.container.fitToViewport(),k(t,a,r),B(c,s,t)},n.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n._events;null!==t&&(Object.keys(r).forEach(function(e){return T(t,e,r[e])}),t.destroy(),B(o))},n}(e.Component);L.defaultProps={width:320,height:240};var F=E(L,!0,["Map"]),W=function(t){function n(){var e=this;t.call(this),this.state={instance:null},this._parentElement=null,this._getRef=function(t){e._parentElement=t}}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){var t=this;this._mounted=!0,this.props.ymaps.panorama.isSupported()&&n.mountObject(this._parentElement,this.props.ymaps.panorama,this.props).then(function(e){return t._mounted&&t.setState({instance:e})})},n.prototype.componentDidUpdate=function(t){null!==this.state.instance&&n.updateObject(this.state.instance,t,this.props)},n.prototype.componentWillUnmount=function(){this._mounted=!1,n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){var t=D(this.props);return e.createElement("div",Object.assign({},{ref:this._getRef},t))},n.mountObject=function(t,e,n){var o=M(n),r=o.instanceRef,s=o._events,i=$(n,"point"),a=$(n,"locateOptions"),c=$(n,"options");return new Promise(function(n,o){e.locate(i,a).done(function(o){if(o.length>0){var i=new e.Player(t,o[0],c);B(null,r,i),Object.keys(s).forEach(function(t){return S(i,t,s[t])}),n(i)}},o)})},n.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"options")){var u=$(e,"options"),p=$(n,"options");u!==p&&t.options.set(p)}if(U(n,"point")){var f=$(n,"point"),l=$(e,"point"),d=$(n,"locateOptions");f!==l&&t.moveTo(f,d)}k(t,a,r),B(c,s,t)},n.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n._events;null!==t&&(Object.keys(r).forEach(function(e){return T(t,e,r[e])}),B(o))},n}(e.Component);W.defaultProps={width:320,height:240};var N=E(W,!0,["panorama.isSupported","panorama.locate","panorama.createPlayer","panorama.Player"]),q=function(t){function n(){t.call(this),this.state={instance:null}}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){var t=n.mountControl(this.props.ymaps.control[this.props.name],this.props);this.setState({instance:t})},n.prototype.componentDidUpdate=function(t){null!==this.state.instance&&n.updateControl(this.state.instance,t,this.props)},n.prototype.componentWillUnmount=function(){n.unmountControl(this.state.instance,this.props)},n.prototype.render=function(){return e.createElement(_.Provider,{value:this.state.instance},this.props.children)},n.mountControl=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n.lazy,i=n._events,a=new t({data:$(e,"data"),options:$(e,"options"),state:$(e,"state"),mapTypes:$(e,"mapTypes"),lazy:s});if(Object.keys(i).forEach(function(t){return S(a,t,i[t])}),r&&r.controls&&"function"==typeof r.controls.add)r.controls.add(a);else{if(!r||!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount "+e.name);r.add(a)}return B(null,o,a),a},n.updateControl=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"options")){var u=$(e,"options"),p=$(n,"options");u!==p&&t.options.set(p)}if(U(n,"data")){var f=$(e,"data"),l=$(n,"data");f!==l&&t.data.set(l)}if(U(n,"state")){var d=$(e,"state"),m=$(n,"state");d!==m&&t.state.set(m)}if(U(n,"mapTypes")){var h=$(e,"mapTypes"),y=$(n,"mapTypes");h!==y&&(t.removeAllMapTypes(),y.forEach(function(e){return t.addMapType(e)}))}k(t,a,r),B(c,s,t)},n.unmountControl=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events;null!==t&&(Object.keys(s).forEach(function(e){return T(t,e,s[e])}),r.controls&&"function"==typeof r.controls.remove?r.controls.remove(t):r.remove&&"function"==typeof r.remove&&r.remove(t),B(o))},n}(e.Component),z=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"Button"}))},!0,["control.Button"])),I=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"FullscreenControl"}))},!0,["control.FullscreenControl"])),Z=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"GeolocationControl"}))},!0,["control.GeolocationControl"])),G=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"ListBox"}))},!0,["control.ListBox"])),V=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"ListBoxItem"}))},!0,["control.ListBoxItem"])),Y=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"RouteButton"}))},!0,["control.RouteButton"])),H=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"RouteEditor"}))},!0,["control.RouteEditor"])),J=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"RoutePanel"}))},!0,["control.RoutePanel"])),K=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"RulerControl"}))},!0,["control.RulerControl"])),Q=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"SearchControl"}))},!0,["control.SearchControl"])),X=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"TrafficControl"}))},!0,["control.TrafficControl"])),tt=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"TypeSelector"}))},!0,["control.TypeSelector"])),et=g(E(function(t){return e.createElement(q,Object.assign({},t,{name:"ZoomControl"}))},!0,["control.ZoomControl"])),nt=g(E(function(t){function n(){t.call(this),this.state={instance:null}}return t&&(n.__proto__=t),(n.prototype=Object.create(t&&t.prototype)).constructor=n,n.prototype.componentDidMount=function(){var t=n.mountObject(this.props.ymaps.Clusterer,this.props);this.setState({instance:t})},n.prototype.componentDidUpdate=function(t){null!==this.state.instance&&n.updateObject(this.state.instance,t,this.props)},n.prototype.componentWillUnmount=function(){n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){return e.createElement(_.Provider,{value:this.state.instance},this.props.children)},n.mountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events,i=new t($(e,"options"));if(Object.keys(s).forEach(function(t){return S(i,t,s[t])}),r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(i);else{if(!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount Clusterer");r.add(i)}return B(null,o,i),i},n.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"options")){var u=$(e,"options"),p=$(n,"options");u!==p&&t.options.set(p)}k(t,a,r),B(c,s,t)},n.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events;null!==t&&(Object.keys(s).forEach(function(e){return T(t,e,s[e])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(t):r.remove&&"function"==typeof r.remove&&r.remove(t),B(o))},n}(e.Component),!0,["Clusterer"])),ot=g(E(function(t){function e(){t.call(this),this.state={instance:null}}return t&&(e.__proto__=t),(e.prototype=Object.create(t&&t.prototype)).constructor=e,e.prototype.componentDidMount=function(){var t=e.mountObject(this.props.ymaps.ObjectManager,this.props);this.setState({instance:t})},e.prototype.componentDidUpdate=function(t){null!==this.state.instance&&e.updateObject(this.state.instance,t,this.props)},e.prototype.componentWillUnmount=function(){e.unmountObject(this.state.instance,this.props)},e.prototype.render=function(){return null},e.mountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events,i=$(e,"options"),a=$(e,"features"),c=$(e,"filter"),u=$(e,"objects"),p=$(e,"clusters"),f=new t(i);if(f.add(a||[]),f.setFilter(c),f.objects.options.set(u),f.clusters.options.set(p),Object.keys(s).forEach(function(t){return S(f,t,s[t])}),r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(f);else{if(!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount ObjectManager");r.add(f)}return B(null,o,f),f},e.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"options")){var u=$(e,"options"),p=$(n,"options");u!==p&&t.options.set(p)}if(U(n,"objects")){var f=$(e,"objects"),l=$(n,"objects");f!==l&&t.objects.options.set(l)}if(U(n,"clusters")){var d=$(e,"clusters"),m=$(n,"clusters");d!==m&&t.clusters.options.set(m)}if(U(n,"filter")){var h=$(e,"filter"),y=$(n,"filter");h!==y&&t.options.set(y)}if(U(n,"features")){var v=$(e,"features"),b=$(n,"features");v!==b&&(t.remove(v),t.add(b))}k(t,a,r),B(c,s,t)},e.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events;null!==t&&(Object.keys(s).forEach(function(e){return T(t,e,s[e])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(t):r.remove&&"function"==typeof r.remove&&r.remove(t),B(o))},e}(e.Component),!0,["ObjectManager"])),rt=function(t){function e(){t.call(this),this.state={instance:null}}return t&&(e.__proto__=t),(e.prototype=Object.create(t&&t.prototype)).constructor=e,e.prototype.componentDidMount=function(){var t=this.props,n=t.name,o=t.ymaps,r=t.dangerZone,s=e.mountObject(r&&"function"==typeof r.modifyConstructor?r.modifyConstructor(o[n]):o[n],this.props);this.setState({instance:s})},e.prototype.componentDidUpdate=function(t){null!==this.state.instance&&e.updateObject(this.state.instance,t,this.props)},e.prototype.componentWillUnmount=function(){e.unmountObject(this.state.instance,this.props)},e.prototype.render=function(){return null},e.mountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events,i=new t($(e,"geometry"),$(e,"properties"),$(e,"options"));if(Object.keys(s).forEach(function(t){return S(i,t,s[t])}),r&&r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(i);else{if(!r||!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount "+e.name);r.add(i)}return B(null,o,i),i},e.updateObject=function(t,e,n){var o=M(n),r=o._events,s=o.instanceRef,i=M(e),a=i._events,c=i.instanceRef;if(U(n,"geometry")){var u=$(e,"geometry",{}),p=$(n,"geometry",{});Array.isArray(p)&&p!==u?Array.isArray(p[0])&&"number"==typeof p[1]?(t.geometry.setCoordinates(p[0]),t.geometry.setRadius(p[1])):t.geometry.setCoordinates(p):"object"==typeof p&&(p.coordinates!==u.coordinates&&t.geometry.setCoordinates(p.coordinates),p.radius!==u.radius&&t.geometry.setRadius(p.radius))}if(U(n,"properties")){var f=$(e,"properties"),l=$(n,"properties");f!==l&&t.properties.set(l)}if(U(n,"options")){var d=$(e,"options"),m=$(n,"options");d!==m&&t.options.set(m)}k(t,a,r),B(c,s,t)},e.unmountObject=function(t,e){var n=M(e),o=n.instanceRef,r=n.parent,s=n._events;null!==t&&(Object.keys(s).forEach(function(e){return T(t,e,s[e])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(t):r.remove&&"function"==typeof r.remove&&r.remove(t),B(o))},e}(e.Component),st={modifyConstructor:function(t){function e(e,n,o){t.call(this,{geometry:e,properties:n},o)}return e.prototype=t.prototype,e}},it=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"GeoObject",dangerZone:st}))},!0,["GeoObject"])),at=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Circle"}))},!0,["Circle"])),ct=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Placemark"}))},!0,["Placemark"])),ut=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Polygon"}))},!0,["Polygon"])),pt=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Polyline"}))},!0,["Polyline"])),ft=g(E(function(t){return e.createElement(rt,Object.assign({},t,{name:"Rectangle"}))},!0,["Rectangle"]));exports.withYMaps=E,exports.YMaps=x,exports.Map=F,exports.Panorama=N,exports.Button=z,exports.FullscreenControl=I,exports.GeolocationControl=Z,exports.ListBox=G,exports.ListBoxItem=V,exports.RouteButton=Y,exports.RouteEditor=H,exports.RoutePanel=J,exports.RulerControl=K,exports.SearchControl=Q,exports.TrafficControl=X,exports.TypeSelector=tt,exports.ZoomControl=et,exports.Clusterer=nt,exports.ObjectManager=ot,exports.GeoObject=it,exports.Circle=at,exports.Placemark=ct,exports.Polygon=ut,exports.Polyline=pt,exports.Rectangle=ft;
-	//# sourceMappingURL=react-yandex-maps.js.map
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {var e,t=(e=__webpack_require__(1))&&"object"==typeof e&&"default"in e?e.default:e,n="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};function o(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}function r(e,t){return e(t={exports:{}},t.exports),t.exports}o(r(function(e,t){Object.defineProperty(t,"__esModule",{value:!0});var n="function"==typeof Symbol&&Symbol.for,o=n?Symbol.for("react.element"):60103,r=n?Symbol.for("react.portal"):60106,a=n?Symbol.for("react.fragment"):60107,s=n?Symbol.for("react.strict_mode"):60108,i=n?Symbol.for("react.profiler"):60114,p=n?Symbol.for("react.provider"):60109,u=n?Symbol.for("react.context"):60110,c=n?Symbol.for("react.async_mode"):60111,f=n?Symbol.for("react.concurrent_mode"):60111,l=n?Symbol.for("react.forward_ref"):60112,d=n?Symbol.for("react.suspense"):60113,y=n?Symbol.for("react.memo"):60115,h=n?Symbol.for("react.lazy"):60116;function m(e){if("object"==typeof e&&null!==e){var t=e.$$typeof;switch(t){case o:switch(e=e.type){case c:case f:case a:case i:case s:case d:return e;default:switch(e=e&&e.$$typeof){case u:case l:case p:return e;default:return t}}case h:case y:case r:return t}}}function v(e){return m(e)===f}t.typeOf=m,t.AsyncMode=c,t.ConcurrentMode=f,t.ContextConsumer=u,t.ContextProvider=p,t.Element=o,t.ForwardRef=l,t.Fragment=a,t.Lazy=h,t.Memo=y,t.Portal=r,t.Profiler=i,t.StrictMode=s,t.Suspense=d,t.isValidElementType=function(e){return"string"==typeof e||"function"==typeof e||e===a||e===f||e===i||e===s||e===d||"object"==typeof e&&null!==e&&(e.$$typeof===h||e.$$typeof===y||e.$$typeof===p||e.$$typeof===u||e.$$typeof===l)},t.isAsyncMode=function(e){return v(e)||m(e)===c},t.isConcurrentMode=v,t.isContextConsumer=function(e){return m(e)===u},t.isContextProvider=function(e){return m(e)===p},t.isElement=function(e){return"object"==typeof e&&null!==e&&e.$$typeof===o},t.isForwardRef=function(e){return m(e)===l},t.isFragment=function(e){return m(e)===a},t.isLazy=function(e){return m(e)===h},t.isMemo=function(e){return m(e)===y},t.isPortal=function(e){return m(e)===r},t.isProfiler=function(e){return m(e)===i},t.isStrictMode=function(e){return m(e)===s},t.isSuspense=function(e){return m(e)===d}}));var a=r(function(e,t){!function(){Object.defineProperty(t,"__esModule",{value:!0});var e="function"==typeof Symbol&&Symbol.for,n=e?Symbol.for("react.element"):60103,o=e?Symbol.for("react.portal"):60106,r=e?Symbol.for("react.fragment"):60107,a=e?Symbol.for("react.strict_mode"):60108,s=e?Symbol.for("react.profiler"):60114,i=e?Symbol.for("react.provider"):60109,p=e?Symbol.for("react.context"):60110,u=e?Symbol.for("react.async_mode"):60111,c=e?Symbol.for("react.concurrent_mode"):60111,f=e?Symbol.for("react.forward_ref"):60112,l=e?Symbol.for("react.suspense"):60113,d=e?Symbol.for("react.memo"):60115,y=e?Symbol.for("react.lazy"):60116;function h(e){if("object"==typeof e&&null!==e){var t=e.$$typeof;switch(t){case n:var h=e.type;switch(h){case u:case c:case r:case s:case a:case l:return h;default:var m=h&&h.$$typeof;switch(m){case p:case f:case i:return m;default:return t}}case y:case d:case o:return t}}}var m=u,v=c,b=p,O=i,g=n,j=f,_=r,w=y,x=d,E=o,R=s,C=a,S=l,P=!1;function T(e){return h(e)===c}t.typeOf=h,t.AsyncMode=m,t.ConcurrentMode=v,t.ContextConsumer=b,t.ContextProvider=O,t.Element=g,t.ForwardRef=j,t.Fragment=_,t.Lazy=w,t.Memo=x,t.Portal=E,t.Profiler=R,t.StrictMode=C,t.Suspense=S,t.isValidElementType=function(e){return"string"==typeof e||"function"==typeof e||e===r||e===c||e===s||e===a||e===l||"object"==typeof e&&null!==e&&(e.$$typeof===y||e.$$typeof===d||e.$$typeof===i||e.$$typeof===p||e.$$typeof===f)},t.isAsyncMode=function(e){return P||(P=!0,function(e,t){if(void 0===t)throw new Error("`lowPriorityWarning(condition, format, ...args)` requires a warning message argument");if(!e){for(var n=arguments.length,o=Array(n>2?n-2:0),r=2;r<n;r++)o[r-2]=arguments[r];(function(e){for(var t=arguments.length,n=Array(t>1?t-1:0),o=1;o<t;o++)n[o-1]=arguments[o];var r=0,a="Warning: "+e.replace(/%s/g,function(){return n[r++]});"undefined"!=typeof console&&console.warn(a);try{throw new Error(a)}catch(e){}}).apply(void 0,[t].concat(o))}}(!1,"The ReactIs.isAsyncMode() alias has been deprecated, and will be removed in React 17+. Update your code to use ReactIs.isConcurrentMode() instead. It has the exact same API.")),T(e)||h(e)===u},t.isConcurrentMode=T,t.isContextConsumer=function(e){return h(e)===p},t.isContextProvider=function(e){return h(e)===i},t.isElement=function(e){return"object"==typeof e&&null!==e&&e.$$typeof===n},t.isForwardRef=function(e){return h(e)===f},t.isFragment=function(e){return h(e)===r},t.isLazy=function(e){return h(e)===y},t.isMemo=function(e){return h(e)===d},t.isPortal=function(e){return h(e)===o},t.isProfiler=function(e){return h(e)===s},t.isStrictMode=function(e){return h(e)===a},t.isSuspense=function(e){return h(e)===l}}()});o(a);var s=r(function(e){e.exports=a}),i=Object.getOwnPropertySymbols,p=Object.prototype.hasOwnProperty,u=Object.prototype.propertyIsEnumerable,c=function(){try{if(!Object.assign)return!1;var e=new String("abc");if(e[5]="de","5"===Object.getOwnPropertyNames(e)[0])return!1;for(var t={},n=0;n<10;n++)t["_"+String.fromCharCode(n)]=n;if("0123456789"!==Object.getOwnPropertyNames(t).map(function(e){return t[e]}).join(""))return!1;var o={};return"abcdefghijklmnopqrst".split("").forEach(function(e){o[e]=e}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},o)).join("")}catch(e){return!1}}()?Object.assign:function(e,t){for(var n,o,r=function(e){if(null==e)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(e)}(e),a=1;a<arguments.length;a++){for(var s in n=Object(arguments[a]))p.call(n,s)&&(r[s]=n[s]);if(i){o=i(n);for(var c=0;c<o.length;c++)u.call(n,o[c])&&(r[o[c]]=n[o[c]])}}return r},f="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED",l=function(){},d=f,y={},h=Function.call.bind(Object.prototype.hasOwnProperty);function m(e,t,n,o,r){for(var a in e)if(h(e,a)){var s;try{if("function"!=typeof e[a]){var i=Error((o||"React class")+": "+n+" type `"+a+"` is invalid; it must be a function, usually from the `prop-types` package, but received `"+typeof e[a]+"`.");throw i.name="Invariant Violation",i}s=e[a](t,a,o,n,null,d)}catch(e){s=e}if(!s||s instanceof Error||l((o||"React class")+": type specification of "+n+" `"+a+"` is invalid; the type checker function must return `null` or an `Error` but returned a "+typeof s+". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument)."),s instanceof Error&&!(s.message in y)){y[s.message]=!0;var p=r?r():"";l("Failed "+n+" type: "+s.message+(null!=p?p:""))}}}l=function(e){var t="Warning: "+e;"undefined"!=typeof console&&console.error(t);try{throw new Error(t)}catch(e){}},m.resetWarningCache=function(){y={}};var v=m,b=Function.call.bind(Object.prototype.hasOwnProperty),O=function(){};function g(){return null}O=function(e){var t="Warning: "+e;"undefined"!=typeof console&&console.error(t);try{throw new Error(t)}catch(e){}};var j=r(function(e){e.exports=function(e,t){var n="function"==typeof Symbol&&Symbol.iterator,o="@@iterator",r="<<anonymous>>",a={array:u("array"),bool:u("boolean"),func:u("function"),number:u("number"),object:u("object"),string:u("string"),symbol:u("symbol"),any:p(g),arrayOf:function(e){return p(function(t,n,o,r,a){if("function"!=typeof e)return new i("Property `"+a+"` of component `"+o+"` has invalid PropType notation inside arrayOf.");var s=t[n];if(!Array.isArray(s))return new i("Invalid "+r+" `"+a+"` of type `"+d(s)+"` supplied to `"+o+"`, expected an array.");for(var p=0;p<s.length;p++){var u=e(s,p,o,r,a+"["+p+"]",f);if(u instanceof Error)return u}return null})},element:p(function(t,n,o,r,a){var s=t[n];return e(s)?null:new i("Invalid "+r+" `"+a+"` of type `"+d(s)+"` supplied to `"+o+"`, expected a single ReactElement.")}),elementType:p(function(e,t,n,o,r){var a=e[t];return s.isValidElementType(a)?null:new i("Invalid "+o+" `"+r+"` of type `"+d(a)+"` supplied to `"+n+"`, expected a single ReactElement type.")}),instanceOf:function(e){return p(function(t,n,o,a,s){var p;return t[n]instanceof e?null:new i("Invalid "+a+" `"+s+"` of type `"+((p=t[n]).constructor&&p.constructor.name?p.constructor.name:r)+"` supplied to `"+o+"`, expected instance of `"+(e.name||r)+"`.")})},node:p(function(e,t,n,o,r){return l(e[t])?null:new i("Invalid "+o+" `"+r+"` supplied to `"+n+"`, expected a ReactNode.")}),objectOf:function(e){return p(function(t,n,o,r,a){if("function"!=typeof e)return new i("Property `"+a+"` of component `"+o+"` has invalid PropType notation inside objectOf.");var s=t[n],p=d(s);if("object"!==p)return new i("Invalid "+r+" `"+a+"` of type `"+p+"` supplied to `"+o+"`, expected an object.");for(var u in s)if(b(s,u)){var c=e(s,u,o,r,a+"."+u,f);if(c instanceof Error)return c}return null})},oneOf:function(e){return Array.isArray(e)?p(function(t,n,o,r,a){for(var s=t[n],p=0;p<e.length;p++)if((u=s)===(c=e[p])?0!==u||1/u==1/c:u!=u&&c!=c)return null;var u,c,f=JSON.stringify(e,function(e,t){return"symbol"===y(t)?String(t):t});return new i("Invalid "+r+" `"+a+"` of value `"+String(s)+"` supplied to `"+o+"`, expected one of "+f+".")}):(O(arguments.length>1?"Invalid arguments supplied to oneOf, expected an array, got "+arguments.length+" arguments. A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).":"Invalid argument supplied to oneOf, expected an array."),g)},oneOfType:function(e){if(!Array.isArray(e))return O("Invalid argument supplied to oneOfType, expected an instance of array."),g;for(var t=0;t<e.length;t++){var n=e[t];if("function"!=typeof n)return O("Invalid argument supplied to oneOfType. Expected an array of check functions, but received "+h(n)+" at index "+t+"."),g}return p(function(t,n,o,r,a){for(var s=0;s<e.length;s++)if(null==(0,e[s])(t,n,o,r,a,f))return null;return new i("Invalid "+r+" `"+a+"` supplied to `"+o+"`.")})},shape:function(e){return p(function(t,n,o,r,a){var s=t[n],p=d(s);if("object"!==p)return new i("Invalid "+r+" `"+a+"` of type `"+p+"` supplied to `"+o+"`, expected `object`.");for(var u in e){var c=e[u];if(c){var l=c(s,u,o,r,a+"."+u,f);if(l)return l}}return null})},exact:function(e){return p(function(t,n,o,r,a){var s=t[n],p=d(s);if("object"!==p)return new i("Invalid "+r+" `"+a+"` of type `"+p+"` supplied to `"+o+"`, expected `object`.");var u=c({},t[n],e);for(var l in u){var y=e[l];if(!y)return new i("Invalid "+r+" `"+a+"` key `"+l+"` supplied to `"+o+"`.\nBad object: "+JSON.stringify(t[n],null,"  ")+"\nValid keys: "+JSON.stringify(Object.keys(e),null,"  "));var h=y(s,l,o,r,a+"."+l,f);if(h)return h}return null})}};function i(e){this.message=e,this.stack=""}function p(e){var n={},o=0;function a(a,s,p,u,c,l,d){if(u=u||r,l=l||p,d!==f){if(t){var y=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types");throw y.name="Invariant Violation",y}if("undefined"!=typeof console){var h=u+":"+p;!n[h]&&o<3&&(O("You are manually calling a React.PropTypes validation function for the `"+l+"` prop on `"+u+"`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details."),n[h]=!0,o++)}}return null==s[p]?a?new i(null===s[p]?"The "+c+" `"+l+"` is marked as required in `"+u+"`, but its value is `null`.":"The "+c+" `"+l+"` is marked as required in `"+u+"`, but its value is `undefined`."):null:e(s,p,u,c,l)}var s=a.bind(null,!1);return s.isRequired=a.bind(null,!0),s}function u(e){return p(function(t,n,o,r,a,s){var p=t[n];return d(p)!==e?new i("Invalid "+r+" `"+a+"` of type `"+y(p)+"` supplied to `"+o+"`, expected `"+e+"`."):null})}function l(t){switch(typeof t){case"number":case"string":case"undefined":return!0;case"boolean":return!t;case"object":if(Array.isArray(t))return t.every(l);if(null===t||e(t))return!0;var r=function(e){var r=t&&(n&&t[n]||t[o]);if("function"==typeof r)return r}();if(!r)return!1;var a,s=r.call(t);if(r!==t.entries){for(;!(a=s.next()).done;)if(!l(a.value))return!1}else for(;!(a=s.next()).done;){var i=a.value;if(i&&!l(i[1]))return!1}return!0;default:return!1}}function d(e){var t=typeof e;return Array.isArray(e)?"array":e instanceof RegExp?"object":function(e,t){return"symbol"===e||!!t&&("Symbol"===t["@@toStringTag"]||"function"==typeof Symbol&&t instanceof Symbol)}(t,e)?"symbol":t}function y(e){if(null==e)return""+e;var t=d(e);if("object"===t){if(e instanceof Date)return"date";if(e instanceof RegExp)return"regexp"}return t}function h(e){var t=y(e);switch(t){case"array":case"object":return"an "+t;case"boolean":case"date":case"regexp":return"a "+t;default:return t}}return i.prototype=Error.prototype,a.checkPropTypes=v,a.resetWarningCache=v.resetWarningCache,a.PropTypes=a,a}(s.isElement,!0)}),_=o(r(function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e){return e.displayName||e.name||("string"==typeof e&&e.length>0?e:"Unknown")}})),w=function(e,t){var n={};for(var o in e)-1===t.indexOf(o)&&(n[o]=e[o]);return n},x="__global_unique_id__",E=function(){return n[x]=(n[x]||0)+1};function R(e){return function(){return e}}var C=function(){};C.thatReturns=R,C.thatReturnsFalse=R(!1),C.thatReturnsTrue=R(!0),C.thatReturnsNull=R(null),C.thatReturnsThis=function(){return this},C.thatReturnsArgument=function(e){return e};var S=function(e,t){if(void 0===t)throw new Error("`warning(condition, format, ...args)` requires a warning message argument");if(0!==t.indexOf("Failed Composite propType: ")&&!e){for(var n=arguments.length,o=Array(n>2?n-2:0),r=2;r<n;r++)o[r-2]=arguments[r];(function(e){for(var t=arguments.length,n=Array(t>1?t-1:0),o=1;o<t;o++)n[o-1]=arguments[o];var r=0,a="Warning: "+e.replace(/%s/g,function(){return n[r++]});"undefined"!=typeof console&&console.error(a);try{throw new Error(a)}catch(e){}}).apply(void 0,[t].concat(o))}},P=r(function(e,n){n.__esModule=!0;var o=s(j),r=s(E),a=s(S);function s(e){return e&&e.__esModule?e:{default:e}}function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function p(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function u(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}n.default=function(e,n){var s,c,f="__create-react-context-"+(0,r.default)()+"__",l=function(e){function t(){var n,o,r,a;i(this,t);for(var s=arguments.length,u=Array(s),c=0;c<s;c++)u[c]=arguments[c];return n=o=p(this,e.call.apply(e,[this].concat(u))),o.emitter=(r=o.props.value,a=[],{on:function(e){a.push(e)},off:function(e){a=a.filter(function(t){return t!==e})},get:function(){return r},set:function(e,t){r=e,a.forEach(function(e){return e(r,t)})}}),p(o,n)}return u(t,e),t.prototype.getChildContext=function(){var e;return(e={})[f]=this.emitter,e},t.prototype.componentWillReceiveProps=function(e){if(this.props.value!==e.value){var t=this.props.value,o=e.value,r=void 0;((s=t)===(i=o)?0!==s||1/s==1/i:s!=s&&i!=i)?r=0:(r="function"==typeof n?n(t,o):1073741823,(0,a.default)((1073741823&r)===r,"calculateChangedBits: Expected the return value to be a 31-bit integer. Instead received: %s",r),0!=(r|=0)&&this.emitter.set(e.value,r))}var s,i},t.prototype.render=function(){return this.props.children},t}(t.Component);l.childContextTypes=((s={})[f]=o.default.object.isRequired,s);var d=function(t){function n(){var e,o;i(this,n);for(var r=arguments.length,a=Array(r),s=0;s<r;s++)a[s]=arguments[s];return e=o=p(this,t.call.apply(t,[this].concat(a))),o.state={value:o.getValue()},o.onUpdate=function(e,t){0!=((0|o.observedBits)&t)&&o.setState({value:o.getValue()})},p(o,e)}return u(n,t),n.prototype.componentWillReceiveProps=function(e){var t=e.observedBits;this.observedBits=null==t?1073741823:t},n.prototype.componentDidMount=function(){this.context[f]&&this.context[f].on(this.onUpdate);var e=this.props.observedBits;this.observedBits=null==e?1073741823:e},n.prototype.componentWillUnmount=function(){this.context[f]&&this.context[f].off(this.onUpdate)},n.prototype.getValue=function(){return this.context[f]?this.context[f].get():e},n.prototype.render=function(){return(e=this.props.children,Array.isArray(e)?e[0]:e)(this.state.value);var e},n}(t.Component);return d.contextTypes=((c={})[f]=o.default.object,c),{Provider:l,Consumer:d}},e.exports=n.default});o(P);var T=o(r(function(e,n){n.__esModule=!0;var o=a(t),r=a(P);function a(e){return e&&e.__esModule?e:{default:e}}n.default=o.default.createContext||r.default,e.exports=n.default})),M=T(null),A=function(e){var n=_(e),o=function(o){return t.createElement(M.Consumer,null,function(r){if(null===r)throw new Error("Couldn't find Yandex.Maps API in the context. Make sure that <"+n+" /> is inside <YMaps /> provider");return t.createElement(e,Object.assign({},{ymaps:r},o))})};return o.displayName="withYMapsContext("+n+")",o},k=T(null),$=function(e){var n=function(n){return t.createElement(k.Consumer,null,function(o){return t.createElement(e,Object.assign({},{parent:o},n))})};return n.displayName="withParentContext("+_(e)+")",n};function I(e,n,o){void 0===n&&(n=!1),void 0===o&&(o=[]);var r=function(r){function a(){r.call(this),this.state={loading:!0},this._isMounted=!1}return r&&(a.__proto__=r),(a.prototype=Object.create(r&&r.prototype)).constructor=a,a.prototype.componentDidMount=function(){var e=this;this._isMounted=!0,this.props.ymaps.load().then(function(t){return Promise.all(o.concat(e.props.modules).map(t.loadModule)).then(function(){!0===e._isMounted&&e.setState({loading:!1},function(){e.props.onLoad(t)})})}).catch(function(t){!0===e._isMounted&&e.props.onError(t)})},a.prototype.componentWillUnmount=function(){this._isMounted=!1},a.prototype.render=function(){var o=this.props.ymaps,r=!1===n||!1===this.state.loading,a=w(this.props,["onLoad","onError","modules","ymaps"]);return r&&t.createElement(e,Object.assign({},{ymaps:o.getApi()},a))},a}(t.Component);return r.displayName="withYMaps("+_(e)+")",r.propTypes={onLoad:j.func,onError:j.func,modules:j.arrayOf(j.string),ymaps:j.object},r.defaultProps={onLoad:Function.prototype,onError:Function.prototype,modules:[]},A(r)}var D={lang:"ru_RU",load:"",ns:"",mode:"debug"},U={},q=function(e){var t=Date.now().toString(32);this.options=e,this.namespace=e.query.ns||D.ns,this.onload="__yandex-maps-api-onload__$$"+t,this.onerror="__yandex-maps-api-onerror__$$"+t};q.prototype.getApi=function(){return"undefined"!=typeof window&&this.namespace?window[this.namespace]:this.api},q.prototype.setApi=function(e){return this.api=e},q.prototype.getPromise=function(){return this.namespace?U[this.namespace]:this.promise},q.prototype.setPromise=function(e){return this.namespace?U[this.namespace]=this.promise=e:this.promise=e},q.prototype.load=function(){var e=this;if(this.getApi())return Promise.resolve(this.setApi(this.getApi()));if(this.getPromise())return this.setPromise(this.getPromise());var t=Object.assign({onload:this.onload,onerror:this.onerror},D,this.options.query),n=Object.keys(t).map(function(e){return e+"="+t[e]}).join("&"),o=["https://"+(this.options.enterprise?"enterprise.":"")+"api-maps.yandex.ru",this.options.version,"?"+n].join("/"),r=new Promise(function(t,n){window[e.onload]=function(n){delete window[e.onload],n.loadModule=e.loadModule.bind(e),n.ready(function(){return t(e.setApi(n))})},window[e.onerror]=function(t){delete window[e.onerror],n(t)},e.fetchScript(o).catch(window[e.onerror])});return this.setPromise(r)},q.prototype.fetchScript=function(e){var t=this;return new Promise(function(n,o){t.script=document.createElement("script"),t.script.type="text/javascript",t.script.onload=n,t.script.onerror=o,t.script.src=e,t.script.async="async",document.head.appendChild(t.script)})},q.prototype.loadModule=function(e){var t=this;return new Promise(function(n,o){t.getApi().modules.require(e,function(o){!function(e,t,n,o){void 0===o&&(o=!1),t="string"==typeof t?t.split("."):t.slice();for(var r,a=e;t.length>1;)a[r=t.shift()]||(a[r]={}),a=a[r];a[t[0]]=!0===o&&a[t[0]]||n}(t.api,e,o,!0),n(o)},o,t.getApi())})},q._name="__react-yandex-maps__";var B=function(e){function n(t){e.call(this,t),this.ymaps=new q(t)}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){!0===this.props.preload&&this.ymaps.load()},n.prototype.render=function(){return t.createElement(M.Provider,{value:this.ymaps},this.props.children)},n}(t.Component);B.propTypes={version:j.string.isRequired,enterprise:j.bool,query:j.shape({lang:j.oneOf(["tr_TR","en_US","en_RU","ru_RU","ru_UA","uk_UA"]),apikey:j.string,coordorder:j.oneOf(["latlong","longlat"]),load:j.string,mode:j.oneOf(["release","debug"]),csp:j.bool,ns:j.string}),children:j.node,preload:j.bool},B.defaultProps={version:"2.1",enterprise:!1,query:{lang:"ru_RU",load:"",ns:""},preload:!1};var F=/^on(?=[A-Z])/;function N(e){return Object.keys(e).reduce(function(t,n){if(F.test(n)){var o=n.replace(F,"").toLowerCase();t._events[o]=e[n]}else t[n]=e[n];return t},{_events:{}})}function L(e,t,n){"function"==typeof n&&e.events.add(t,n)}function W(e,t,n){"function"==typeof n&&e.events.remove(t,n)}function z(e,t,n){Object.keys(Object.assign({},t,n)).forEach(function(o){t[o]!==n[o]&&(W(e,o,t[o]),L(e,o,n[o]))})}var G=function(e){return"default"+e.charAt(0).toUpperCase()+e.slice(1)};function V(e,t){return void 0!==e[t]||void 0===e[G(t)]}function Y(e,t,n){return(V(e,t)?e[t]:e[G(t)])||n}function Z(e,t,n){void 0===n&&(n=null),e&&e!==t&&(e.hasOwnProperty("current")?e.current=null:"function"==typeof e&&e(null)),t&&(t.hasOwnProperty("current")?t.current=n:"function"==typeof t&&t(n))}function J(e){var t=e.width,n=e.height,o=e.style,r=e.className;return void 0!==o||void 0!==r?Object.assign({},o&&{style:o},r&&{className:r}):{style:{width:t,height:n}}}var H=function(e){function n(){var t=this;e.call(this),this.state={instance:null},this._parentElement=null,this._getRef=function(e){t._parentElement=e}}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){var e=n.mountObject(this._parentElement,this.props.ymaps.Map,this.props);this.setState({instance:e})},n.prototype.componentDidUpdate=function(e){null!==this.state.instance&&n.updateObject(this.state.instance,e,this.props)},n.prototype.componentWillUnmount=function(){n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){var e=J(this.props),n=N(this.props),o=w(n,["_events","state","defaultState","options","defaultOptions","instanceRef","ymaps","children","width","height","style","className"]);return t.createElement(k.Provider,{value:this.state.instance},t.createElement("div",Object.assign({},{ref:this._getRef},e,o),this.props.children))},n.mountObject=function(e,t,n){var o=N(n),r=o.instanceRef,a=o._events,s=new t(e,Y(n,"state"),Y(n,"options"));return Object.keys(a).forEach(function(e){return L(s,e,a[e])}),Z(null,r,s),s},n.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"state")){var u=Y(t,"state",{}),c=Y(n,"state",{});u.type!==c.type&&e.setType(c.type),u.behaviors!==c.behaviors&&(u.behaviors&&e.behaviors.disable(u.behaviors),c.behaviors&&e.behaviors.enable(c.behaviors)),u.zoom!==c.zoom&&e.setZoom(c.zoom),u.center!==c.center&&e.setCenter(c.center),c.bounds&&u.bounds!==c.bounds&&e.setBounds(c.bounds)}if(V(n,"options")){var f=Y(t,"options"),l=Y(n,"options",{});f!==l&&e.options.set(l)}Y(t,"width")===Y(n,"width")&&Y(t,"height")===Y(n,"height")||e.container.fitToViewport(),z(e,i,r),Z(p,a,e)},n.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n._events;null!==e&&(Object.keys(r).forEach(function(t){return W(e,t,r[t])}),e.destroy(),Z(o))},n}(t.Component),K={bounds:j.arrayOf(j.arrayOf(j.number)),center:j.arrayOf(j.number),controls:j.arrayOf(j.string),behaviors:j.arrayOf(j.string),margin:j.oneOfType([j.arrayOf(j.number),j.arrayOf(j.arrayOf(j.number))]),type:j.oneOf(["yandex#map","yandex#satellite","yandex#hybrid"]),zoom:j.number},Q={};H.propTypes={state:j.shape(K),defaultState:j.shape(K),options:j.shape(Q),defaultOptions:j.shape(Q),instanceRef:j.func,ymaps:j.object,children:j.node,width:j.oneOfType([j.number,j.string]),height:j.oneOfType([j.number,j.string]),style:j.object,className:j.string},H.defaultProps={width:320,height:240};var X=I(H,!0,["Map"]),ee=function(e){function n(){var t=this;e.call(this),this.state={instance:null},this._parentElement=null,this._getRef=function(e){t._parentElement=e}}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){var e=this;this._mounted=!0,this.props.ymaps.panorama.isSupported()&&n.mountObject(this._parentElement,this.props.ymaps.panorama,this.props).then(function(t){return e._mounted&&e.setState({instance:t})})},n.prototype.componentDidUpdate=function(e){null!==this.state.instance&&n.updateObject(this.state.instance,e,this.props)},n.prototype.componentWillUnmount=function(){this._mounted=!1,n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){var e=J(this.props);return t.createElement("div",Object.assign({},{ref:this._getRef},e))},n.mountObject=function(e,t,n){var o=N(n),r=o.instanceRef,a=o._events,s=Y(n,"point"),i=Y(n,"locateOptions"),p=Y(n,"options");return new Promise(function(n,o){t.locate(s,i).done(function(o){if(o.length>0){var s=new t.Player(e,o[0],p);Z(null,r,s),Object.keys(a).forEach(function(e){return L(s,e,a[e])}),n(s)}},o)})},n.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"options")){var u=Y(t,"options"),c=Y(n,"options");u!==c&&e.options.set(c)}if(V(n,"point")){var f=Y(n,"point"),l=Y(t,"point"),d=Y(n,"locateOptions");f!==l&&e.moveTo(f,d)}z(e,i,r),Z(p,a,e)},n.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n._events;null!==e&&(Object.keys(r).forEach(function(t){return W(e,t,r[t])}),Z(o))},n}(t.Component),te={};ee.propTypes={options:j.shape(te),defaultOptions:j.shape(te),point:j.arrayOf(j.number),defaultPoint:j.arrayOf(j.number),locateOptions:j.shape({layer:j.oneOf(["yandex#panorama","yandex#airPanorama"])}),instanceRef:j.func,ymaps:j.object,children:j.node,width:j.oneOfType([j.number,j.string]),height:j.oneOfType([j.number,j.string]),style:j.object,className:j.string},ee.defaultProps={width:320,height:240};var ne=I(ee,!0,["panorama.isSupported","panorama.locate","panorama.createPlayer","panorama.Player"]),oe=function(e){function n(){e.call(this),this.state={instance:null}}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){var e=n.mountControl(this.props.ymaps.control[this.props.name],this.props);this.setState({instance:e})},n.prototype.componentDidUpdate=function(e){null!==this.state.instance&&n.updateControl(this.state.instance,e,this.props)},n.prototype.componentWillUnmount=function(){n.unmountControl(this.state.instance,this.props)},n.prototype.render=function(){return t.createElement(k.Provider,{value:this.state.instance},this.props.children)},n.mountControl=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n.lazy,s=n._events,i=new e({data:Y(t,"data"),options:Y(t,"options"),state:Y(t,"state"),mapTypes:Y(t,"mapTypes"),lazy:a});if(Object.keys(s).forEach(function(e){return L(i,e,s[e])}),r&&r.controls&&"function"==typeof r.controls.add)r.controls.add(i);else{if(!r||!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount "+t.name);r.add(i)}return Z(null,o,i),i},n.updateControl=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"options")){var u=Y(t,"options"),c=Y(n,"options");u!==c&&e.options.set(c)}if(V(n,"data")){var f=Y(t,"data"),l=Y(n,"data");f!==l&&e.data.set(l)}if(V(n,"state")){var d=Y(t,"state"),y=Y(n,"state");d!==y&&e.state.set(y)}if(V(n,"mapTypes")){var h=Y(t,"mapTypes"),m=Y(n,"mapTypes");h!==m&&(e.removeAllMapTypes(),m.forEach(function(t){return e.addMapType(t)}))}z(e,i,r),Z(p,a,e)},n.unmountControl=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events;null!==e&&(Object.keys(a).forEach(function(t){return W(e,t,a[t])}),r.controls&&"function"==typeof r.controls.remove?r.controls.remove(e):r.remove&&"function"==typeof r.remove&&r.remove(e),Z(o))},n}(t.Component);function re(e){return t.createElement(oe,Object.assign({},e,{name:"Button"}))}oe.propTypes={children:j.node,instanceRef:j.func,ymaps:j.object,parent:j.object,name:j.oneOf(["Button","FullscreenControl","GeolocationControl","ListBox","ListBoxItem","RouteButton","RouteEditor","RoutePanel","RulerControl","SearchControl","TrafficControl","TypeSelector","ZoomControl"]).isRequired},re.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var ae=$(I(re,!0,["control.Button"]));function se(e){return t.createElement(oe,Object.assign({},e,{name:"FullscreenControl"}))}se.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var ie=$(I(se,!0,["control.FullscreenControl"]));function pe(e){return t.createElement(oe,Object.assign({},e,{name:"GeolocationControl"}))}pe.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var ue=$(I(pe,!0,["control.GeolocationControl"]));function ce(e){return t.createElement(oe,Object.assign({},e,{name:"ListBox"}))}ce.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var fe=$(I(ce,!0,["control.ListBox"]));function le(e){return t.createElement(oe,Object.assign({},e,{name:"ListBoxItem"}))}le.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var de=$(I(le,!0,["control.ListBoxItem"]));function ye(e){return t.createElement(oe,Object.assign({},e,{name:"RouteButton"}))}ye.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var he=$(I(ye,!0,["control.RouteButton"]));function me(e){return t.createElement(oe,Object.assign({},e,{name:"RouteEditor"}))}me.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var ve=$(I(me,!0,["control.RouteEditor"]));function be(e){return t.createElement(oe,Object.assign({},e,{name:"RoutePanel"}))}be.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var Oe=$(I(be,!0,["control.RoutePanel"]));function ge(e){return t.createElement(oe,Object.assign({},e,{name:"RulerControl"}))}ge.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var je=$(I(ge,!0,["control.RulerControl"]));function _e(e){return t.createElement(oe,Object.assign({},e,{name:"SearchControl"}))}_e.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var we=$(I(_e,!0,["control.SearchControl"]));function xe(e){return t.createElement(oe,Object.assign({},e,{name:"TrafficControl"}))}xe.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var Ee=$(I(xe,!0,["control.TrafficControl"]));function Re(e){return t.createElement(oe,Object.assign({},e,{name:"TypeSelector"}))}Re.propTypes={mapTypes:j.arrayOf(j.oneOf(["yandex#map","yandex#satellite","yandex#hybrid"])),defaultMapTypes:j.arrayOf(j.oneOf(["yandex#map","yandex#satellite","yandex#hybrid"])),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var Ce=$(I(Re,!0,["control.TypeSelector"]));function Se(e){return t.createElement(oe,Object.assign({},e,{name:"ZoomControl"}))}Se.propTypes={data:j.shape({}),defaultData:j.shape({}),options:j.shape({}),defaultOptions:j.shape({}),state:j.shape({}),defaultState:j.shape({})};var Pe=$(I(Se,!0,["control.ZoomControl"])),Te=function(e){function n(){e.call(this),this.state={instance:null}}return e&&(n.__proto__=e),(n.prototype=Object.create(e&&e.prototype)).constructor=n,n.prototype.componentDidMount=function(){var e=n.mountObject(this.props.ymaps.Clusterer,this.props);this.setState({instance:e})},n.prototype.componentDidUpdate=function(e){null!==this.state.instance&&n.updateObject(this.state.instance,e,this.props)},n.prototype.componentWillUnmount=function(){n.unmountObject(this.state.instance,this.props)},n.prototype.render=function(){return t.createElement(k.Provider,{value:this.state.instance},this.props.children)},n.mountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events,s=new e(Y(t,"options"));if(Object.keys(a).forEach(function(e){return L(s,e,a[e])}),r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(s);else{if(!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount Clusterer");r.add(s)}return Z(null,o,s),s},n.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"options")){var u=Y(t,"options"),c=Y(n,"options");u!==c&&e.options.set(c)}z(e,i,r),Z(p,a,e)},n.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events;null!==e&&(Object.keys(a).forEach(function(t){return W(e,t,a[t])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(e):r.remove&&"function"==typeof r.remove&&r.remove(e),Z(o))},n}(t.Component);Te.propTypes={options:j.shape({}),defaultOptions:j.shape({}),instanceRef:j.func,ymaps:j.object,parent:j.object,children:j.node};var Me=$(I(Te,!0,["Clusterer"])),Ae=function(e){function t(){e.call(this),this.state={instance:null}}return e&&(t.__proto__=e),(t.prototype=Object.create(e&&e.prototype)).constructor=t,t.prototype.componentDidMount=function(){var e=t.mountObject(this.props.ymaps.ObjectManager,this.props);this.setState({instance:e})},t.prototype.componentDidUpdate=function(e){null!==this.state.instance&&t.updateObject(this.state.instance,e,this.props)},t.prototype.componentWillUnmount=function(){t.unmountObject(this.state.instance,this.props)},t.prototype.render=function(){return null},t.mountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events,s=Y(t,"options"),i=Y(t,"features"),p=Y(t,"filter"),u=Y(t,"objects"),c=Y(t,"clusters"),f=new e(s);if(f.add(i||[]),f.setFilter(p),f.objects.options.set(u),f.clusters.options.set(c),Object.keys(a).forEach(function(e){return L(f,e,a[e])}),r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(f);else{if(!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount ObjectManager");r.add(f)}return Z(null,o,f),f},t.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"options")){var u=Y(t,"options"),c=Y(n,"options");u!==c&&e.options.set(c)}if(V(n,"objects")){var f=Y(t,"objects"),l=Y(n,"objects");f!==l&&e.objects.options.set(l)}if(V(n,"clusters")){var d=Y(t,"clusters"),y=Y(n,"clusters");d!==y&&e.clusters.options.set(y)}if(V(n,"filter")){var h=Y(t,"filter"),m=Y(n,"filter");h!==m&&e.options.set(m)}if(V(n,"features")){var v=Y(t,"features"),b=Y(n,"features");v!==b&&(e.remove(v),e.add(b))}z(e,i,r),Z(p,a,e)},t.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events;null!==e&&(Object.keys(a).forEach(function(t){return W(e,t,a[t])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(e):r.remove&&"function"==typeof r.remove&&r.remove(e),Z(o))},t}(t.Component),ke=j.shape({id:j.oneOfType([j.number,j.string]).isRequired,type:j.oneOf(["Feature"]).isRequired,geometry:j.object.isRequired,options:j.object,properties:j.object}),$e={type:j.oneOf(["FeatureCollection"]).isRequired};$e.features=j.arrayOf(j.oneOfType([j.shape($e),ke])).isRequired;var Ie=j.shape($e),De=j.oneOfType([j.arrayOf(j.oneOfType([Ie,ke])),Ie]),Ue=j.oneOfType([j.string,j.func]),qe=j.shape({}),Be=j.shape({}),Fe=j.shape({});Ae.propTypes={features:De,defaultFeatures:De,filter:Ue,defaultFilter:Ue,options:qe,defaultOptions:qe,objects:Be,defaultObjects:Be,clusters:Fe,defaultClusters:Fe,instanceRef:j.func,ymaps:j.object,parent:j.object};var Ne=$(I(Ae,!0,["ObjectManager"])),Le=function(e){function t(){e.call(this),this.state={instance:null}}return e&&(t.__proto__=e),(t.prototype=Object.create(e&&e.prototype)).constructor=t,t.prototype.componentDidMount=function(){var e=this.props,n=e.name,o=e.ymaps,r=e.dangerZone,a=t.mountObject(r&&"function"==typeof r.modifyConstructor?r.modifyConstructor(o[n]):o[n],this.props);this.setState({instance:a})},t.prototype.componentDidUpdate=function(e){null!==this.state.instance&&t.updateObject(this.state.instance,e,this.props)},t.prototype.componentWillUnmount=function(){t.unmountObject(this.state.instance,this.props)},t.prototype.render=function(){return null},t.mountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events,s=new e(Y(t,"geometry"),Y(t,"properties"),Y(t,"options"));if(Object.keys(a).forEach(function(e){return L(s,e,a[e])}),r&&r.geoObjects&&"function"==typeof r.geoObjects.add)r.geoObjects.add(s);else{if(!r||!r.add||"function"!=typeof r.add)throw new Error("No parent found to mount "+t.name);r.add(s)}return Z(null,o,s),s},t.updateObject=function(e,t,n){var o=N(n),r=o._events,a=o.instanceRef,s=N(t),i=s._events,p=s.instanceRef;if(V(n,"geometry")){var u=Y(t,"geometry",{}),c=Y(n,"geometry",{});Array.isArray(c)&&c!==u?Array.isArray(c[0])&&"number"==typeof c[1]?(e.geometry.setCoordinates(c[0]),e.geometry.setRadius(c[1])):e.geometry.setCoordinates(c):"object"==typeof c&&(c.coordinates!==u.coordinates&&e.geometry.setCoordinates(c.coordinates),c.radius!==u.radius&&e.geometry.setRadius(c.radius))}if(V(n,"properties")){var f=Y(t,"properties"),l=Y(n,"properties");f!==l&&e.properties.set(l)}if(V(n,"options")){var d=Y(t,"options"),y=Y(n,"options");d!==y&&e.options.set(y)}z(e,i,r),Z(p,a,e)},t.unmountObject=function(e,t){var n=N(t),o=n.instanceRef,r=n.parent,a=n._events;null!==e&&(Object.keys(a).forEach(function(t){return W(e,t,a[t])}),r.geoObjects&&"function"==typeof r.geoObjects.remove?r.geoObjects.remove(e):r.remove&&"function"==typeof r.remove&&r.remove(e),Z(o))},t}(t.Component);Le.propTypes={instanceRef:j.func,ymaps:j.object,parent:j.object,name:j.oneOf(["GeoObject","Placemark","Polyline","Rectangle","Polygon","Circle"]).isRequired,dangerZone:j.shape({modifyConstructor:j.func})};var We={modifyConstructor:function(e){function t(t,n,o){e.call(this,{geometry:t,properties:n},o)}return t.prototype=e.prototype,t}};function ze(e){return t.createElement(Le,Object.assign({},e,{name:"GeoObject",dangerZone:We}))}var Ge=j.shape({type:j.oneOf(["Point","LineString","Rectangle","Polygon","Circle"]).isRequired,coordinates:j.oneOfType([j.arrayOf(j.number),j.arrayOf(j.arrayOf(j.number)),j.arrayOf(j.arrayOf(j.arrayOf(j.number)))]).isRequired,radius:j.number});ze.propTypes={geometry:Ge,defaultGeometry:Ge,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var Ve=$(I(ze,!0,["GeoObject"]));function Ye(e){return t.createElement(Le,Object.assign({},e,{name:"Circle"}))}var Ze=j.arrayOf(j.oneOfType([j.number,j.arrayOf(j.number)]));Ye.propTypes={geometry:Ze,defaultGeometry:Ze,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var Je=$(I(Ye,!0,["Circle"]));function He(e){return t.createElement(Le,Object.assign({},e,{name:"Placemark"}))}var Ke=j.arrayOf(j.number);He.propTypes={geometry:Ke,defaultGeometry:Ke,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var Qe=$(I(He,!0,["Placemark"]));function Xe(e){return t.createElement(Le,Object.assign({},e,{name:"Polygon"}))}var et=j.arrayOf(j.arrayOf(j.arrayOf(j.number)));Xe.propTypes={geometry:et,defaultGeometry:et,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var tt=$(I(Xe,!0,["Polygon"]));function nt(e){return t.createElement(Le,Object.assign({},e,{name:"Polyline"}))}var ot=j.arrayOf(j.arrayOf(j.number));nt.propTypes={geometry:ot,defaultGeometry:ot,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var rt=$(I(nt,!0,["Polyline"]));function at(e){return t.createElement(Le,Object.assign({},e,{name:"Rectangle"}))}var st=j.arrayOf(j.arrayOf(j.number));at.propTypes={geometry:st,defaultGeometry:st,properties:j.shape({}),defaultProperties:j.shape({}),options:j.shape({}),defaultOptions:j.shape({})};var it=$(I(at,!0,["Rectangle"]));exports.withYMaps=I,exports.YMaps=B,exports.Map=X,exports.Panorama=ne,exports.Button=ae,exports.FullscreenControl=ie,exports.GeolocationControl=ue,exports.ListBox=fe,exports.ListBoxItem=de,exports.RouteButton=he,exports.RouteEditor=ve,exports.RoutePanel=Oe,exports.RulerControl=je,exports.SearchControl=we,exports.TrafficControl=Ee,exports.TypeSelector=Ce,exports.ZoomControl=Pe,exports.Clusterer=Me,exports.ObjectManager=Ne,exports.GeoObject=Ve,exports.Circle=Je,exports.Placemark=Qe,exports.Polygon=tt,exports.Polyline=rt,exports.Rectangle=it;
-	//# sourceMappingURL=react-yandex-maps.js.map
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ }),
-/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36953,33 +36911,54 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	__webpack_require__(80);
+	__webpack_require__(77);
 	
-	var Tags = function Tags(props) {
+	var _reactRedux = __webpack_require__(30);
+	
+	var _storeReducersPoints = __webpack_require__(79);
+	
+	var _storeReducersMainPageReducer = __webpack_require__(80);
+	
+	var Button = function Button(props) {
+	    var linkEvent = function linkEvent(event) {
+	        event.preventDefault();
+	    };
+	
 	    return _react2["default"].createElement(
-	        "div",
-	        { className: "Tags" },
-	        props.tags.map(function (tag, i) {
-	            return _react2["default"].createElement(
-	                "div",
-	                { className: "Item Tags-Item", key: i },
-	                _react2["default"].createElement("div", { className: "Item-Lst", style: { background: "" + tag.color } }),
-	                _react2["default"].createElement(
-	                    "div",
-	                    { className: "Item-Text" },
-	                    tag.text
-	                )
-	            );
-	        })
+	        "li",
+	        { className: "NavBar-Item NavBar-Item_" + props.state.MainPage.options[props.index].buttonStatus,
+	            onClick: function () {
+	                props.selectActive(props.index);
+	            } },
+	        _react2["default"].createElement(
+	            "a",
+	            { href: "#", onClick: linkEvent },
+	            props.btn
+	        )
 	    );
 	};
-	exports.Tags = Tags;
+	
+	exports["default"] = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        state: state
+	    };
+	}, function (dispatch) {
+	    return {
+	        getPoints: function getPoints(index) {
+	            dispatch((0, _storeReducersPoints.asyncGetPoints)(index));
+	        },
+	        selectActive: function selectActive(index) {
+	            dispatch((0, _storeReducersMainPageReducer.selectActive)(index));
+	        }
+	    };
+	})(Button);
+	module.exports = exports["default"];
 
 /***/ }),
-/* 80 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var content = __webpack_require__(81);
+	var content = __webpack_require__(78);
 	
 	if (typeof content === 'string') {
 	  content = [[module.id, content, '']];
@@ -36998,15 +36977,179 @@
 
 
 /***/ }),
-/* 81 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(22)(false);
-	// Imports
-	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates:300&display=swap&subset=cyrillic,cyrillic-ext);", ""]);
 	// Module
-	exports.push([module.id, ".Tags {\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-columns: 1fr 1fr;\n        grid-template-columns: 1fr 1fr;\n    -ms-grid-rows: auto;\n        grid-template-rows: auto;\n}\n\n.Item {\n    font-family: 'Montserrat Alternates', sans-serif;\n    display: -ms-flexbox;\n    display: flex;\n    padding: 28px 0 28px 28px;\n}\n\n.Item-Lst {\n    width: 50px;\n    height: 50px;\n}\n\n.Item-Text {\n    font-size: 2em;\n    margin-left: 30px;\n}\n\n\n@media (max-width: 480px) {\n    .Item {\n        padding: 28px 0 28px 0;\n    }\n    .Item-Text {\n        font-size: 1em;\n    }\n\n    .Item-Lst {\n        width: 30px;\n        height: 30px;\n    }\n}\n\n\n@media (min-width: 480px) and (max-width: 840px) {\n    .Item-Text {\n        font-size: 1.5em;\n    }\n    .Item-Lst {\n        width: 30px;\n        height: 30px;\n    }\n}\n\n\n@media (max-width: 1080px) {\n    .Tags {\n        display: -ms-grid;\n        display: grid;\n        -ms-grid-columns: 1fr;\n            grid-template-columns: 1fr;\n        -ms-grid-rows: auto;\n            grid-template-rows: auto;\n    }\n}\n\n", ""]);
+	exports.push([module.id, "", ""]);
 
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _reducersMainPageReducer = __webpack_require__(80);
+	
+	var _mainPageReducer = __webpack_require__(80);
+	
+	var asyncGetPoints = function asyncGetPoints(index) {
+	    return function (dispatch) {
+	        fetch('/ololo', {
+	            method: 'POST',
+	            body: JSON.stringify({ val: index })
+	        }).then(function (response) {
+	            return response.json();
+	        }).then(function (data) {
+	            var result = data.map(function (point) {
+	                return {
+	                    latitude: point["coordinates"][1],
+	                    longitude: point["coordinates"][0],
+	                    color: point["color"]
+	                };
+	            });
+	
+	            dispatch((0, _reducersMainPageReducer.addPoints)(result, index));
+	        })["catch"](function (error) {
+	            return console.error(error);
+	        });
+	    };
+	};
+	exports.asyncGetPoints = asyncGetPoints;
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _initialStateJsx = __webpack_require__(81);
+	
+	var SELECT_ACTIVE = "SELECT_ACTIVE";
+	var ADD_POINTS = "ADD_POINTS";
+	var SET_INIT_OPTIONS = "SET_INIT_OPTIONS";
+	var SET_INIT_PLACES = "SET_INIT_PLACES";
+	
+	var mainPageReducer = function mainPageReducer(state, action) {
+	    if (state === undefined) state = _initialStateJsx.initialState;
+	
+	    var newState = undefined;
+	    switch (action.type) {
+	        case SELECT_ACTIVE:
+	            newState = Object.assign({}, state, { MainPage: { active: action.num } });
+	            newState.active = action.num;
+	            newState.options.forEach(function (opt, index) {
+	                if (index === action.num) {
+	                    newState.options[action.num].buttonStatus = "active";
+	                } else {
+	                    newState.options[index].buttonStatus = "";
+	                }
+	            });
+	
+	            return newState;
+	        case ADD_POINTS:
+	            newState = Object.assign({}, state);
+	            newState.active = action.active;
+	            newState.options[action.active].points = action.points;
+	            return newState;
+	        case SET_INIT_OPTIONS:
+	            newState = Object.assign({}, state);
+	            newState.options = action.options;
+	            return newState;
+	        case SET_INIT_PLACES:
+	            newState = Object.assign({}, state);
+	            newState.places = action.places;
+	            return newState;
+	        default:
+	            return state;
+	    }
+	};
+	
+	exports.mainPageReducer = mainPageReducer;
+	var selectActive = function selectActive(num) {
+	    return { type: SELECT_ACTIVE, num: num };
+	};
+	exports.selectActive = selectActive;
+	var addPoints = function addPoints(points, index) {
+	    return { type: ADD_POINTS, points: points, active: index };
+	};
+	exports.addPoints = addPoints;
+	var setInitialOptions = function setInitialOptions(options) {
+	    return { type: SET_INIT_OPTIONS, options: options };
+	};
+	exports.setInitialOptions = setInitialOptions;
+	var setInitialPlaces = function setInitialPlaces(places) {
+	    return { type: SET_INIT_PLACES, places: places };
+	};
+	exports.setInitialPlaces = setInitialPlaces;
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reducersMainPageReducer = __webpack_require__(80);
+	
+	// fetch('/data', {
+	//     method: 'POST',
+	//     body: JSON.stringify({val: index}),
+	// })
+	//     .then((response) => response.json())
+	//     .then((data) => {
+	//         console.log(data);
+	//         let result = data.map((point) => {
+	//             return {
+	//                 latitude: point["coordinates"][1],
+	//                 longitude: point["coordinates"][0],
+	//                 color: point["color"]
+	//             }
+	//         });
+	//
+	//         dispatch(addPoints(result, index));
+	//         dispatch(selectActive(index));
+	//
+	//     })
+	//     .catch((error) => console.error(error));
+	
+	var initialState = {
+	    active: 0,
+	    text: ["Москва - огромный город для жизни и для развлечений. Только подумать, 12.5 миллионов совершенно разных людей, чьи вкусы и потребности уникальны.", "Опираясь на отзывы людей из социальных сетей можно разделить районы города на три категории:"],
+	    options: [{
+	        buttonName: "",
+	        buttonStatus: "",
+	        tags: [],
+	        points: []
+	    }],
+	
+	    places: [{
+	        title: "",
+	        telNumber: "",
+	        address: "",
+	        link: ""
+	    }]
+	};
+	exports.initialState = initialState;
 
 /***/ }),
 /* 82 */
@@ -37018,8 +37161,6 @@
 	    value: true
 	});
 	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	var _react = __webpack_require__(1);
@@ -37028,49 +37169,22 @@
 	
 	__webpack_require__(83);
 	
-	var _storeReducersMainPageReducer = __webpack_require__(85);
-	
-	var _reactRedux = __webpack_require__(30);
-	
-	var Button = function Button(props) {
-	    var _useState = (0, _react.useState)("");
-	
-	    var _useState2 = _slicedToArray(_useState, 2);
-	
-	    var className = _useState2[0];
-	    var setClassName = _useState2[1];
-	
-	    var linkEvent = function linkEvent(event) {
-	        event.preventDefault();
-	    };
-	
+	var AsideWhiteBlock = function AsideWhiteBlock(props) {
 	    return _react2["default"].createElement(
-	        "li",
-	        { className: "NavBar-Item NavBar-Item_" + props.state.MainPage.options[props.index].buttonStatus,
-	            onClick: function () {
-	                props.changeOpt(props.index);
-	                props.setActive(props.index);
-	            } },
+	        "div",
+	        { className: "AsideWhiteBlock Content" },
 	        _react2["default"].createElement(
-	            "a",
-	            { href: "#", onClick: linkEvent },
-	            props.btn
+	            "div",
+	            { className: "AsideWhiteBlock-Text" },
+	            _react2["default"].createElement(
+	                "span",
+	                { className: "Text" },
+	                props.text
+	            )
 	        )
 	    );
 	};
-	
-	exports["default"] = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        state: state
-	    };
-	}, function (dispatch) {
-	    return {
-	        changeOpt: function changeOpt(index) {
-	            dispatch((0, _storeReducersMainPageReducer.changeMap)(index));
-	        }
-	    };
-	})(Button);
-	module.exports = exports["default"];
+	exports.AsideWhiteBlock = AsideWhiteBlock;
 
 /***/ }),
 /* 83 */
@@ -37099,8 +37213,10 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(22)(false);
+	// Imports
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates:200,200i,500&display=swap&subset=cyrillic,cyrillic-ext);", ""]);
 	// Module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, ".AsideWhiteBlock {\n    padding: 5em 3em 0 3em;\n    box-sizing: border-box;\n    font-family: 'Montserrat Alternates', sans-serif;\n    font-weight: 500;\n}\n\n\n@media (max-width: 480px) {\n    .AsideWhiteBlock {\n        padding: 2em 3em 0 3em;\n    }\n}\n\n@media (min-width: 480px) and (max-width: 840px) {\n    .AsideWhiteBlock {\n        padding: 3em 3em 0 3em;\n    }\n}", ""]);
 
 
 /***/ }),
@@ -37113,186 +37229,130 @@
 	    value: true
 	});
 	
-	var _initialStateJsx = __webpack_require__(86);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	var SELECT_ACTIVE = "SELECT_ACTIVE";
+	var _react = __webpack_require__(1);
 	
-	var mainPageReducer = function mainPageReducer(state, action) {
-	    if (state === undefined) state = _initialStateJsx.initialState;
+	var _react2 = _interopRequireDefault(_react);
 	
-	    switch (action.type) {
-	        case SELECT_ACTIVE:
-	            state.options.forEach(function (opt, index) {
-	                if (index === action.num) {
-	                    state.options[action.num].buttonStatus = "active";
-	                } else {
-	                    state.options[index].buttonStatus = "";
-	                }
-	            });
-	            return state;
-	        default:
-	            return state;
-	    }
+	__webpack_require__(86);
+	
+	var _reactRedux = __webpack_require__(30);
+	
+	var Place = function Place(props) {
+	    return _react2["default"].createElement(
+	        "div",
+	        { className: "Places-Place Place" },
+	        _react2["default"].createElement(
+	            "div",
+	            { className: " Place-Title Title" },
+	            _react2["default"].createElement(
+	                "span",
+	                { className: "Title-Text" },
+	                props.place.title
+	            )
+	        ),
+	        _react2["default"].createElement(
+	            "div",
+	            { className: "Place-Address" },
+	            _react2["default"].createElement(
+	                "span",
+	                { className: "Rubric" },
+	                "Адрес:"
+	            ),
+	            " ",
+	            props.place.address
+	        ),
+	        _react2["default"].createElement(
+	            "div",
+	            { className: "Place-TelNumber" },
+	            _react2["default"].createElement(
+	                "span",
+	                { className: "Rubric" },
+	                "Номер:"
+	            ),
+	            " tel ",
+	            _react2["default"].createElement(
+	                "a",
+	                { href: "tel:" + props.place.telNumber },
+	                props.place.telNumber
+	            )
+	        ),
+	        _react2["default"].createElement(
+	            "div",
+	            { className: "Place-Link Link" },
+	            _react2["default"].createElement(
+	                "span",
+	                { className: "Rubric" },
+	                "Ссылка:"
+	            ),
+	            " ",
+	            _react2["default"].createElement(
+	                "a",
+	                { className: "Link-Link", href: props.place.link },
+	                props.place.link
+	            )
+	        )
+	    );
 	};
 	
-	exports.mainPageReducer = mainPageReducer;
-	var changeMap = function changeMap(num) {
-	    return { type: SELECT_ACTIVE, num: num };
+	var Places = function Places(props) {
+	    return _react2["default"].createElement(
+	        "div",
+	        { className: "Places Content", id: "Events" },
+	        _react2["default"].createElement(
+	            "div",
+	            { className: "Places-Title" },
+	            "Куда сходить в Москве"
+	        ),
+	        props.places.map(function (place, i) {
+	            return _react2["default"].createElement(Place, { key: i, place: place });
+	        })
+	    );
 	};
-	exports.changeMap = changeMap;
+	
+	exports["default"] = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        places: state.MainPage.places
+	    };
+	}, function (dispatch) {
+	    return {};
+	})(Places);
+	module.exports = exports["default"];
 
 /***/ }),
 /* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	var content = __webpack_require__(87);
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
+	if (typeof content === 'string') {
+	  content = [[module.id, content, '']];
+	}
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	var options = {}
 	
-	var _react = __webpack_require__(1);
+	options.insert = "head";
+	options.singleton = false;
 	
-	var _react2 = _interopRequireDefault(_react);
+	var update = __webpack_require__(23)(content, options);
 	
-	var initialState = {
-	    title: ["Москва для жизни и для развлечений", "Для жизни", "Для развлечений", "Рейтинг райнов Москвы по удобству жизни и выбору развлечений"],
-	    text: ["Москва - огромный город для жизни и для развлечений. Только подумать, 12.5 миллионов совершенно разных людей, чьи вкусы и потребности уникальны.", "Опираясь на отзывы людей из социальных сетей можно разделить районы города на три категории:"],
-	    districts: [{
-	        dist: "Академический",
-	        place: [{
-	            place: "07",
-	            text: "по удобству жизни"
-	        }, {
-	            place: "25",
-	            text: "по удобству жизни"
-	        }],
-	        text: "“В принципе у нас есть чем заняться - и до музея, и до театра - пусть и не самого " + "извествного - идти в среднем меьше 10 минут”",
-	        diagram: [60, 30, 10]
-	    }, {
-	        dist: "Басманский",
-	        place: [{
-	            place: "09",
-	            text: "по удобству жизни"
-	        }, {
-	            place: "23",
-	            text: "по удобству жизни"
-	        }],
-	        text: "“В принципе у нас есть чем заняться - и до музея, и до театра - пусть и не самого " + "извествного - идти в среднем меьше 10 минут”",
-	        diagram: [60, 30, 10]
-	    }],
-	
-	    options: [{
-	        buttonName: "Для жизни",
-	        buttonStatus: "active",
-	        tags: [{
-	            color: "#FC9801",
-	            text: "Очень удобно для жизни"
-	        }, {
-	            color: "#FFE607",
-	            text: "Удобно для жизни"
-	        }, {
-	            color: "#C4C4C4",
-	            text: "Недостаточно инфраструктуры"
-	        }],
-	        points: [{
-	            latitude: 55.831903,
-	            longitude: 37.411961,
-	            text: "Здесь удобно",
-	            color: "yellow"
-	        }, {
-	            latitude: 55.763338,
-	            longitude: 37.565466,
-	            text: "Здесь очень удобно",
-	            color: "#FC9801"
-	        }, {
-	            latitude: 55.744522,
-	            longitude: 37.616378,
-	            text: "Здесь неудобно",
-	            color: "gray"
-	        }]
-	    }, {
-	        buttonName: "Для развлечений",
-	        buttonStatus: "",
-	        tags: [{
-	            color: "#FF3C1E",
-	            text: "Культурные"
-	        }, {
-	            color: "#4574B2",
-	            text: "Развлекательные"
-	        }, {
-	            color: "#8B5876",
-	            text: "Культурно-развлекательные"
-	        }, {
-	            color: "#C4C4C4",
-	            text: "Недостаточно мест для досуга и развлечений"
-	        }],
-	        points: [{
-	            latitude: 54.684758,
-	            longitude: 37.738521,
-	            text: "12312123",
-	            color: "#0095b6"
-	        }]
-	
-	    }, {
-	        buttonName: "Для всего",
-	        buttonStatus: "",
-	        tags: [{
-	            color: "#7ABD9B",
-	            text: "Очень удобно для жизни"
-	        }, {
-	            color: "#BF9DC5",
-	            text: "Удобно для жизни"
-	        }, {
-	            color: "#8B5876",
-	            text: "Недостаточно инфраструктуры"
-	        }],
-	        points: [{
-	            latitude: 54.684758,
-	            longitude: 37.738521,
-	            text: "12312123",
-	            color: "#0095b6"
-	        }]
-	    }]
-	};
-	exports.initialState = initialState;
+	if (content.locals) {
+	  module.exports = content.locals;
+	}
+
 
 /***/ }),
 /* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	__webpack_require__(88);
-	
-	var AsideWhiteBlock = function AsideWhiteBlock(props) {
-	    return _react2["default"].createElement(
-	        "div",
-	        { className: "AsideWhiteBlock Content" },
-	        _react2["default"].createElement(
-	            "div",
-	            { className: "AsideWhiteBlock-Text" },
-	            _react2["default"].createElement(
-	                "span",
-	                { className: "Text" },
-	                props.text
-	            )
-	        )
-	    );
-	};
-	exports.AsideWhiteBlock = AsideWhiteBlock;
+	exports = module.exports = __webpack_require__(22)(false);
+	// Imports
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Jura:700&display=swap&subset=cyrillic,cyrillic-ext);", ""]);
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates:200,200i,500,600&display=swap&subset=cyrillic,cyrillic-ext);", ""]);
+	// Module
+	exports.push([module.id, ".Places-Title {\n    font-size: 7em;\n    font-family: Jura, sans-serif;\n    text-align: center;\n    margin-bottom: 50px;\n    border-bottom: 2px solid gray;\n    border-top: 4px solid gray;\n}\n\n.Places-Place {\n    border-bottom: 4px solid gray;\n    border-top: 4px solid gray;\n    margin-bottom: 30px;\n    margin-top: 30px;\n}\n\n.Place-Title {\n    font-size: 3em;\n    font-family: 'Montserrat Alternates', sans-serif;\n    margin-bottom: 20px;\n    font-weight: 600;\n}\n\n.Title-Text {\n    border-bottom: 4px solid black;\n}\n\n.Place-Address {\n    font-size: 2em;\n    font-family: 'Montserrat Alternates', sans-serif;\n    font-weight: 200 i;\n    margin-bottom: 20px;\n}\n\n.Place-TelNumber {\n    font-size: 2em;\n    font-family: 'Montserrat Alternates', sans-serif;\n    font-weight: 200 i;\n    margin-bottom: 20px;\n\n}\n\n.Place-Link {\n    font-size: 2em;\n    font-family: 'Montserrat Alternates', sans-serif;\n    font-weight: 200 i;\n    margin-bottom: 20px;\n    overflow: hidden;\n}\n\n.Rubric {\n    font-weight: 500;\n}\n\n\n@media (max-width: 480px) {\n    .Places-Title {\n        font-size: 2em;\n        margin-bottom: 20px;\n        margin-top: 20px;\n\n    }\n\n    .Place-Title {\n        font-size: 1.5em;\n        margin-bottom: 10px;\n    }\n\n    .Place-Address {\n        font-size: 1em;\n        margin-bottom: 10px;\n\n    }\n\n    .Place-TelNumber {\n        font-size: 1em;\n        margin-bottom: 10px;\n\n    }\n\n    .Place-Link {\n        font-size: 1em;\n        margin-bottom: 10px;\n\n    }\n\n    .Places-Place {\n        margin-bottom: 10px;\n        margin-top: 10px;\n    }\n\n\n}\n\n@media (min-width: 480px) and (max-width: 840px) {\n    .Places-Title {\n        font-size: 3em;\n    }\n\n    .Place-Title {\n        font-size: 2em;\n    }\n\n    .Place-Address {\n        font-size: 1.4em;\n    }\n\n    .Place-TelNumber {\n        font-size: 1.4em;\n    }\n\n    .Place-Link {\n        font-size: 1.4em;\n    }\n\n\n}\n\n@media (min-width: 840px) and  (max-width: 1080px) {\n    .Places-Title {\n        font-size: 4em;\n    }\n\n    .Place-Title {\n        font-size: 2.5em;\n    }\n\n    .Place-Address {\n        font-size: 1.8em;\n    }\n\n    .Place-TelNumber {\n        font-size: 1.8em;\n    }\n\n    .Place-Link {\n        font-size: 1.8em;\n    }\n\n}\n", ""]);
+
 
 /***/ }),
 /* 88 */
@@ -37321,241 +37381,57 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(22)(false);
-	// Imports
-	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates:200,200i,500&display=swap&subset=cyrillic,cyrillic-ext);", ""]);
 	// Module
-	exports.push([module.id, ".AsideWhiteBlock {\n    padding: 5em 3em 0 3em;\n    box-sizing: border-box;\n    font-family: 'Montserrat Alternates', sans-serif;\n    font-weight: 500;\n}\n\n\n@media (max-width: 480px) {\n    .AsideWhiteBlock {\n        padding: 2em 3em 0 3em;\n    }\n}\n\n@media (min-width: 480px) and (max-width: 840px) {\n    .AsideWhiteBlock {\n        padding: 3em 3em 0 3em;\n    }\n}", ""]);
+	exports.push([module.id, "body {\n    margin: 0;\n}\n\n\n.Content {\n    margin: 0 auto;\n    max-width: 1440px;\n    min-width: 240px;\n}\n\n.Content_green {\n    background: url(\"https://s3-alpha-sig.figma.com/img/4d56/6940/f9bb29279b3b4dc5901ae3268f56a98a?Expires=1576454400&Signature=AXIpRo1l3UGJ~nLziBP2qMWd1QOtt~KOGqo7FXKzodGEb9Gfauc~dQ8A~Ge1dKUkYZAwEfSVMMNTdLyU1HLC8mzDYjcLLukwYj~DElGPUT2FuV4LcjPbEZEO0ij~84tQ2z~Ml9DMSoCXvRFwcQmFPPXlMSaqMrcKvIT6uaPQKsqaw2AZSHVUVdXhIwnPRIfviX2kNrwaNhvAEiX1J5tg0a-LW00OymOhvDPRrpTTa5yzQMcSKRpYdQLURmokeGGTEewnpvmHK-~7t9R9h4xHyP9YBI0zk31V79kxk213N8SwgjOUdfGXwahoNSJ~51QWcx6GLvS2dEKK3JJ1XgjIvw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA\") no-repeat;\n    background-size: 100%;\n    background-position: center;\n}\n\n\n\n.Title_normal {\n    font-size: 3em;\n    font-weight: 600;\n    word-spacing: 5px;\n}\n\n.Text {\n    font-size: 3em;\n    font-weight: 500;\n    letter-spacing: 2px;\n    word-spacing: 5px;\n}\n\n.Text_normal {\n    font-size: 3em;\n    letter-spacing: 2px;\n    word-spacing: 5px;\n}\n\n@media (max-width: 480px) {\n    .Text {\n        font-size: 1em;\n    }\n\n}\n\n@media (min-width: 480px) and (max-width: 840px) {\n    .Text {\n        font-size: 1.5em;\n    }\n}\n\n@media (min-width: 840px) and (max-width: 1080px) {\n    .Text {\n        font-size: 2em;\n    }\n\n}\n", ""]);
 
 
 /***/ }),
 /* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
+	var _mainPageReducer = __webpack_require__(80);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	__webpack_require__(91);
-	
-	var _infoForDistrict = __webpack_require__(93);
-	
-	var _reactRedux = __webpack_require__(30);
-	
-	var SelectDistrict = function SelectDistrict(props) {
-	    var _useState = (0, _react.useState)(0);
-	
-	    var _useState2 = _slicedToArray(_useState, 2);
-	
-	    var active = _useState2[0];
-	    var setActive = _useState2[1];
-	
-	    var changeDistrict = function changeDistrict(event) {
-	        setActive(event.target.value);
+	var setInitOptions = function setInitOptions() {
+	    return function (dispatch) {
+	        fetch('/init', {
+	            method: 'POST',
+	            body: JSON.stringify({ val: 1 })
+	        }).then(function (response) {
+	            return response.json();
+	        }).then(function (data) {
+	            dispatch((0, _mainPageReducer.setInitialOptions)(data));
+	        })['catch'](function (error) {
+	            return console.error(error);
+	        });
 	    };
-	
-	    return _react2["default"].createElement(
-	        "div",
-	        { className: "SelectDistrict Content" },
-	        _react2["default"].createElement(
-	            "select",
-	            { className: "SelectDistrict-Select Select", onChange: changeDistrict },
-	            props.districts.map(function (dst, i) {
-	                return _react2["default"].createElement(
-	                    "option",
-	                    { className: "SelectDistrict-Item", key: i, value: i },
-	                    dst.dist
-	                );
-	            })
-	        ),
-	        _react2["default"].createElement(_infoForDistrict.InfoForDistrict, { districts: props.districts[active] })
-	    );
 	};
 	
-	exports["default"] = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        districts: state.MainPage.districts
+	exports.setInitOptions = setInitOptions;
+	var setInitPlaces = function setInitPlaces() {
+	    return function (dispatch) {
+	        fetch('/initPlaces', {
+	            method: 'POST',
+	            body: JSON.stringify({ val: 1 })
+	        }).then(function (response) {
+	            return response.json();
+	        }).then(function (data) {
+	            dispatch((0, _mainPageReducer.setInitialPlaces)(data));
+	            console.log(data);
+	        })['catch'](function (error) {
+	            return console.error(error);
+	        });
 	    };
-	}, function (dispatch) {
-	    return {};
-	})(SelectDistrict);
-	module.exports = exports["default"];
+	};
+	exports.setInitPlaces = setInitPlaces;
 
 /***/ }),
 /* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var content = __webpack_require__(92);
-	
-	if (typeof content === 'string') {
-	  content = [[module.id, content, '']];
-	}
-	
-	var options = {}
-	
-	options.insert = "head";
-	options.singleton = false;
-	
-	var update = __webpack_require__(23)(content, options);
-	
-	if (content.locals) {
-	  module.exports = content.locals;
-	}
-
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(22)(false);
-	// Module
-	exports.push([module.id, ".SelectDistrict-Select {\n    display: block;\n    width: 100%;\n    height: 73px;\n    outline: none;\n    font-size: 2em;\n}\n\n.Select-Item {\n    display: -ms-grid;\n    display: grid;\n    height: 50px;\n    background: transparent;\n}", ""]);
-
-
-/***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	__webpack_require__(94);
-	
-	var Place = function Place(props) {
-	    return _react2["default"].createElement(
-	        "div",
-	        { className: "Place" },
-	        _react2["default"].createElement(
-	            "div",
-	            { className: "Place-PlaceNum PlaceNum" },
-	            _react2["default"].createElement("div", { className: "PlaceNum-Circle" }),
-	            props.place.place,
-	            " место"
-	        ),
-	        _react2["default"].createElement(
-	            "div",
-	            { className: "Place-Text" },
-	            props.place.text
-	        )
-	    );
-	};
-	
-	var InfoForDistrict = function InfoForDistrict(props) {
-	    return _react2["default"].createElement(
-	        "div",
-	        { className: "IfoForDistrict Content" },
-	        _react2["default"].createElement(
-	            "div",
-	            { className: "InfoForDistrict-Title" },
-	            _react2["default"].createElement(
-	                "span",
-	                null,
-	                props.districts.dist
-	            )
-	        ),
-	        _react2["default"].createElement(
-	            "div",
-	            { className: "InfoForDistrict-Place" },
-	            props.districts.place.map(function (dist, i) {
-	                return _react2["default"].createElement(Place, { key: i, place: dist });
-	            })
-	        ),
-	        _react2["default"].createElement(
-	            "div",
-	            { className: "IfoForDistrict-Text" },
-	            props.districts.text
-	        ),
-	        _react2["default"].createElement(
-	            "div",
-	            { className: "IfoForDistrict-AdditionalText" },
-	            "Доля жилой территории, на которой в шаговой доступности есть инфраструктура для жизни, %"
-	        )
-	    );
-	};
-	exports.InfoForDistrict = InfoForDistrict;
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var content = __webpack_require__(95);
-	
-	if (typeof content === 'string') {
-	  content = [[module.id, content, '']];
-	}
-	
-	var options = {}
-	
-	options.insert = "head";
-	options.singleton = false;
-	
-	var update = __webpack_require__(23)(content, options);
-	
-	if (content.locals) {
-	  module.exports = content.locals;
-	}
-
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(22)(false);
-	// Module
-	exports.push([module.id, ".InfoForDistrict-Place {\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-columns: 1fr 1fr;\n        grid-template-columns: 1fr 1fr;\n    text-align: center;\n}\n.InfoForDistrict-Title{\n    text-align: center;\n    margin-top: 60px;\n    margin-bottom: 60px;\n    font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n    letter-spacing: 3px;\n}\n\n.InfoForDistrict-Title span {\n    font-size: 3em;\n    font-weight: bold;\n    border-bottom: 2px solid black;\n}\n\n.Place-PlaceNum {\n    font-size: 4em;\n    font-weight: bold;\n    display: inline-block;\n    box-sizing: border-box;\n}\n\n.PlaceNum-Circle {\n    height: 100px;\n    width: 100px;\n    background: rgba(128, 128, 128, 0.29);\n    position: relative;\n    top: 80px;\n    left: 15px;\n    border-radius: 100px;\n}\n.Place-Text {\n    font-size: 2em;\n}\n\n.IfoForDistrict-Text {\n    margin-top: 60px;\n    margin-bottom: 60px;\n    padding: 0 3em 0 3em;\n    box-sizing: border-box;\n    font-size: 3em;\n}\n\n.IfoForDistrict-AdditionalText {\n    font-size: 3em;\n    text-decoration: underline;\n}", ""]);
-
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var content = __webpack_require__(97);
-	
-	if (typeof content === 'string') {
-	  content = [[module.id, content, '']];
-	}
-	
-	var options = {}
-	
-	options.insert = "head";
-	options.singleton = false;
-	
-	var update = __webpack_require__(23)(content, options);
-	
-	if (content.locals) {
-	  module.exports = content.locals;
-	}
-
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(22)(false);
-	// Module
-	exports.push([module.id, "body {\n    margin: 0;\n}\n\n\n.Content {\n    margin: 0 auto;\n    max-width: 1440px;\n    min-width: 240px;\n}\n\n.Content_green {\n    background: url(\"https://s3-alpha-sig.figma.com/img/4d56/6940/f9bb29279b3b4dc5901ae3268f56a98a?Expires=1576454400&Signature=AXIpRo1l3UGJ~nLziBP2qMWd1QOtt~KOGqo7FXKzodGEb9Gfauc~dQ8A~Ge1dKUkYZAwEfSVMMNTdLyU1HLC8mzDYjcLLukwYj~DElGPUT2FuV4LcjPbEZEO0ij~84tQ2z~Ml9DMSoCXvRFwcQmFPPXlMSaqMrcKvIT6uaPQKsqaw2AZSHVUVdXhIwnPRIfviX2kNrwaNhvAEiX1J5tg0a-LW00OymOhvDPRrpTTa5yzQMcSKRpYdQLURmokeGGTEewnpvmHK-~7t9R9h4xHyP9YBI0zk31V79kxk213N8SwgjOUdfGXwahoNSJ~51QWcx6GLvS2dEKK3JJ1XgjIvw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA\") no-repeat;\n    background-size: 100%;\n    background-position: center;\n}\n\n\n\n.Title_normal {\n    font-size: 3em;\n    font-weight: 600;\n    word-spacing: 5px;\n}\n\n.Text {\n    font-size: 3em;\n    font-weight: 500;\n    letter-spacing: 2px;\n    word-spacing: 5px;\n}\n\n.Text_normal {\n    font-size: 3em;\n    letter-spacing: 2px;\n    word-spacing: 5px;\n}\n\n@media (max-width: 480px) {\n    .Text {\n        font-size: 1em;\n    }\n\n}\n\n@media (min-width: 480px) and (max-width: 840px) {\n    .Text {\n        font-size: 1.5em;\n    }\n}\n\n@media (min-width: 840px) and (max-width: 1080px) {\n    .Text {\n        font-size: 2em;\n    }\n\n}\n", ""]);
-
-
-/***/ }),
-/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37572,14 +37448,74 @@
 	
 	var _redux = __webpack_require__(53);
 	
-	var _reducersMainPageReducerJs = __webpack_require__(85);
+	var _reducersMainPageReducerJs = __webpack_require__(80);
+	
+	var _reduxThunk = __webpack_require__(92);
+	
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+	
+	var _reduxDevtoolsExtension = __webpack_require__(93);
 	
 	var reducers = (0, _redux.combineReducers)({
 	    MainPage: _reducersMainPageReducerJs.mainPageReducer
 	});
 	
-	var store = (0, _redux.createStore)(reducers);
+	var store = (0, _redux.createStore)(reducers, (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk2["default"])));
 	exports.store = store;
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch,
+	        getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+	
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+	
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+	
+	exports['default'] = thunk;
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var compose = __webpack_require__(53).compose;
+	
+	exports.__esModule = true;
+	exports.composeWithDevTools = (
+	  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+	    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :
+	    function() {
+	      if (arguments.length === 0) return undefined;
+	      if (typeof arguments[0] === 'object') return compose;
+	      return compose.apply(null, arguments);
+	    }
+	);
+	
+	exports.devToolsEnhancer = (
+	  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ ?
+	    window.__REDUX_DEVTOOLS_EXTENSION__ :
+	    function() { return function(noop) { return noop; } }
+	);
+
 
 /***/ })
 /******/ ]);

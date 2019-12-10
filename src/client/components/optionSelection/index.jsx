@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React  from 'react';
 import "./optionSection.css"
 import MapFrame from "../mapFrame";
 import {Tags} from "../tags";
@@ -6,9 +6,6 @@ import {connect} from "react-redux";
 import Button from "../button"
 
 const OptionSelection = (props) => {
-
-    const [active, setActive] = useState(0);
-
 
     return (
         <div className="OptionSelection Content">
@@ -20,8 +17,6 @@ const OptionSelection = (props) => {
                                 key={index}
                                 index={index}
                                 btn={btn.buttonName}
-                                setActive={setActive}
-                                active={active}
                             />
                         )
                     })
@@ -29,11 +24,12 @@ const OptionSelection = (props) => {
             </ul>
 
 
-            <Tags tags={props.state.MainPage.options[active].tags}/>
+            <Tags tags={props.state.MainPage.options[props.state.MainPage.active].tags}/>
 
             <div className="OptionSelection-Map">
-                <MapFrame active = {active} />
+                <MapFrame active = {props.state.MainPage.active} />
             </div>
+
 
         </div>
     )

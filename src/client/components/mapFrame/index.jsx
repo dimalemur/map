@@ -6,18 +6,14 @@ import {Map, Placemark, YMaps} from "react-yandex-maps";
 
 const MapFrame = (props) => {
     return (
-        <div className="MapFrame Content">
-
+        <div className="MapFrame Content" id="maps">
             <YMaps>
-                <Map state={{center: [55.76, 37.64], zoom: 10, showMap: false}}  width="100%" height="100%">
+                <Map state={{center: [55.76, 37.64], zoom: 12, showMap: false}} width="100%" height="100%">
                     {props.options[props.active].points.map((point, i) => {
                         return (
                             <Placemark
                                 key={i}
                                 geometry={[point.latitude, point.longitude]}
-                                properties={{
-                                    balloonContent: point.text
-                                }}
                                 options={{
                                     preset: "islands#circleDotIcon",
                                     iconColor: point.color,
@@ -26,7 +22,6 @@ const MapFrame = (props) => {
                                     ['geoObject.addon.balloon']
                                 }
                             />
-
                         )
                     })
                     }
@@ -40,7 +35,8 @@ const MapFrame = (props) => {
 
 export default connect(
     state => ({
-        options: state.MainPage.options
+        options: state.MainPage.options,
+        active:state.MainPage.active
     }),
     dispatch => ({})
 )(MapFrame);
