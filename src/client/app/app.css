@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background: #FFFEFA;
 }
 
 
@@ -7,6 +8,7 @@ body {
     margin: 0 auto;
     max-width: 1440px;
     min-width: 240px;
+
 }
 
 .Content_green {
@@ -24,10 +26,11 @@ body {
 }
 
 .Text {
-    font-size: 3em;
+    font-size: 64px;
     font-weight: 500;
     letter-spacing: 2px;
     word-spacing: 5px;
+    color: #242424;
 }
 
 .Text_normal {
