@@ -1,12 +1,15 @@
 import sqlite3
 import sys
+import os.path
 
-sys.path.append('/home/lemur/map/src/server')
-from analiz import for_life_2
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "bd.db")
+print(BASE_DIR)
+print(db_path)
 
 
 def tags(id):
-    con = sqlite3.connect('bd.db')
+    con = sqlite3.connect(db_path)
     cur = con.cursor()
     tags = []
     cur.execute('select * from tags')
@@ -17,7 +20,7 @@ def tags(id):
 
 
 def points(id):
-    con = sqlite3.connect('bd.db')
+    con = sqlite3.connect(db_path)
     cur = con.cursor()
     cur.execute('select * from points')
     for j in cur.fetchall():
@@ -27,7 +30,7 @@ def points(id):
 
 def initState():
     links = []
-    con = sqlite3.connect('bd.db')
+    con = sqlite3.connect(db_path)
     cur = con.cursor()
 
     state = []
@@ -39,11 +42,9 @@ def initState():
     return state
 
 
-
-
 def initState_api(mode):
     links = []
-    con = sqlite3.connect('bd.db')
+    con = sqlite3.connect(db_path)
     cur = con.cursor()
 
     state = []

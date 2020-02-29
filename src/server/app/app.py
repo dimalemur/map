@@ -1,13 +1,7 @@
 from flask import Flask, render_template
-from flask import request, abort
-import requests
-import json
-import sys
-
-sys.path.append('/home/lemur/map/src/server')
-sys.path.append('/home/lemur/map/src/server/app/db')
-from analiz import *
-from db import initState,initState_api
+from flask import request
+import os
+from db import initState, initState_api
 from main import *
 
 app = Flask(__name__, static_folder="../../../public/")
@@ -73,4 +67,4 @@ def get_init_state_api(city, mode):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
